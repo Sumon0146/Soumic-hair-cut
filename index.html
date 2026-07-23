@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figaro - Hair & Beard Salon</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0c0d0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Background */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, rgba(12, 13, 15, 0.4), rgba(12, 13, 15, 0.85)), 
+                        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 60px;
+        }
+
+        /* Header Layout */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #a82c2c;
+        }
+
+        /* Hero Center Elements */
+        .play-btn {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            scale: 1.1;
+        }
+
+        /* Overlay Glass Cards */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.55);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 2px;
+        }
+
+        /* Left Services Menu Card */
+        .left-card {
+            position: absolute;
+            top: 200px;
+            left: 60px;
+            width: 200px;
+        }
+
+        .service-group {
+            margin-bottom: 30px;
+        }
+
+        .service-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .service-group i {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: block;
+            color: #d1d1d1;
+        }
+
+        .service-group h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .service-group ul {
+            list-style: none;
+        }
+
+        .service-group ul li {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 6px;
+            font-weight: 300;
+        }
+
+        /* Right Quote Card */
+        .right-card {
+            position: absolute;
+            top: 220px;
+            right: 60px;
+            width: 260px;
+        }
+
+        .right-card i.razor-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: block;
+            color: #e0e0e0;
+        }
+
+        .right-card p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #b5b5b5;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: #e0e0e0;
+        }
+
+        /* Main Hero Heading (Bottom Left Area) */
+        .main-heading-container {
+            margin-top: auto;
+            margin-left: 320px;
+            max-width: 550px;
+            padding-bottom: 30px;
+        }
+
+        .main-heading-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+            padding-left: 20px;
+        }
+
+        .main-heading-container p {
+            font-size: 14px;
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 22px;
+            font-weight: 300;
+        }
+
+        .discover-btn {
+            display: inline-block;
+            margin-left: 22px;
+            color: #8b1e1e;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .discover-btn:hover {
+            color: #b82a2a;
+        }
+
+        /* Social Icons Footer */
+        .social-links {
+            display: flex;
+            gap: 18px;
+            z-index: 10;
+        }
+
+        .social-links a {
+            color: #808080;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive Layout for Smaller Screens */
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 30px;
+            }
+            .left-card, .right-card {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                width: 100%;
+                margin-top: 20px;
+            }
+            .main-heading-container {
+                margin-left: 0;
+                margin-top: 40px;
+            }
+            .play-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 40px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <!-- Header Section -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-scissors"></i> Figaro
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Book</a></li>
+                    <li><a href="#">Locations</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Video Play Button Center -->
+        <a href="#" class="play-btn">
+            <i class="fa-solid fa-play"></i>
+        </a>
+
+        <!-- Left Glassmorphism Card (Services) -->
+        <div class="glass-card left-card">
+            <div class="service-group">
+                <i class="fa-solid fa-chair"></i>
+                <h4>Hair Styling</h4>
+                <ul>
+                    <li>Haircut</li>
+                    <li>Hair coloring</li>
+                    <li>Highlights</li>
+                </ul>
+            </div>
+            <div class="service-group">
+                <i class="fa-solid fa-pump-soap"></i>
+                <h4>Beard Styling</h4>
+                <ul>
+                    <li>Beard coloring</li>
+                    <li>Shave</li>
+                    <li>Beard trim</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Glassmorphism Card (Quote/Info) -->
+        <div class="glass-card right-card">
+            <i class="fa-solid fa-cut razor-icon"></i>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+            <div class="signature">Alfred Hardberg</div>
+        </div>
+
+        <!-- Main Heading Content -->
+        <div class="main-heading-container">
+            <h1>We don’t cut,<br>we style</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.</p>
+            <a href="#" class="discover-btn">Discover &rarr;</a>
+        </div>
+
+        <!-- Footer Social Icons -->
+        <div class="social-links">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </section>
+
+</body>
+</html>
