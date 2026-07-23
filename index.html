@@ -101,66 +101,65 @@
             </div>
         </section>
 
-        <!-- Booking System Section -->
+        <!-- Direct WhatsApp Booking Section -->
         <section id="booking" class="bg-gray-800 p-6 rounded-lg border border-amber-500/50 shadow-xl">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
                 📅 অ্যাপয়েন্টমেন্ট বুকিং করুন
             </h2>
-            <p class="text-center text-gray-400 text-sm mb-6">আপনার সুবিধাজনক সময়ে সিরিয়াল পেতে নিচের ফরমটি পূরণ করুন</p>
+            <p class="text-center text-gray-400 text-sm mb-6">নিচের তথ্যগুলো দিন, সরাসরি হোয়াটসঅ্যাপে সিরিয়াল চলে আসবে</p>
 
-            <!-- Formspree action url setup guide below -->
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="space-y-4">
+            <form id="whatsappForm" onsubmit="sendToWhatsApp(event)" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">আপনার নাম *</label>
-                        <input type="text" name="Name" required placeholder="উদাহরণ: রফিকুল ইসলাম" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="text" id="name" required placeholder="উদাহরণ: রফিকুল ইসলাম" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">মোবাইল নম্বর *</label>
-                        <input type="tel" name="Phone" required placeholder="019XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="tel" id="phone" required placeholder="019XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1 text-sm font-medium">সার্ভিস নির্বাচন করুন *</label>
-                    <select name="Service" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                    <select id="service" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                         <option value="">সার্ভিস বেছে নিন...</option>
-                        <option value="Haircut">হেয়ার কাট (৳১০০ - ৳৩০০)</option>
-                        <option value="Stylish Cut">ট্রেন্ডি / স্টাইলিশ কাট (৳২০০ - ৳৫০০)</option>
-                        <option value="Beard Trim/Shave">দাড়ি ট্রিম / শেভ (৳৫০ - ৳১৫০)</option>
-                        <option value="Beard Styling">দাড়ি স্টাইলিং (৳১০০ - ৳২৫০)</option>
-                        <option value="Hair Color">চুল কালার (৳৩০০ - ৳১,০০০+)</option>
-                        <option value="Hair Rebonding">চুল রিবন্ডিং / স্মুদনিং (৳১,৫০০ - ৳৪,০০০+)</option>
-                        <option value="Facial">ফেসিয়াল / স্কিন কেয়ার (৳১৫০ - ৳১,৫০০)</option>
-                        <option value="Hair Spa">হেয়ার স্পা / মেসেজ (৳৩০০ - ৳৮০০)</option>
+                        <option value="হেয়ার কাট (Haircut)">হেয়ার কাট (৳১০০ - ৳৩০০)</option>
+                        <option value="ট্রেন্ডি / স্টাইলিশ কাট">ট্রেন্ডি / স্টাইলিশ কাট (৳২০০ - ৳৫০০)</option>
+                        <option value="দাড়ি ট্রিম / শেভ">দাড়ি ট্রিম / শেভ (৳৫০ - ৳১৫০)</option>
+                        <option value="দাড়ি স্টাইলিং">দাড়ি স্টাইলিং (৳১০০ - ৳২৫০)</option>
+                        <option value="চুল কালার (Hair Color)">চুল কালার (৳৩০০ - ৳১,০০০+)</option>
+                        <option value="চুল রিবন্ডিং / স্মুদনিং">চুল রিবন্ডিং / স্মুদনিং (৳১,৫০০ - ৳৪,০০০+)</option>
+                        <option value="ফেসিয়াল / স্কিন কেয়ার">ফেসিয়াল / স্কিন কেয়ার (৳১৫০ - ৳১,৫০০)</option>
+                        <option value="হেয়ার স্পা / মেসেজ">হেয়ার স্পা / মেসেজ (৳৩০০ - ৳৮০০)</option>
                     </select>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">তারিখ *</label>
-                        <input type="date" name="Date" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="date" id="date" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">সময় *</label>
-                        <select name="Time" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <select id="time" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                             <option value="">সময় নির্বাচন করুন...</option>
-                            <option value="10:00 AM - 12:00 PM">সকাল ১০:০০ - দুপুর ১২:০০</option>
-                            <option value="12:00 PM - 02:00 PM">দুপুর ১২:০০ - দুপুর ০২:০০</option>
-                            <option value="03:00 PM - 05:00 PM">বিকাল ০৩:০০ - বিকাল ০৫:০০</option>
-                            <option value="05:00 PM - 07:00 PM">সন্ধ্যা ০৫:০০ - সন্ধ্যা ০৭:০০</option>
-                            <option value="07:00 PM - 09:00 PM">রাত ০৭:০০ - রাত ০৯:০০</option>
+                            <option value="সকাল ১০:০০ - দুপুর ১২:০০">সকাল ১০:০০ - দুপুর ১২:০০</option>
+                            <option value="দুপুর ১২:০০ - দুপুর ০২:০০">দুপুর ১২:০০ - দুপুর ০২:০০</option>
+                            <option value="বিকাল ০৩:০০ - বিকাল ০৫:০০">বিকাল ০৩:০০ - বিকাল ০৫:০০</option>
+                            <option value="সন্ধ্যা ০৫:০০ - সন্ধ্যা ০৭:০০">সন্ধ্যা ০৫:০০ - সন্ধ্যা ০৭:০০</option>
+                            <option value="রাত ০৭:০০ - রাত ০৯:০০">রাত ০৭:০০ - রাত ০৯:০০</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1 text-sm font-medium">অতিরিক্ত কোনো তথ্য (ঐচ্ছিক)</label>
-                    <textarea name="Note" rows="2" placeholder="বিশেষ কোনো চাওয়া থাকলে লিখুন..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500"></textarea>
+                    <textarea id="note" rows="2" placeholder="বিশেষ কোনো চাওয়া থাকলে লিখুন..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3 rounded-lg transition duration-300 shadow-md">
-                    <i class="fa-solid fa-paper-plane mr-2"></i> বুকিং সম্পন্ন করুন
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg transition duration-300 shadow-md flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-xl mr-2"></i> WhatsApp-এ বুকিং নিশ্চিত করুন
                 </button>
             </form>
         </section>
@@ -204,5 +203,31 @@
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
+    <!-- Script to Handle WhatsApp Direct Message -->
+    <script>
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+
+            const myPhoneNumber = "8801910947438"; // Your WhatsApp number
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const note = document.getElementById('note').value || "নাই";
+
+            const message = `Hello, আমি *সৌমিক হেয়ার কাটিং*-এ সিরিয়াল বুক করতে চাই।%0A%0A` +
+                            `👤 *নাম:* ${encodeURIComponent(name)}%0A` +
+                            `📞 *মোবাইল:* ${encodeURIComponent(phone)}%0A` +
+                            `✂️ *সার্ভিস:* ${encodeURIComponent(service)}%0A` +
+                            `📅 *তারিখ:* ${encodeURIComponent(date)}%0A` +
+                            `⏰ *সময়:* ${encodeURIComponent(time)}%0A` +
+                            `📝 *অতিরিক্ত নোট:* ${encodeURIComponent(note)}`;
+
+            const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
 </body>
 </html>
