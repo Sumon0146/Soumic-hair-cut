@@ -3,336 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Figaro - Hair & Beard Salon</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>সৌমিক হেয়ার কাটিং - সেরা পুরুষ সেলুন</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Google Font (Hind Siliguri) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0c0d0f;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Hero Section with Background */
-        .hero {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(to bottom, rgba(12, 13, 15, 0.4), rgba(12, 13, 15, 0.85)), 
-                        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 40px 60px;
-        }
-
-        /* Header Layout */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 20px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 35px;
-        }
-
-        nav ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 300;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #a82c2c;
-        }
-
-        /* Hero Center Elements */
-        .play-btn {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 65px;
-            height: 65px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
-        }
-
-        .play-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            scale: 1.1;
-        }
-
-        /* Overlay Glass Cards */
-        .glass-card {
-            background: rgba(20, 20, 20, 0.55);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 2px;
-        }
-
-        /* Left Services Menu Card */
-        .left-card {
-            position: absolute;
-            top: 200px;
-            left: 60px;
-            width: 200px;
-        }
-
-        .service-group {
-            margin-bottom: 30px;
-        }
-
-        .service-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .service-group i {
-            font-size: 24px;
-            margin-bottom: 12px;
-            display: block;
-            color: #d1d1d1;
-        }
-
-        .service-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .service-group ul {
-            list-style: none;
-        }
-
-        .service-group ul li {
-            font-size: 12px;
-            color: #a0a0a0;
-            margin-bottom: 6px;
-            font-weight: 300;
-        }
-
-        /* Right Quote Card */
-        .right-card {
-            position: absolute;
-            top: 220px;
-            right: 60px;
-            width: 260px;
-        }
-
-        .right-card i.razor-icon {
-            font-size: 28px;
-            margin-bottom: 15px;
-            display: block;
-            color: #e0e0e0;
-        }
-
-        .right-card p {
-            font-size: 13px;
-            line-height: 1.7;
-            color: #b5b5b5;
-            margin-bottom: 15px;
-            font-weight: 300;
-        }
-
-        .signature {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 18px;
-            color: #e0e0e0;
-        }
-
-        /* Main Hero Heading (Bottom Left Area) */
-        .main-heading-container {
-            margin-top: auto;
-            margin-left: 320px;
-            max-width: 550px;
-            padding-bottom: 30px;
-        }
-
-        .main-heading-container h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            border-left: 2px solid rgba(255, 255, 255, 0.3);
-            padding-left: 20px;
-        }
-
-        .main-heading-container p {
-            font-size: 14px;
-            color: #b0b0b0;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            padding-left: 22px;
-            font-weight: 300;
-        }
-
-        .discover-btn {
-            display: inline-block;
-            margin-left: 22px;
-            color: #8b1e1e;
-            text-decoration: none;
-            font-size: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .discover-btn:hover {
-            color: #b82a2a;
-        }
-
-        /* Social Icons Footer */
-        .social-links {
-            display: flex;
-            gap: 18px;
-            z-index: 10;
-        }
-
-        .social-links a {
-            color: #808080;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #ffffff;
-        }
-
-        /* Responsive Layout for Smaller Screens */
-        @media (max-width: 1024px) {
-            .hero {
-                padding: 30px;
-            }
-            .left-card, .right-card {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                width: 100%;
-                margin-top: 20px;
-            }
-            .main-heading-container {
-                margin-left: 0;
-                margin-top: 40px;
-            }
-            .play-btn {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                margin: 40px auto;
-            }
-        }
+        body { font-family: 'Hind Siliguri', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100">
 
-    <section class="hero">
-        <!-- Header Section -->
-        <header>
-            <div class="logo">
-                <i class="fa-solid fa-scissors"></i> Figaro
+    <!-- Header / Hero Section -->
+    <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500">সৌমিক হেয়ার কাটিং</h1>
+            <p class="text-lg md:text-xl text-gray-300">আপনার নিখুঁত লুকের সঠিক ঠিকানা</p>
+            <a href="tel:01910947438" class="mt-4 inline-block bg-amber-500 hover:bg-amber-6-00 text-gray-900 font-bold py-2 px-6 rounded-full transition duration-300">
+                <i class="fa-solid fa-phone mr-1"></i> কল করুন
+            </a>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-4 md:p-6 space-y-10">
+
+        <!-- Services & Price List -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">
+                ✂️ সার্ভিস ও মূল্য তালিকা
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Hair Care -->
+                <div class="bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 text-amber-400 border-b border-gray-600 pb-2">
+                        <i class="fa-solid fa-scissors mr-2"></i>হেয়ার কেয়ার (Hair Care)
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>হেয়ার কাট (Haircut)</span>
+                            <span class="font-bold text-amber-500">৳১০০ – ৳৩০০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>ট্রেন্ডি / স্টাইলিশ কাট</span>
+                            <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>দাড়ি ট্রিম / শেভ</span>
+                            <span class="font-bold text-amber-500">৳৫০ – ৳১৫০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>দাড়ি স্টাইলিং</span>
+                            <span class="font-bold text-amber-500">৳১০০ – ৳২৫০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>চুল কালার (Hair Color)</span>
+                            <span class="font-bold text-amber-500">৳৩০০ – ৳১,০০০+</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>চুল রিবন্ডিং / স্মুদনিং</span>
+                            <span class="font-bold text-amber-500">৳১,৫০০ – ৳৪,০০০+</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Facial & Skin Care -->
+                <div class="bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 text-amber-400 border-b border-gray-600 pb-2">
+                        <i class="fa-solid fa-sparkles mr-2"></i>ফেসিয়াল ও স্কিন কেয়ার
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>ফেস ওয়াশ / ক্লিন-আপ</span>
+                            <span class="font-bold text-amber-500">৳১৫০ – ৳৩০০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
+                            <span class="font-bold text-amber-500">৳৫০০ – ৳১,৫০০</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-700 pb-1">
+                            <span>ডি-ট্যান / স্ক্রাব</span>
+                            <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>হেয়ার স্পা / মেসেজ</span>
+                            <span class="font-bold text-amber-500">৳৩০০ – ৳৮০০</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Book</a></li>
-                    <li><a href="#">Locations</a></li>
-                </ul>
-            </nav>
-        </header>
+        </section>
 
-        <!-- Video Play Button Center -->
-        <a href="#" class="play-btn">
-            <i class="fa-solid fa-play"></i>
-        </a>
+        <!-- Location & Contact -->
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="space-y-4">
+                    <p class="flex items-start">
+                        <i class="fa-solid fa-location-dot text-amber-500 mt-1 mr-3 text-lg"></i>
+                        <span><strong>ঠিকানা:</strong> বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা।</span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fa-solid fa-phone text-amber-500 mr-3 text-lg"></i>
+                        <span><strong>মোবাইল:</strong> <a href="tel:01910947438" class="hover:underline">01910947438</a></span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fa-brands fa-whatsapp text-emerald-500 mr-3 text-xl"></i>
+                        <span><strong>হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801910947438" target="_blank" class="hover:underline">01910947438</a></span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fa-solid fa-envelope text-amber-500 mr-3 text-lg"></i>
+                        <span><strong>ইমেইল:</strong> <a href="mailto:bdsumonu@gmail.com" class="hover:underline">bdsumonu@gmail.com</a></span>
+                    </p>
+                </div>
 
-        <!-- Left Glassmorphism Card (Services) -->
-        <div class="glass-card left-card">
-            <div class="service-group">
-                <i class="fa-solid fa-chair"></i>
-                <h4>Hair Styling</h4>
-                <ul>
-                    <li>Haircut</li>
-                    <li>Hair coloring</li>
-                    <li>Highlights</li>
-                </ul>
+                <div class="text-center md:text-right">
+                    <a href="https://maps.app.goo.gl/5dJt2dXfqp5bTknu5" target="_blank" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full md:w-auto">
+                        <i class="fa-solid fa-map-location-dot mr-2"></i> গুগল ম্যাপে লোকেশন দেখুন
+                    </a>
+                </div>
             </div>
-            <div class="service-group">
-                <i class="fa-solid fa-pump-soap"></i>
-                <h4>Beard Styling</h4>
-                <ul>
-                    <li>Beard coloring</li>
-                    <li>Shave</li>
-                    <li>Beard trim</li>
-                </ul>
-            </div>
-        </div>
+        </section>
 
-        <!-- Right Glassmorphism Card (Quote/Info) -->
-        <div class="glass-card right-card">
-            <i class="fa-solid fa-cut razor-icon"></i>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
-            <div class="signature">Alfred Hardberg</div>
-        </div>
+    </div>
 
-        <!-- Main Heading Content -->
-        <div class="main-heading-container">
-            <h1>We don’t cut,<br>we style</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare.</p>
-            <a href="#" class="discover-btn">Discover &rarr;</a>
-        </div>
-
-        <!-- Footer Social Icons -->
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-solid fa-globe"></i></a>
-        </div>
-    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 text-center py-4 mt-10 border-t border-gray-800">
+        <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
 
 </body>
 </html>
