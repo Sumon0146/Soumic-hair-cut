@@ -86,7 +86,7 @@
                         </li>
                         <li class="flex justify-between border-b border-gray-700 pb-1">
                             <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
-                            <span class="font-bold text-amber-500">৳৫০০ – ৳১,১৫০</span>
+                            <span class="font-bold text-amber-500">৳পাঁচশত – ৳১,১৫০</span>
                         </li>
                         <li class="flex justify-between border-b border-gray-700 pb-1">
                             <span>ডি-ট্যান / স্ক্রাব</span>
@@ -100,8 +100,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- Web3Forms Booking Section -->
+                <!-- Web3Forms Booking Section -->
         <section id="booking" class="bg-gray-800 p-6 rounded-lg border border-amber-500/50 shadow-xl">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
                 📅 অ্যাপয়েন্টমেন্ট বুকিং করুন
@@ -129,7 +128,7 @@
 
                 <div>
                     <label class="block text-gray-300 mb-1 text-sm font-medium">সার্ভিস নির্বাচন করুন *</label>
-                    <select name="service" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                    <select id="serviceSelect" name="service" required onchange="showServiceDetails()" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                         <option value="">সার্ভিস বেছে নিন...</option>
                         <option value="হেয়ার কাট (Haircut)">হেয়ার কাট (৳১০০ - ৳৩০০)</option>
                         <option value="ট্রেন্ডি / স্টাইলিশ কাট">ট্রেন্ডি / স্টাইলিশ কাট (৳২০০ - ৳৫০০)</option>
@@ -140,6 +139,11 @@
                         <option value="ফেসিয়াল / স্কিন কেয়ার">ফেসিয়াল / স্কিন কেয়ার (৳১৫০ - ৳১,৫০০)</option>
                         <option value="হেয়ার স্পা / মেসেজ">হেয়ার স্পা / মেসেজ (৳৩০০ - ৳৮০০)</option>
                     </select>
+                </div>
+
+                <!-- Dynamically showing selected service info -->
+                <div id="serviceInfoBox" class="hidden bg-gray-900/80 border border-amber-500/40 p-4 rounded-lg text-amber-400 text-sm space-y-1">
+                    <p id="serviceInfoText" class="font-medium"></p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -173,8 +177,7 @@
                 </button>
             </form>
         </section>
-
-        <!-- Location & Contact -->
+                <!-- Location & Contact -->
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             
@@ -213,5 +216,32 @@
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
+    <script>
+        const details = {
+            "হেয়ার কাট (Haircut)": "💡 আনুমানিক খরচ: ৳১০০ – ৳৩০০ (সাধারণ বা রেগুলার হেয়ার কাট)",
+            "ট্রেন্ডি / স্টাইলিশ কাট": "💡 আনুমানিক খরচ: ৳২০০ – ৳৫০০ (ফেইড, ক্রু কাট বা আধুনিক স্টাইলিং)",
+            "দাড়ি ট্রিম / শেভ": "💡 আনুমানিক খরচ: ৳৫০ – ৳১৫০ (সাধারণ শেভ বা ট্রিম)",
+            "দাড়ি স্টাইলিং": "💡 আনুমানিক খরচ: ৳১০০ – ৳২৫০ (দাড়ির শেপ ও কাস্টম স্টাইলিং)",
+            "চুল কালার (Hair Color)": "💡 আনুমানিক খরচ: ৳৩০০ – ৳১,০০০+ (কালারের ব্র্যান্ড ও চুলের দৈর্ঘ্যের ওপর নির্ভরশীল)",
+            "চুল রিবন্ডিং / স্মুদনিং": "💡 আনুমানিক খরচ: ৳১,৫০০ – ৳৪,০০০+ (পারমানেন্ট স্ট্রেট বা স্মুদনিং প্রসেস)",
+            "ফেসিয়াল / স্কিন কেয়ার": "💡 আনুমানিক খরচ: ৳১৫০ – ৳১,৫০০ (ফেসওয়াশ থেকে ডায়মন্ড ফেসিয়াল)",
+            "হেয়ার স্পা / মেসেজ": "💡 আনুমানিক খরচ: ৳৩০০ – ৳৮০০ (চুলের পুষ্টি ও রিল্যাক্সেশন মেসেজ)"
+        };
+
+        function showServiceDetails() {
+            const val = document.getElementById('serviceSelect').value;
+            const infoBox = document.getElementById('serviceInfoBox');
+            const infoText = document.getElementById('serviceInfoText');
+
+            if (val && details[val]) {
+                infoText.innerText = details[val];
+                infoBox.classList.remove('hidden');
+            } else {
+                infoBox.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
+
+
