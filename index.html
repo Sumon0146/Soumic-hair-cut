@@ -86,7 +86,7 @@
                         </li>
                         <li class="flex justify-between border-b border-gray-700 pb-1">
                             <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
-                            <span class="font-bold text-amber-500">৳৫০০ – ৳১,৫০০</span>
+                            <span class="font-bold text-amber-500">৳৫০০ – ৳১,১৫০</span>
                         </li>
                         <li class="flex justify-between border-b border-gray-700 pb-1">
                             <span>ডি-ট্যান / স্ক্রাব</span>
@@ -101,35 +101,35 @@
             </div>
         </section>
 
-        <!-- Direct WhatsApp Booking & Web3Forms Section -->
+        <!-- Web3Forms Booking Section -->
         <section id="booking" class="bg-gray-800 p-6 rounded-lg border border-amber-500/50 shadow-xl">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
                 📅 অ্যাপয়েন্টমেন্ট বুকিং করুন
             </h2>
-            <p class="text-center text-gray-400 text-sm mb-6">নিচের তথ্যগুলো দিন, WhatsApp-এ সিরিয়াল যাওয়ার পাশাপাশি আমাদের কাছেও ইমেইল চলে আসবে</p>
+            <p class="text-center text-gray-400 text-sm mb-6">নিচের তথ্যগুলো দিন, সরাসরি ইমেইলে আপনার সিরিয়াল মেসেজ চলে আসবে</p>
 
-            <!-- Web3Forms Form Action Added -->
-            <form action="https://api.web3forms.com/submit" method="POST" onsubmit="sendToWhatsApp(event)" class="space-y-4">
+            <!-- Web3Forms Action -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
                 
                 <!-- Web3Forms Access Key -->
                 <input type="hidden" name="access_key" value="a656d3f3-b15d-4662-9943-7bbb1010661a">
                 <!-- Custom Subject for Email -->
-                <input type="hidden" name="subject" value="সৌমিক হেয়ার কাটিং - নতুন বুকিং রিকুয়েস্ট">
+                <input type="hidden" name="subject" value="সৌমিক হেয়ার কাটিং - নতুন অ্যাপয়েন্টমেন্ট বুকিং">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">আপনার নাম *</label>
-                        <input type="text" id="name" name="name" required placeholder="উদাহরণ: রফিকুল ইসলাম" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="text" name="name" required placeholder="উদাহরণ: রফিকুল ইসলাম" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">মোবাইল নম্বর *</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="019XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="tel" name="phone" required placeholder="019XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1 text-sm font-medium">সার্ভিস নির্বাচন করুন *</label>
-                    <select id="service" name="service" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                    <select name="service" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                         <option value="">সার্ভিস বেছে নিন...</option>
                         <option value="হেয়ার কাট (Haircut)">হেয়ার কাট (৳১০০ - ৳৩০০)</option>
                         <option value="ট্রেন্ডি / স্টাইলিশ কাট">ট্রেন্ডি / স্টাইলিশ কাট (৳২০০ - ৳৫০০)</option>
@@ -145,11 +145,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">তারিখ *</label>
-                        <input type="date" id="date" name="date" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <input type="date" name="date" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
                         <label class="block text-gray-300 mb-1 text-sm font-medium">সময় *</label>
-                        <select id="time" name="time" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
+                        <select name="time" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
                             <option value="">সময় নির্বাচন করুন...</option>
                             <option value="সকাল ১০:০০ - দুপুর ১২:০০">সকাল ১০:০০ - দুপুর ১২:০০</option>
                             <option value="দুপুর ১২:০০ - দুপুর ০২:০০">দুপুর ১২:০০ - দুপুর ০২:০০</option>
@@ -162,14 +162,14 @@
 
                 <div>
                     <label class="block text-gray-300 mb-1 text-sm font-medium">অতিরিক্ত কোনো তথ্য (ঐচ্ছিক)</label>
-                    <textarea id="note" name="note" rows="2" placeholder="বিশেষ কোনো চাওয়া থাকলে লিখুন..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500"></textarea>
+                    <textarea name="note" rows="2" placeholder="বিশেষ কোনো চাওয়া থাকলে লিখুন..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
                 <!-- Botcheck for Spam Protection -->
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg transition duration-300 shadow-md flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-xl mr-2"></i> WhatsApp ও ইমেইলে বুকিং নিশ্চিত করুন
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3 rounded-lg transition duration-300 shadow-md flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> বুকিং নিশ্চিত করুন
                 </button>
             </form>
         </section>
@@ -213,36 +213,5 @@
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
-    <!-- Script to Handle Both Web3Forms Submission & WhatsApp -->
-    <script>
-        async function sendToWhatsApp(event) {
-            // ফর্ম সাবমিট হওয়ার সাথে সাথে Web3Forms-এর ব্যাকএন্ডে ডেটা চলে যাবে, 
-            // একই সাথে ইউজারকে WhatsApp-এ মেসেজ পাঠানোর উইন্ডো ওপেন হবে।
-            
-            const myPhoneNumber = "8801910947438"; 
-
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const service = document.getElementById('service').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const note = document.getElementById('note').value || "নাই";
-
-            const message = `Hello, আমি *সৌমিক হেয়ার কাটিং*-এ সিরিয়াল বুক করতে চাই।%0A%0A` +
-                            `👤 *নাম:* ${encodeURIComponent(name)}%0A` +
-                            `📞 *মোবাইল:* ${encodeURIComponent(phone)}%0A` +
-                            `✂️ *সার্ভিস:* ${encodeURIComponent(service)}%0A` +
-                            `📅 *তারিখ:* ${encodeURIComponent(date)}%0A` +
-                            `⏰ *সময়:* ${encodeURIComponent(time)}%0A` +
-                            `📝 *অতিরিক্ত নোট:* ${encodeURIComponent(note)}`;
-
-            const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${message}`;
-            
-            // একটু পরে WhatsApp উইন্ডো ওপেন হবে যাতে ফর্মে ডেটা সাবমিট হতে সমস্যা না হয়
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 500);
-        }
-    </script>
 </body>
 </html>
