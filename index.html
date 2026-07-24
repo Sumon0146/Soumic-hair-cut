@@ -118,11 +118,11 @@
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
                 📅 অ্যাপয়েন্টমেন্ট বুকিং করুন
             </h2>
-            <p class="text-center text-gray-400 text-sm mb-6">নিচের ফর্মটি পূরণ করুন, আপনার ডাটা সরাসরি আমাদের শিটে জমা হয়ে যাবে</p>
+            <p class="text-center text-gray-400 text-sm mb-6">নিচের ফর্মটি পূরণ করুন, আপনার তথ্য সরাসরি আমাদের গুগল শিটে জমা হয়ে যাবে</p>
 
-            <!-- Google Form Embedded Frame -->
+            <!-- Google Form Embed Frame -->
             <div class="w-full overflow-hidden rounded-lg bg-white">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScz3QaOvAopW-00xWq6n2XRkhwlu8oAC21nEgVMNLhdgGCbpQ/viewform?embedded=true" width="100%" height="550" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScz3QaOvAopW-00xWq6n2XRkhwlu8oAC21nEgVMNLhdgGCbpQ/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
         </section>
 
@@ -156,52 +156,6 @@
                     </a>
                 </div>
             </div>
-        </section>
-
-        <!-- Feedback & Review Section -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 shadow-xl">
-            <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
-                ⭐ আপনার মূল্যবান ফিডব্যাক দিন
-            </h2>
-            <p class="text-center text-gray-400 text-sm mb-6">আমাদের সেবা আপনার কেমন লাগলো তা আমাদের জানান</p>
-
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                
-                <!-- Web3Forms Access Key -->
-                <input type="hidden" name="access_key" value="a656d3f3-b15d-4662-9943-7bbb1010661a">
-                <!-- Custom Subject for Email -->
-                <input type="hidden" name="subject" value="সৌমিক হেয়ার কাটিং - নতুন ওয়েবসাইট ফিডব্যাক">
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-gray-300 mb-1 text-sm font-medium">আপনার নাম *</label>
-                        <input type="text" name="feedback_name" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-1 text-sm font-medium">রেটিং নির্বাচন করুন (তারকা) *</label>
-                        <select name="rating" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500">
-                            <option value="">রেটিং দিন...</option>
-                            <option value="⭐⭐⭐⭐⭐ (৫/৫ - চমৎকার)">⭐⭐⭐⭐⭐ (৫/৫ - চমৎকার)</option>
-                            <option value="⭐⭐⭐⭐ (৪/৫ - ভালো)">⭐⭐⭐⭐ (৪/৫ - ভালো)</option>
-                            <option value="⭐⭐⭐ (৩/৫ - মোটামুটি)">⭐⭐⭐ (৩/৫ - মোটামুটি)</option>
-                            <option value="⭐⭐ (২/৫ - আরও ভালো হওয়া চাই)">⭐⭐ (২/৫ - আরও ভালো হওয়া চাই)</option>
-                            <option value="⭐ (১/৫ - খারাপ)">⭐ (১/৫ - খারাপ)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-gray-300 mb-1 text-sm font-medium">আপনার মন্তব্য বা ফিডব্যাক *</label>
-                    <textarea name="feedback_message" rows="3" required placeholder="আমাদের সেবা বা পরিচ্ছন্নতা সম্পর্কে কিছু বলুন..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-500"></textarea>
-                </div>
-
-                <!-- Botcheck for Spam Protection -->
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3 rounded-lg transition duration-300 shadow-md flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-comment-dots mr-2"></i> ফিডব্যাক জমা দিন
-                </button>
-            </form>
         </section>
 
     </div>
