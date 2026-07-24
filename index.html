@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,67 +41,80 @@
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Hair Care -->
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">
-                    <h3 class="text-xl font-semibold mb-4 text-amber-400 border-b border-gray-600 pb-2">
-                        <i class="fa-solid fa-scissors mr-2"></i>হেয়ার কেয়ার (Hair Care)
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>হেয়ার কাট (Haircut)</span>
-                            <span class="font-bold text-amber-500">৳১০০ – ৳৩০০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>ট্রেন্ডি / স্টাইলিশ কাট</span>
-                            <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>দাড়ি ট্রিম / শেভ</span>
-                            <span class="font-bold text-amber-500">৳৫০ – ৳১৫০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>দাড়ি স্টাইলিং</span>
-                            <span class="font-bold text-amber-500">৳১০০ – ৳২৫০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>চুল কালার (Hair Color)</span>
-                            <span class="font-bold text-amber-500">৳৩০০ – ৳১,০০০+</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>চুল রিবন্ডিং / স্মুদনিং</span>
-                            <span class="font-bold text-amber-500">৳১,৫০০ – ৳৪,০০০+</span>
-                        </li>
-                    </ul>
+                <!-- Hair Care (Collapsible/Accordion Feature Added) -->
+                <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden">
+                    <button onclick="toggleAccordion('hairCareContent', 'hairCareIcon')" class="w-full text-left p-5 flex justify-between items-center focus:outline-none hover:bg-gray-750 transition duration-200">
+                        <h3 class="text-xl font-semibold text-amber-400">
+                            <i class="fa-solid fa-scissors mr-2"></i>হেয়ার কেয়ার (Hair Care)
+                        </h3>
+                        <i id="hairCareIcon" class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div id="hairCareContent" class="hidden p-5 pt-0 border-t border-gray-700/50 mt-2">
+                        <ul class="space-y-3">
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>হেয়ার কাট (Haircut)</span>
+                                <span class="font-bold text-amber-500">৳১০০ – ৳৩০০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>ট্রেন্ডি / স্টাইলিশ কাট</span>
+                                <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>দাড়ি ট্রিম / শেভ</span>
+                                <span class="font-bold text-amber-500">৳৫০ – ৳১৫০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>দাড়ি স্টাইলিং</span>
+                                <span class="font-bold text-amber-500">৳১০০ – ৳২৫০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>চুল কালার (Hair Color)</span>
+                                <span class="font-bold text-amber-500">৳৩০০ – ৳১,০০০+</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>চুল রিবন্ডিং / স্মুদনিং</span>
+                                <span class="font-bold text-amber-500">৳১,৫০০ – ৳৪,০০০+</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Facial & Skin Care -->
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg border border-gray-700">
-                    <h3 class="text-xl font-semibold mb-4 text-amber-400 border-b border-gray-600 pb-2">
-                        <i class="fa-solid fa-sparkles mr-2"></i>ফেসিয়াল ও স্কিন কেয়ার
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>ফেস ওয়াশ / ক্লিন-আপ</span>
-                            <span class="font-bold text-amber-500">৳১৫০ – ৳৩০০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
-                            <span class="font-bold text-amber-500">৳পাঁচশত – ৳১,১৫০</span>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-700 pb-1">
-                            <span>ডি-ট্যান / স্ক্রাব</span>
-                            <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>হেয়ার স্পা / মেসেজ</span>
-                            <span class="font-bold text-amber-500">৳৩০০ – ৳৮০০</span>
-                        </li>
-                    </ul>
+                <!-- Facial & Skin Care (Collapsible/Accordion Feature Added) -->
+                <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden">
+                    <button onclick="toggleAccordion('facialContent', 'facialIcon')" class="w-full text-left p-5 flex justify-between items-center focus:outline-none hover:bg-gray-750 transition duration-200">
+                        <h3 class="text-xl font-semibold text-amber-400">
+                            <i class="fa-solid fa-sparkles mr-2"></i>ফেসিয়াল ও স্কিন কেয়ার
+                        </h3>
+                        <i id="facialIcon" class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
+                    </button>
+
+                    <div id="facialContent" class="hidden p-5 pt-0 border-t border-gray-700/50 mt-2">
+                        <ul class="space-y-3">
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>ফেস ওয়াশ / ক্লিন-আপ</span>
+                                <span class="font-bold text-amber-500">৳১৫০ – ৳৩০০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
+                                <span class="font-bold text-amber-500">৳পাঁচশত – ৳১,১৫০</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-700 pb-1">
+                                <span>ডি-ট্যান / স্ক্রাব</span>
+                                <span class="font-bold text-amber-500">৳২০০ – ৳৫০০</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>হেয়ার স্পা / মেসেজ</span>
+                                <span class="font-bold text-amber-500">৳৩০০ – ৳৮০০</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
-                <!-- Web3Forms Booking Section -->
-        <section id="booking" class="bg-gray-800 p-6 rounded-lg border border-amber-500/50 shadow-xl">
+
+        <!-- Web3Forms Booking Section -->
+        <section id="booking" class="bg-gray-800 p-6 rounded-lg border border-amber-500/50 shadow-xl scroll-mt-6">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-2">
                 📅 অ্যাপয়েন্টমেন্ট বুকিং করুন
             </h2>
@@ -136,7 +149,7 @@
                         <option value="দাড়ি স্টাইলিং">দাড়ি স্টাইলিং (৳১০০ - ৳২৫০)</option>
                         <option value="চুল কালার (Hair Color)">চুল কালার (৳৩০০ - ৳১,০০০+)</option>
                         <option value="চুল রিবন্ডিং / স্মুদনিং">চুল রিবন্ডিং / স্মুদনিং (৳১,৫০০ - ৳৪,০০০+)</option>
-                        <option value="ফেসিয়াল / স্কিন কেয়ার">ফেসিয়াল / স্কিন কেয়ার (৳১৫০ - ৳১,৫০০)</option>
+                        <option value="ফেসিয়াল / স্কিন কেয়ার">ফেসিয়াল / স্কিন কেয়ার (৳১৫০ - ৳১,১৫০)</option>
                         <option value="হেয়ার স্পা / মেসেজ">হেয়ার স্পা / মেসেজ (৳৩০০ - ৳৮০০)</option>
                     </select>
                 </div>
@@ -177,7 +190,8 @@
                 </button>
             </form>
         </section>
-                <!-- Location & Contact -->
+
+        <!-- Location & Contact -->
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             
@@ -224,7 +238,7 @@
             "দাড়ি স্টাইলিং": "💡 আনুমানিক খরচ: ৳১০০ – ৳২৫০ (দাড়ির শেপ ও কাস্টম স্টাইলিং)",
             "চুল কালার (Hair Color)": "💡 আনুমানিক খরচ: ৳৩০০ – ৳১,০০০+ (কালারের ব্র্যান্ড ও চুলের দৈর্ঘ্যের ওপর নির্ভরশীল)",
             "চুল রিবন্ডিং / স্মুদনিং": "💡 আনুমানিক খরচ: ৳১,৫০০ – ৳৪,০০০+ (পারমানেন্ট স্ট্রেট বা স্মুদনিং প্রসেস)",
-            "ফেসিয়াল / স্কিন কেয়ার": "💡 আনুমানিক খরচ: ৳১৫০ – ৳১,৫০০ (ফেসওয়াশ থেকে ডায়মন্ড ফেসিয়াল)",
+            "ফেসিয়াল / স্কিন কেয়ার": "💡 আনুমানিক খরচ: ৳১৫০ – ৳১,১৫০ (ফেসওয়াশ থেকে ডায়মন্ড ফেসিয়াল)",
             "হেয়ার স্পা / মেসেজ": "💡 আনুমানিক খরচ: ৳৩০০ – ৳৮০০ (চুলের পুষ্টি ও রিল্যাক্সেশন মেসেজ)"
         };
 
@@ -240,8 +254,20 @@
                 infoBox.classList.add('hidden');
             }
         }
+
+        // Accordion Toggle Functionality
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
     </script>
 </body>
 </html>
-
-
