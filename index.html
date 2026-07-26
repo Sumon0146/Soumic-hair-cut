@@ -145,36 +145,36 @@
                 <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম</label>
-                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম (ঐচ্ছিক)</label>
+                    <input type="text" id="custName" placeholder="নাম না লিখলেও চলবে" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন</label>
-                    <div class="flex gap-2 text-2xl text-gray-500 cursor-pointer" id="starContainer">
-                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(1)"></i>
-                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(2)"></i>
-                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(3)"></i>
-                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(4)"></i>
-                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(5)"></i>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন (স্টার বাটনে ট্যাপ করুন)</label>
+                    <div class="flex gap-2 text-3xl text-gray-600 cursor-pointer py-1" id="starContainer">
+                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(1)"></i>
+                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(2)"></i>
+                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(3)"></i>
+                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(4)"></i>
+                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(5)"></i>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য</label>
-                    <textarea id="custComment" rows="3" placeholder="সার্ভিস কেমন লাগলো লিখুন..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500" required></textarea>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য (ঐচ্ছিক)</label>
+                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন (না লিখলেও চলবে)..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
-                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2 px-6 rounded transition duration-300">
-                    রিভিউ জমা দিন
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded transition duration-300">
+                    রেটিং জমা দিন
                 </button>
             </form>
 
             <!-- Reviews Display -->
             <div class="space-y-4 pt-4">
-                <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রিভিউসমূহ:</h3>
+                <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রেটিং ও রিভিউ:</h3>
                 <div id="reviewsList" class="space-y-3">
-                    <!-- Default Demo Reviews -->
+                    <!-- Sample Review -->
                     <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-200">আরিফ আহমেদ</span>
@@ -227,27 +227,48 @@
 
     <!-- JavaScript -->
     <script>
-        let currentRating = 5;
+        let selectedRating = 0;
 
         function setRating(rating) {
-            currentRating = rating;
+            selectedRating = rating;
             const stars = document.getElementById('starContainer').children;
             for (let i = 0; i < stars.length; i++) {
                 if (i < rating) {
                     stars[i].classList.add('text-amber-400');
-                    stars[i].classList.remove('text-gray-500');
+                    stars[i].classList.remove('text-gray-600');
                 } else {
                     stars[i].classList.remove('text-amber-400');
-                    stars[i].classList.add('text-gray-500');
+                    stars[i].classList.add('text-gray-600');
                 }
+            }
+        }
+
+        function resetRating() {
+            selectedRating = 0;
+            const stars = document.getElementById('starContainer').children;
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].classList.remove('text-amber-400');
+                stars[i].classList.add('text-gray-600');
             }
         }
 
         function submitReview(event) {
             event.preventDefault();
-            const name = document.getElementById('custName').value;
-            const comment = document.getElementById('custComment').value;
-            const starsText = '⭐'.repeat(currentRating);
+
+            if (selectedRating === 0) {
+                alert('অনুগ্রহ করে রেটিং দিতে অন্তত একটি স্টার সিলেক্ট করুন!');
+                return;
+            }
+
+            const nameInput = document.getElementById('custName').value.trim();
+            const commentInput = document.getElementById('custComment').value.trim();
+            
+            const name = nameInput !== "" ? nameInput : "গ্রাহক (অজ্ঞাত)";
+            const starsText = '⭐'.repeat(selectedRating);
+            
+            const commentHtml = commentInput !== "" 
+                ? `<p class="text-sm text-gray-400">${commentInput}</p>` 
+                : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
 
             const newReviewHtml = `
                 <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
@@ -255,14 +276,14 @@
                         <span class="font-bold text-gray-200">${name}</span>
                         <span class="text-amber-400 text-sm">${starsText}</span>
                     </div>
-                    <p class="text-sm text-gray-400">${comment}</p>
+                    ${commentHtml}
                 </div>
             `;
 
             document.getElementById('reviewsList').insertAdjacentHTML('afterbegin', newReviewHtml);
             document.getElementById('ratingForm').reset();
-            setRating(5);
-            alert('আপনার মূল্যবান মতামতের জন্য ধন্যবাদ!');
+            resetRating();
+            alert('রেটিং দেওয়ার জন্য আপনাকে ধন্যবাদ!');
         }
 
         function toggleAccordion(contentId, iconId) {
@@ -277,9 +298,6 @@
                 icon.style.transform = 'rotate(0deg)';
             }
         }
-
-        // Initialize star colors
-        setRating(5);
     </script>
 </body>
 </html>
