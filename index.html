@@ -32,6 +32,13 @@
         </div>
     </header>
 
+    <!-- Scrolling Notice / Marquee Section (লাল বক্সে যুক্ত করা অংশ) -->
+    <div class="bg-amber-500/10 border-y border-amber-500/30 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
+        <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
+            ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই হোয়াটসঅ্যাপে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
+        </marquee>
+    </div>
+
     <div class="max-w-4xl mx-auto p-4 md:p-6 space-y-12">
 
         <!-- Services & Price List -->
@@ -222,7 +229,6 @@
     <script>
         let selectedRating = 0;
 
-        // ডিফল্ট ডেমো রিভিউ (যদি প্রথমবার পেজ লোড হয়)
         const initialReviews = [
             {
                 name: "আরিফ আহমেদ",
@@ -231,7 +237,6 @@
             }
         ];
 
-        // পেজ লোড হলেই পূর্বের রিভিউগুলো লোড করা
         window.addEventListener('DOMContentLoaded', () => {
             loadReviews();
         });
@@ -314,12 +319,10 @@
                 comment: commentInput
             };
 
-            // LocalStorage-এ নতুন রিভিউ সেভ করা
             let reviews = JSON.parse(localStorage.getItem('salon_reviews')) || [];
-            reviews.unshift(newReview); // সবার উপরে দেখাবে
+            reviews.unshift(newReview);
             localStorage.setItem('salon_reviews', JSON.stringify(reviews));
 
-            // তালিকা রেন্ডার করা
             renderReviews(reviews);
 
             document.getElementById('ratingForm').reset();
