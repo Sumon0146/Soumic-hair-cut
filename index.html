@@ -32,7 +32,7 @@
         </div>
     </header>
 
-    <!-- Scrolling Notice / Marquee Section (লাল বক্সে যুক্ত করা অংশ) -->
+    <!-- Scrolling Notice / Marquee Section -->
     <div class="bg-amber-500/10 border-y border-amber-500/30 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
         <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
             ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই হোয়াটসঅ্যাপে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
@@ -116,6 +116,18 @@
             </div>
         </section>
 
+        <!-- Photo Gallery Section -->
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">
+                🖼️ আমাদের কাজ ও গ্যালারি
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=500&auto=format&fit=crop" alt="Haircut Style 1" class="rounded-lg object-cover w-full h-40 border border-gray-700 hover:scale-105 transition duration-300">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=500&auto=format&fit=crop" alt="Haircut Style 2" class="rounded-lg object-cover w-full h-40 border border-gray-700 hover:scale-105 transition duration-300">
+                <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=500&auto=format&fit=crop" alt="Beard Styling" class="rounded-lg object-cover w-full h-40 border border-gray-700 hover:scale-105 transition duration-300">
+            </div>
+        </section>
+
         <!-- WhatsApp Direct Booking Section -->
         <section id="booking" class="bg-gray-800 p-8 rounded-lg border border-emerald-500/50 shadow-xl scroll-mt-6 text-center space-y-6">
             <div class="max-w-md mx-auto">
@@ -146,6 +158,13 @@
             <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">
                 ⭐ গ্রাহকদের মতামত ও রেটিং
             </h2>
+
+            <!-- Rating Summary Card -->
+            <div id="ratingSummary" class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 text-center flex flex-col items-center justify-center space-y-1">
+                <span class="text-3xl font-bold text-amber-400" id="avgScore">5.0</span>
+                <div class="text-amber-400 text-lg" id="avgStars">⭐⭐⭐⭐⭐</div>
+                <span class="text-xs text-gray-400" id="totalReviewsCount">(১টি রিভিউর ভিত্তিতে)</span>
+            </div>
 
             <!-- Rating Form -->
             <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-900 p-5 rounded-lg space-y-4 border border-gray-700">
@@ -186,15 +205,19 @@
             </div>
         </section>
 
-        <!-- Location & Contact -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-            <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
+        <!-- Location & Contact Section -->
+        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-6">
+            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 <div class="space-y-4">
                     <p class="flex items-start">
                         <i class="fa-solid fa-location-dot text-amber-500 mt-1 mr-3 text-lg"></i>
                         <span><strong>ঠিকানা:</strong> বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা।</span>
+                    </p>
+                    <p class="flex items-center">
+                        <i class="fa-solid fa-clock text-amber-500 mr-3 text-lg"></i>
+                        <span><strong>সময়সূচী:</strong> প্রতিদিন সকাল ৮:০০ - রাত ১০:০০</span>
                     </p>
                     <p class="flex items-center">
                         <i class="fa-solid fa-phone text-amber-500 mr-3 text-lg"></i>
@@ -204,13 +227,14 @@
                         <i class="fa-brands fa-whatsapp text-emerald-500 mr-3 text-xl"></i>
                         <span><strong>হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801910947438" target="_blank" class="hover:underline">01910947438</a></span>
                     </p>
+                    <!-- Facebook Social Link Added Here -->
                     <p class="flex items-center">
-                        <i class="fa-solid fa-envelope text-amber-500 mr-3 text-lg"></i>
-                        <span><strong>ইমেইল:</strong> <a href="mailto:bdsumonu@gmail.com" class="hover:underline">bdsumonu@gmail.com</a></span>
+                        <i class="fa-brands fa-facebook text-blue-500 mr-3 text-xl"></i>
+                        <span><strong>ফেসবুক পেজ:</strong> <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-amber-400 hover:underline">আমাদের ফেসবুকে ফলো করুন</a></span>
                     </p>
                 </div>
 
-                <div class="text-center md:text-right">
+                <div class="text-center md:text-right space-y-3">
                     <a href="https://maps.app.goo.gl/5dJt2dXfqp5bTknu5" target="_blank" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full md:w-auto">
                         <i class="fa-solid fa-map-location-dot mr-2"></i> গুগল ম্যাপে লোকেশন দেখুন
                     </a>
@@ -220,8 +244,19 @@
 
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-400 text-center py-4 mt-10 border-t border-gray-800">
+    <!-- Footer with Social Media Link -->
+    <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
+        <div class="flex justify-center space-x-6 text-2xl">
+            <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300" title="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://wa.me/8801910947438" target="_blank" class="text-emerald-500 hover:text-emerald-400 transition duration-300" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="tel:01910947438" class="text-amber-500 hover:text-amber-400 transition duration-300" title="Call Us">
+                <i class="fa-solid fa-phone"></i>
+            </a>
+        </div>
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
@@ -248,6 +283,7 @@
                 localStorage.setItem('salon_reviews', JSON.stringify(reviews));
             }
             renderReviews(reviews);
+            updateSummary(reviews);
         }
 
         function renderReviews(reviews) {
@@ -271,6 +307,17 @@
                 `;
                 reviewsList.insertAdjacentHTML('beforeend', reviewHtml);
             });
+        }
+
+        function updateSummary(reviews) {
+            if (reviews.length === 0) return;
+
+            const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
+            const avgScore = (totalScore / reviews.length).toFixed(1);
+
+            document.getElementById('avgScore').innerText = avgScore;
+            document.getElementById('avgStars').innerText = '⭐'.repeat(Math.round(avgScore));
+            document.getElementById('totalReviewsCount').innerText = `(${reviews.length}টি রিভিউর ভিত্তিতে)`;
         }
 
         function setRating(rating) {
@@ -324,10 +371,11 @@
             localStorage.setItem('salon_reviews', JSON.stringify(reviews));
 
             renderReviews(reviews);
+            updateSummary(reviews);
 
             document.getElementById('ratingForm').reset();
             resetRating();
-            alert('রেটিং সফলভাবে জমা হয়েছে এবং সংরক্ষিত থাকবে!');
+            alert('রেটিং সফলভাবে জমা হয়েছে!');
         }
 
         function toggleAccordion(contentId, iconId) {
