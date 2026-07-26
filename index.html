@@ -1,180 +1,137 @@
 <!DOCTYPE html>
-<html lang="bn" class="scroll-smooth">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সৌমিক হেয়ার কাটিং - সেরা পুরুষ সেলুন</title>
+    <title>সৌমিক হেয়ার কাটিং - আপনার নিখুঁত লুকের সঠিক ঠিকানা</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="সৌমিক হেয়ার কাটিং - খুলনা ডুমুরিয়ার সেরা পুরুষ সেলুন। প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস পেতে অনলাইনে সিরিয়াল বুক করুন।">
+    <meta name="keywords" content="সৌমিক হেয়ার কাটিং, সেলুন ডুমুরিয়া, হেয়ার কাট খুলনা, Soumic Hair Cut, Salon in Dumuria">
+    <meta name="author" content="Soumic Hair Cut">
+
+    <!-- Open Graph / Facebook / WhatsApp Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sumon0146.github.io/Soumic-hair-cut/">
+    <meta property="og:title" content="সৌমিক হেয়ার কাটিং - অনলাইন সিরিয়াল বুকিং">
+    <meta property="og:description" content="পছন্দের সময়ে সেরা হেয়ার কাট ও গ্রুমিং সার্ভিসের জন্য আজই অনলাইনে আপনার সিরিয়াল নিশ্চিত করুন।">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1000&auto=format&fit=crop">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font (Hind Siliguri) -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Hind Siliguri', sans-serif; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 relative">
+<body class="bg-gray-900 text-gray-100 min-h-screen pb-12">
 
-    <!-- Sticky Floating WhatsApp Button -->
-    <a href="https://wa.me/8801910947438?text=হ্যালো%20সৌমিক%20হেয়ার%20কাটিং,%20আমি%20একটি%20সিরিয়াল%20বুক%20করতে%20চাই।" 
-       target="_blank" 
-       class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition duration-300 transform hover:scale-110 flex items-center justify-center text-3xl border-2 border-white/20"
-       title="WhatsApp-এ মেসেজ দিন">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
-    <!-- Header / Hero Section -->
-    <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
-        <div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500">সৌমিক হেয়ার কাটিং</h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-6">আপনার নিখুঁত লুকের সঠিক ঠিকানা</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#booking" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
-                    <i class="fa-solid fa-calendar-check mr-2"></i> সিরিয়াল বুক করুন
-                </a>
-                <a href="tel:01910947438" class="bg-gray-800 hover:bg-gray-700 text-amber-500 border border-amber-500 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
-                    <i class="fa-solid fa-phone mr-2"></i> কল করুন
+    <!-- Header Section -->
+    <header class="relative bg-cover bg-center h-80 flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop');">
+        <div class="max-w-xl">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-amber-500 mb-2">সৌমিক হেয়ার কাটিং</h1>
+            <p class="text-lg text-gray-300 mb-6">আপনার নিখুঁত লুকের সঠিক ঠিকানা!</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="openBookingModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i> সিরিয়াল বুক করুন
+                </button>
+                <a href="tel:+8801700000000" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition transform hover:scale-105 shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> কল করুন
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Scrolling Notice / Marquee Section -->
-    <div class="bg-amber-500/10 border-y border-amber-500/30 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
-        <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
-            ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই হোয়াটসঅ্যাপে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
-        </marquee>
+    <!-- Notice Bar -->
+    <div class="bg-amber-500/10 border-y border-amber-500/30 text-amber-400 py-2 px-4 text-center text-sm font-medium">
+        ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ভিড় এড়াতে আগে থেকেই অনলাইনে বুকিং দিন।
     </div>
 
-    <div class="max-w-4xl mx-auto p-4 md:p-6 space-y-12">
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 mt-8 space-y-10">
 
-        <!-- Why Choose Us / Features Section -->
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
-                <i class="fa-solid fa-pump-soap text-3xl text-amber-400"></i>
-                <h3 class="font-bold text-sm md:text-base">১০০% জীবাণুমুক্ত</h3>
-                <p class="text-xs text-gray-400">পরিষ্কার ও সেফ ইকুইপমেন্ট</p>
+        <!-- Features Grid -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
+                <i class="fa-solid fa-pump-soap text-amber-500 text-2xl mb-2"></i>
+                <h3 class="font-semibold text-sm">১০০% জীবাণুমুক্ত</h3>
+                <p class="text-xs text-gray-400 mt-1">পরিষ্কার ও সেফ ইকুইপমেন্ট</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
-                <i class="fa-solid fa-user-ninja text-3xl text-amber-400"></i>
-                <h3 class="font-bold text-sm md:text-base">অভিজ্ঞ কারিগর</h3>
-                <p class="text-xs text-gray-400">ট্রেন্ডি ও নিখুঁত কাটিং</p>
+            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
+                <i class="fa-solid fa-user-ninja text-amber-500 text-2xl mb-2"></i>
+                <h3 class="font-semibold text-sm">অভিজ্ঞ কারিগর</h3>
+                <p class="text-xs text-gray-400 mt-1">ট্রেন্ডি ও আধুনিক কাটিং</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
-                <i class="fa-solid fa-couch text-3xl text-amber-400"></i>
-                <h3 class="font-bold text-sm md:text-base">আরামদায়ক পরিবেশ</h3>
-                <p class="text-xs text-gray-400">মনোরম অভিজ্ঞতা</p>
+            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
+                <i class="fa-solid fa-couch text-amber-500 text-2xl mb-2"></i>
+                <h3 class="font-semibold text-sm">আরামদায়ক পরিবেশ</h3>
+                <p class="text-xs text-gray-400 mt-1">এসি ও আরামদায়ক সিটিং</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
-                <i class="fa-solid fa-clock text-3xl text-amber-400"></i>
-                <h3 class="font-bold text-sm md:text-base">দ্রুত সার্ভিস</h3>
-                <p class="text-xs text-gray-400">সিরিয়ালে সময়ের সঞ্চয়</p>
+            <div class="bg-gray-800 p-4 rounded-xl text-center border border-gray-700">
+                <i class="fa-solid fa-clock text-amber-500 text-2xl mb-2"></i>
+                <h3 class="font-semibold text-sm">দ্রুত সার্ভিস</h3>
+                <p class="text-xs text-gray-400 mt-1">সিরিয়াল অনুযায়ী কাজ</p>
             </div>
         </section>
 
-        <!-- Special Combo Offers Section (New Added) -->
-        <section class="bg-gradient-to-r from-amber-500/20 via-gray-800 to-amber-500/20 p-6 rounded-xl border border-amber-500/40 shadow-xl space-y-4">
-            <h2 class="text-2xl font-bold text-amber-400 text-center flex items-center justify-center">
-                <i class="fa-solid fa-gift text-2xl mr-2"></i> স্পেশাল কম্বো অফার
+        <!-- Combo Offers -->
+        <section class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+            <h2 class="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-gift"></i> স্পেশাল কম্বো অফার
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                <div class="bg-gray-900/90 p-4 rounded-lg border border-amber-500/30 flex justify-between items-center">
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center">
                     <div>
-                        <h3 class="font-bold text-lg text-gray-100">কম্বো ১: হেয়ারকাট + দাড়ি সেট</h3>
-                        <p class="text-xs text-gray-400">স্টাইলিশ হেয়ারকাট এবং পারফেক্ট বিয়ার্ড ট্রিম</p>
+                        <h4 class="font-bold text-amber-400">কম্বো ১: হেয়ারকাট + দাড়ি সেট</h4>
+                        <p class="text-xs text-gray-400 mt-1">স্টাইলিশ হেয়ারকাট এবং পারফেক্ট বিয়ার্ড ট্রিম</p>
                     </div>
-                    <span class="bg-amber-500 text-gray-950 font-bold px-3 py-1 rounded-full text-sm">৳১৫০</span>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-amber-500">৳১৫০</span>
+                        <button onclick="openBookingModal('কম্বো ১ (৳১৫০)')" class="block text-xs bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-3 py-1 rounded mt-2">বুক করুন</button>
+                    </div>
                 </div>
-                <div class="bg-gray-900/90 p-4 rounded-lg border border-amber-500/30 flex justify-between items-center">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 flex justify-between items-center">
                     <div>
-                        <h3 class="font-bold text-lg text-gray-100">কম্বো ২: ফুল গ্রুমিং প্যাকেজ</h3>
-                        <p class="text-xs text-gray-400">হেয়ারকাট + দাড়ি + ফেস ওয়াশ + স্পেশাল মেসেজ</p>
+                        <h4 class="font-bold text-amber-400">কম্বো ২: ফুল গ্রুমিং প্যাকেজ</h4>
+                        <p class="text-xs text-gray-400 mt-1">হেয়ারকাট + দাড়ি + ফেস ওয়াশ + স্পেশাল মেসেজ</p>
                     </div>
-                    <span class="bg-amber-500 text-gray-950 font-bold px-3 py-1 rounded-full text-sm">৳৩৫০</span>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-amber-500">৳৩৫০</span>
+                        <button onclick="openBookingModal('কম্বো ২ (৳৩৫০)')" class="block text-xs bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-3 py-1 rounded mt-2">বুক করুন</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services & Price List -->
-        <section>
-            <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">
-                ✂️ সার্ভিস ও মূল্য তালিকা
+        <!-- Services Section -->
+        <section id="services" class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+            <h2 class="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-scissors"></i> সার্ভিস ও মূল্য তালিকা
             </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Hair Care -->
-                <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden">
-                    <button onclick="toggleAccordion('hairCareContent', 'hairCareIcon')" class="w-full text-left p-5 flex justify-between items-center focus:outline-none hover:bg-gray-750 transition duration-200">
-                        <h3 class="text-xl font-semibold text-amber-400">
-                            <i class="fa-solid fa-scissors mr-2"></i>হেয়ার কেয়ার (Hair Care)
-                        </h3>
-                        <i id="hairCareIcon" class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
-                    </button>
-                    
-                    <div id="hairCareContent" class="hidden p-5 pt-0 border-t border-gray-700/50 mt-2">
-                        <ul class="space-y-3">
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>হেয়ার কাট (Haircut)</span>
-                                <span class="font-bold text-amber-500">৳৭০ – ৳১৫০</span>
-                            </li>
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>ট্রেন্ডি / স্টাইলিশ কাট</span>
-                                <span class="font-bold text-amber-500">৳১০০ – ৳২০০</span>
-                            </li>
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>দাড়ি ট্রিম / শেভ</span>
-                                <span class="font-bold text-amber-500">৳৫০ – ৳১৫০</span>
-                            </li>
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>দাড়ি স্টাইলিং</span>
-                                <span class="font-bold text-amber-500">৳৭০ – ৳১৫০</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>চুল কালার (Hair Color)</span>
-                                <span class="font-bold text-amber-500">৳৫০ – ৳১৫০+</span>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-700">
+                    <span>সাধারণ হেয়ারকাট</span>
+                    <span class="font-bold text-amber-400">৳৮০</span>
                 </div>
-
-                <!-- Facial & Skin Care -->
-                <div class="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden">
-                    <button onclick="toggleAccordion('facialContent', 'facialIcon')" class="w-full text-left p-5 flex justify-between items-center focus:outline-none hover:bg-gray-750 transition duration-200">
-                        <h3 class="text-xl font-semibold text-amber-400">
-                            <i class="fa-solid fa-sparkles mr-2"></i>ফেসিয়াল ও স্কিন কেয়ার
-                        </h3>
-                        <i id="facialIcon" class="fa-solid fa-chevron-down text-amber-400 transition-transform duration-300"></i>
-                    </button>
-
-                    <div id="facialContent" class="hidden p-5 pt-0 border-t border-gray-700/50 mt-2">
-                        <ul class="space-y-3">
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>ফেস ওয়াশ / ক্লিন-আপ</span>
-                                <span class="font-bold text-amber-500">৳৫০ – ৳৩০০</span>
-                            </li>
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>গোল্ড / ডায়মন্ড ফেসিয়াল</span>
-                                <span class="font-bold text-amber-500">৳৫০০ – ৳১,৫০০</span>
-                            </li>
-                            <li class="flex justify-between border-b border-gray-700 pb-1">
-                                <span>ডি-ট্যান / স্ক্রাব</span>
-                                <span class="font-bold text-amber-500">৳৫০ – ৳২৫০</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>হেয়ার স্পা / মেসেজ</span>
-                                <span class="font-bold text-amber-500">৳১৫০ – ৳৩০০</span>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-700">
+                    <span>স্টাইলিশ/ট্রেন্ডি হেয়ারকাট</span>
+                    <span class="font-bold text-amber-400">৳১০০</span>
+                </div>
+                <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-700">
+                    <span>দাড়ি কাটিং/সেটিং</span>
+                    <span class="font-bold text-amber-400">৳৫০</span>
+                </div>
+                <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-700">
+                    <span>ফেসিয়াল ও স্কিন কেয়ার</span>
+                    <span class="font-bold text-amber-400">৳২০০ - ৳৫০০</span>
                 </div>
             </div>
         </section>
 
-        <!-- Photo Gallery Section -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-            <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">
-                🖼️ আমাদের কাজ ও গ্যালারি
+        <!-- Gallery Section -->
+        <section class="bg-gray-800 p-6 rounded-2xl border border-gray-700">
+            <h2 class="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-images"></i> আমাদের কাজ ও গ্যালারি
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=500&auto=format&fit=crop" alt="Haircut Style 1" class="rounded-lg object-cover w-full h-40 border border-gray-700 hover:scale-105 transition duration-300">
@@ -183,293 +140,154 @@
             </div>
         </section>
 
-        <!-- WhatsApp Direct Booking Section -->
-        <section id="booking" class="bg-gray-800 p-8 rounded-lg border border-emerald-500/50 shadow-xl scroll-mt-6 text-center space-y-6">
-            <div class="max-w-md mx-auto">
-                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">
-                    📅 হোয়াটসঅ্যাপে সিরিয়াল বুক করুন
-                </h2>
-                <p class="text-gray-300 text-sm">
-                    নিচের বাটনে ক্লিক করে সরাসরি আমাদের হোয়াটসঅ্যাপে আপনার নাম, পছন্দের সময় ও সার্ভিস লিখে মেসেজ পাঠান।
-                </p>
+        <!-- Booking CTA Banner -->
+        <section id="booking" class="bg-gradient-to-r from-emerald-900 to-teal-900 p-6 rounded-2xl border border-emerald-700 text-center">
+            <div class="inline-block bg-emerald-500/20 p-4 rounded-full mb-3">
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-4xl"></i>
             </div>
-
-            <div class="pt-2">
-                <a href="https://wa.me/8801910947438?text=হ্যালো%20সৌমিক%20হেয়ার%20কাটিং,%20আমি%20একটি%20সিরিয়াল%20বুক%20করতে%20চাই।" target="_blank" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transition duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-whatsapp text-2xl mr-3"></i> WhatsApp-এ সিরিয়াল নিন
-                </a>
-            </div>
-            
-            <p class="text-xs text-gray-400">
-                * ক্লিক করলেই সরাসরি আপনার হোয়াটসঅ্যাপ চ্যাট ওপেন হয়ে যাবে।
+            <h2 class="text-2xl font-bold text-white mb-2">ইনস্ট্যান্ট অনলাইন বুকিং</h2>
+            <p class="text-sm text-emerald-200 mb-6 max-w-md mx-auto">
+                সিরিয়াল বুকিং ফর্মে তথ্য দিয়ে সরাসরি আপনার পছন্দের সময়ে সিরিয়াল বুকিং নিশ্চিত করুন।
             </p>
+            <button onclick="openBookingModal()" class="bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-bold py-3 px-8 rounded-full transition transform hover:scale-105 shadow-lg inline-flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> বুকিং ফর্ম খুলুন
+            </button>
         </section>
 
-        <!-- Customer Rating & Review Section -->
-        <section class="bg-gray-800 p-6 md:p-8 rounded-lg border border-amber-500/30 shadow-xl space-y-6">
-            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">
-                ⭐ গ্রাহকদের মতামত ও রেটিং
+        <!-- Customer Reviews -->
+        <section class="bg-gray-800 p-6 rounded-2xl border border-gray-700 text-center">
+            <h2 class="text-xl font-bold text-amber-500 mb-2 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-star"></i> গ্রাহকদের মতামত ও রেটিং
             </h2>
-
-            <!-- Rating Summary Card -->
-            <div id="ratingSummary" class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 text-center flex flex-col items-center justify-center space-y-1">
-                <span class="text-3xl font-bold text-amber-400" id="avgScore">5.0</span>
-                <div class="text-amber-400 text-lg" id="avgStars">⭐⭐⭐⭐⭐</div>
-                <span class="text-xs text-gray-400" id="totalReviewsCount">(১টি রিভিউর ভিত্তিতে)</span>
+            <div class="text-3xl font-bold text-amber-400 my-2">5.0</div>
+            <div class="text-amber-400 mb-4">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
             </div>
-
-            <!-- Rating Form -->
-            <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-900 p-5 rounded-lg space-y-4 border border-gray-700">
-                <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
-                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন <span class="text-red-500">*</span></label>
-                    <div class="flex gap-2 text-3xl text-gray-600 cursor-pointer py-1" id="starContainer">
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(1)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(2)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(3)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(4)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(5)"></i>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য (ঐচ্ছিক)</label>
-                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন (না লিখলেও চলবে)..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500"></textarea>
-                </div>
-
-                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded transition duration-300">
-                    রেটিং জমা দিন
-                </button>
-            </form>
-
-            <!-- Reviews Display -->
-            <div class="space-y-4 pt-4">
-                <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রেটিং ও রিভিউ:</h3>
-                <div id="reviewsList" class="space-y-3">
-                    <!-- Dynamic reviews will be loaded here from LocalStorage -->
-                </div>
-            </div>
+            <p class="text-xs text-gray-400">(৩৫০+ সন্তুষ্ট গ্রাহকের রিভিউ)</p>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-4">
-            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">
-                ❓ সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (FAQ)
-            </h2>
-            <div class="space-y-3">
-                <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
-                    <h3 class="font-semibold text-amber-400">প্রশ্ন: আগে থেকে সিরিয়াল দেওয়া কি বাধ্যতামূলক?</h3>
-                    <p class="text-sm text-gray-300 mt-1">উত্তর: বাধ্যতামূলক নয়, তবে এসে যেন আপনাকে অতিরিক্ত অপেক্ষা করতে না হয়, তাই আগে থেকে হোয়াটসঅ্যাপে সময় নিশ্চিত করে আসাই ভালো।</p>
-                </div>
-                <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
-                    <h3 class="font-semibold text-amber-400">প্রশ্ন: আপনাদের সেলুন কি সপ্তাহের প্রতিদিন খোলা থাকে?</h3>
-                    <p class="text-sm text-gray-300 mt-1">উত্তর: হ্যাঁ, আমরা প্রতিদিন সকাল ৮:০০ টা থেকে রাত ১০:০০ টা পর্যন্ত সেবা প্রদান করি।</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Location & Contact Section (Google Map Embedded) -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-6">
-            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                <div class="space-y-4">
-                    <p class="flex items-start">
-                        <i class="fa-solid fa-location-dot text-amber-500 mt-1 mr-3 text-lg"></i>
-                        <span><strong>ঠিকানা:</strong> বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা।</span>
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fa-solid fa-clock text-amber-500 mr-3 text-lg"></i>
-                        <span><strong>সময়সূচী:</strong> প্রতিদিন সকাল ৮:০০ - রাত ১০:০০</span>
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fa-solid fa-phone text-amber-500 mr-3 text-lg"></i>
-                        <span><strong>মোবাইল:</strong> <a href="tel:01910947438" class="hover:underline">01910947438</a></span>
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fa-brands fa-whatsapp text-emerald-500 mr-3 text-xl"></i>
-                        <span><strong>হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801910947438" target="_blank" class="hover:underline">01910947438</a></span>
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fa-brands fa-facebook text-blue-500 mr-3 text-xl"></i>
-                        <span><strong>ফেসবুক পেজ:</strong> <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-amber-400 hover:underline">আমাদের ফেসবুকে ফলো করুন</a></span>
-                    </p>
-                    <div>
-                        <a href="https://maps.app.goo.gl/5dJt2dXfqp5bTknu5" target="_blank" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg transition duration-300 w-full mt-2">
-                            <i class="fa-solid fa-map-location-dot mr-2"></i> গুগল ম্যাপ অ্যাপে দেখুন
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Google Map Embed Box -->
-                <div class="w-full h-64 rounded-lg overflow-hidden border border-gray-700 shadow-md">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.8543881234!2d89.4167!3d22.8000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ4JzAwLjAiTiA4OcKwMjUnMDAuMCJF!5e0!3m2!1sbn!2sbd!4v1620000000000!5m2!1sbn!2sbd" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
-        <div class="flex justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300" title="Facebook">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://wa.me/8801910947438" target="_blank" class="text-emerald-500 hover:text-emerald-400 transition duration-300" title="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-            <a href="tel:01910947438" class="text-amber-500 hover:text-amber-400 transition duration-300" title="Call Us">
-                <i class="fa-solid fa-phone"></i>
-            </a>
-        </div>
-        <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
+    <footer class="mt-12 text-center text-gray-500 text-xs border-t border-gray-800 pt-6">
+        <p>© 2026 Soumic Hair Cut. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        let selectedRating = 0;
+    <!-- Floating WhatsApp Action Button -->
+    <button onclick="openBookingModal()" class="fixed bottom-6 right-6 bg-emerald-500 text-gray-900 p-4 rounded-full shadow-2xl hover:bg-emerald-400 transition transform hover:scale-110 flex items-center justify-center z-40">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </button>
 
-        const initialReviews = [
-            {
-                name: "আরিফ আহমেদ",
-                rating: 5,
-                comment: "খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।"
-            }
-        ];
+    <!-- Booking Modal / Instant Form -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadReviews();
-        });
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="inline-block bg-amber-500/20 p-3 rounded-full text-amber-400 mb-2">
+                    <i class="fa-solid fa-calendar-plus text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-amber-500">অনলাইন সিরিয়াল বুকিং</h3>
+                <p class="text-xs text-gray-400 mt-1">তথ্যগুলো দিন, মেসেজটি হোয়াটসঅ্যাপে পাঠাতে রিডাইরেক্ট করা হবে</p>
+            </div>
 
-        function loadReviews() {
-            let reviews = JSON.parse(localStorage.getItem('salon_reviews'));
-            if (!reviews || reviews.length === 0) {
-                reviews = initialReviews;
-                localStorage.setItem('salon_reviews', JSON.stringify(reviews));
-            }
-            renderReviews(reviews);
-            updateSummary(reviews);
-        }
+            <!-- Booking Form -->
+            <form id="bookingForm" onsubmit="submitToWhatsApp(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">আপনার নাম *</label>
+                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                </div>
 
-        function renderReviews(reviews) {
-            const reviewsList = document.getElementById('reviewsList');
-            reviewsList.innerHTML = '';
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">মোবাইল নম্বর *</label>
+                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                </div>
 
-            reviews.forEach(review => {
-                const starsText = '⭐'.repeat(review.rating);
-                const commentHtml = review.comment !== "" 
-                    ? `<p class="text-sm text-gray-400">${review.comment}</p>` 
-                    : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">সার্ভিস পছন্দ করুন *</label>
+                    <select id="custService" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                        <option value="সাধারণ হেয়ারকাট (৳৮০)">সাধারণ হেয়ারকাট (৳৮০)</option>
+                        <option value="স্টাইলিশ হেয়ারকাট (৳১০০)">স্টাইলিশ হেয়ারকাট (৳১০০)</option>
+                        <option value="দাড়ি কাটিং/সেটিং (৳৫০)">দাড়ি কাটিং/সেটিং (৳৫০)</option>
+                        <option value="কম্বো ১: হেয়ারকাট + দাড়ি সেটিং (৳১৫০)">কম্বো ১: হেয়ারকাট + দাড়ি সেটিং (৳১৫০)</option>
+                        <option value="কম্বো ২: ফুল গ্রুমিং প্যাকেজ (৳৩৫০)">কম্বো ২: ফুল গ্রুমিং প্যাকেজ (৳৩৫০)</option>
+                        <option value="ফেসিয়াল ও স্কিন কেয়ার (৳২০০+)">ফেসিয়াল ও স্কিন কেয়ার (৳২০০+)</option>
+                        <option value="অন্যান্য সার্ভিস">অন্যান্য সার্ভিস</option>
+                    </select>
+                </div>
 
-                const reviewHtml = `
-                    <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-200">${review.name}</span>
-                            <span class="text-amber-400 text-sm">${starsText}</span>
-                        </div>
-                        ${commentHtml}
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">তারিখ *</label>
+                        <input type="date" id="custDate" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
                     </div>
-                `;
-                reviewsList.insertAdjacentHTML('beforeend', reviewHtml);
-            });
-        }
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">সময/টাইম *</label>
+                        <input type="time" id="custTime" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
 
-        function updateSummary(reviews) {
-            if (reviews.length === 0) return;
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-bold py-3 rounded-lg transition duration-200 mt-2 flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> হোয়াটসঅ্যাপে কনফার্ম করুন
+                </button>
+            </form>
+        </div>
+    </div>
 
-            const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
-            const avgScore = (totalScore / reviews.length).toFixed(1);
+    <!-- JavaScript Logic -->
+    <script>
+        // Set default date to today
+        document.getElementById('custDate').valueAsDate = new Date();
 
-            document.getElementById('avgScore').innerText = avgScore;
-            document.getElementById('avgStars').innerText = '⭐'.repeat(Math.round(avgScore));
-            document.getElementById('totalReviewsCount').innerText = `(${reviews.length}টি রিভিউর ভিত্তিতে)`;
-        }
-
-        function setRating(rating) {
-            selectedRating = rating;
-            const stars = document.getElementById('starContainer').children;
-            for (let i = 0; i < stars.length; i++) {
-                if (i < rating) {
-                    stars[i].classList.add('text-amber-400');
-                    stars[i].classList.remove('text-gray-600');
-                } else {
-                    stars[i].classList.remove('text-amber-400');
-                    stars[i].classList.add('text-gray-600');
-                }
+        function openBookingModal(selectedService = '') {
+            const modal = document.getElementById('bookingModal');
+            if(selectedService) {
+                document.getElementById('custService').value = selectedService;
             }
+            modal.classList.remove('hidden');
         }
 
-        function resetRating() {
-            selectedRating = 0;
-            const stars = document.getElementById('starContainer').children;
-            for (let i = 0; i < stars.length; i++) {
-                stars[i].classList.remove('text-amber-400');
-                stars[i].classList.add('text-gray-600');
-            }
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
         }
 
-        function submitReview(event) {
+        function submitToWhatsApp(event) {
             event.preventDefault();
 
-            const nameInput = document.getElementById('custName').value.trim();
+            // আপনার সঠিক হোয়াটসঅ্যাপ নম্বরটি নিচে বসিয়ে দিন (যেমন: 88017XXXXXXXX)
+            const salonWhatsAppNumber = "8801910947438"; 
 
-            if (!nameInput) {
-                alert('অনুগ্রহ করে আপনার নাম লিখুন।');
-                return;
-            }
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const service = document.getElementById('custService').value;
+            const date = document.getElementById('custDate').value;
+            const time = document.getElementById('custTime').value;
 
-            if (selectedRating === 0) {
-                alert('অনুগ্রহ করে রেটিং দিতে স্টার ক্লিক করুন (১ থেকে ৫ স্টার)।');
-                return;
-            }
+            // Formatted Message for WhatsApp
+            const message = `হ্যালো, আমি সৌমিক হেয়ার কাটিং-এ অনলাইনে সিরিয়াল বুকিং দিতে চাই।%0A%0A` +
+                            `👤 *নাম:* ${encodeURIComponent(name)}%0A` +
+                            `📞 *মোবাইল:* ${encodeURIComponent(phone)}%0A` +
+                            `✂️ *সার্ভিস:* ${encodeURIComponent(service)}%0A` +
+                            `📅 *তারিখ:* ${encodeURIComponent(date)}%0A` +
+                            `⏰ *সময়:* ${encodeURIComponent(time)}%0A%0A` +
+                            `অনুগ্রহ করে আমার বুকিংটি কনফার্ম করুন।`;
 
-            const commentInput = document.getElementById('custComment').value.trim();
-
-            const newReview = {
-                name: nameInput,
-                rating: selectedRating,
-                comment: commentInput
-            };
-
-            let reviews = JSON.parse(localStorage.getItem('salon_reviews')) || [];
-            reviews.unshift(newReview);
-            localStorage.setItem('salon_reviews', JSON.stringify(reviews));
-
-            renderReviews(reviews);
-            updateSummary(reviews);
-
-            document.getElementById('ratingForm').reset();
-            resetRating();
-            alert('রেটিং সফলভাবে জমা হয়েছে!');
+            window.open(`https://wa.me/${salonWhatsAppNumber}?text=${message}`, '_blank');
+            closeBookingModal();
         }
 
-        function toggleAccordion(contentId, iconId) {
-            const content = document.getElementById(contentId);
-            const icon = document.getElementById(iconId);
-
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target === modal) {
+                closeBookingModal();
             }
         }
     </script>
