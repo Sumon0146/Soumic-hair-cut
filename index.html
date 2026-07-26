@@ -145,12 +145,12 @@
                 <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম (ঐচ্ছিক)</label>
-                    <input type="text" id="custName" placeholder="নাম না লিখলেও চলবে" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
+                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন (স্টার বাটনে ট্যাপ করুন)</label>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন <span class="text-red-500">*</span></label>
                     <div class="flex gap-2 text-3xl text-gray-600 cursor-pointer py-1" id="starContainer">
                         <i class="fa-solid fa-star transition duration-200" onclick="setRating(1)"></i>
                         <i class="fa-solid fa-star transition duration-200" onclick="setRating(2)"></i>
@@ -255,15 +255,19 @@
         function submitReview(event) {
             event.preventDefault();
 
-            if (selectedRating === 0) {
-                alert('অনুগ্রহ করে রেটিং দিতে অন্তত একটি স্টার সিলেক্ট করুন!');
+            const nameInput = document.getElementById('custName').value.trim();
+
+            if (!nameInput) {
+                alert('অনুগ্রহ করে আপনার নাম লিখুন।');
                 return;
             }
 
-            const nameInput = document.getElementById('custName').value.trim();
+            if (selectedRating === 0) {
+                alert('অনুগ্রহ করে রেটিং দিতে স্টার ক্লিক করুন (১ থেকে ৫ স্টার)।');
+                return;
+            }
+
             const commentInput = document.getElementById('custComment').value.trim();
-            
-            const name = nameInput !== "" ? nameInput : "গ্রাহক (অজ্ঞাত)";
             const starsText = '⭐'.repeat(selectedRating);
             
             const commentHtml = commentInput !== "" 
@@ -273,7 +277,7 @@
             const newReviewHtml = `
                 <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
                     <div class="flex justify-between items-center">
-                        <span class="font-bold text-gray-200">${name}</span>
+                        <span class="font-bold text-gray-200">${nameInput}</span>
                         <span class="text-amber-400 text-sm">${starsText}</span>
                     </div>
                     ${commentHtml}
