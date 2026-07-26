@@ -134,6 +134,58 @@
             </p>
         </section>
 
+        <!-- Customer Rating & Review Section -->
+        <section class="bg-gray-800 p-6 md:p-8 rounded-lg border border-amber-500/30 shadow-xl space-y-6">
+            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">
+                ⭐ গ্রাহকদের মতামত ও রেটিং
+            </h2>
+
+            <!-- Rating Form -->
+            <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-900 p-5 rounded-lg space-y-4 border border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম</label>
+                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন</label>
+                    <div class="flex gap-2 text-2xl text-gray-500 cursor-pointer" id="starContainer">
+                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(1)"></i>
+                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(2)"></i>
+                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(3)"></i>
+                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(4)"></i>
+                        <i class="fa-solid fa-star hover:text-amber-400" onclick="setRating(5)"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য</label>
+                    <textarea id="custComment" rows="3" placeholder="সার্ভিস কেমন লাগলো লিখুন..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500" required></textarea>
+                </div>
+
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2 px-6 rounded transition duration-300">
+                    রিভিউ জমা দিন
+                </button>
+            </form>
+
+            <!-- Reviews Display -->
+            <div class="space-y-4 pt-4">
+                <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রিভিউসমূহ:</h3>
+                <div id="reviewsList" class="space-y-3">
+                    <!-- Default Demo Reviews -->
+                    <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-200">আরিফ আহমেদ</span>
+                            <span class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="text-sm text-gray-400">খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Location & Contact -->
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700">
             <h2 class="text-2xl font-bold text-amber-500 text-center mb-6 border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
@@ -175,6 +227,44 @@
 
     <!-- JavaScript -->
     <script>
+        let currentRating = 5;
+
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.getElementById('starContainer').children;
+            for (let i = 0; i < stars.length; i++) {
+                if (i < rating) {
+                    stars[i].classList.add('text-amber-400');
+                    stars[i].classList.remove('text-gray-500');
+                } else {
+                    stars[i].classList.remove('text-amber-400');
+                    stars[i].classList.add('text-gray-500');
+                }
+            }
+        }
+
+        function submitReview(event) {
+            event.preventDefault();
+            const name = document.getElementById('custName').value;
+            const comment = document.getElementById('custComment').value;
+            const starsText = '⭐'.repeat(currentRating);
+
+            const newReviewHtml = `
+                <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-200">${name}</span>
+                        <span class="text-amber-400 text-sm">${starsText}</span>
+                    </div>
+                    <p class="text-sm text-gray-400">${comment}</p>
+                </div>
+            `;
+
+            document.getElementById('reviewsList').insertAdjacentHTML('afterbegin', newReviewHtml);
+            document.getElementById('ratingForm').reset();
+            setRating(5);
+            alert('আপনার মূল্যবান মতামতের জন্য ধন্যবাদ!');
+        }
+
         function toggleAccordion(contentId, iconId) {
             const content = document.getElementById(contentId);
             const icon = document.getElementById(iconId);
@@ -187,6 +277,9 @@
                 icon.style.transform = 'rotate(0deg)';
             }
         }
+
+        // Initialize star colors
+        setRating(5);
     </script>
 </body>
 </html>
