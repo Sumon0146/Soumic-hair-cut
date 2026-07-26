@@ -174,14 +174,7 @@
             <div class="space-y-4 pt-4">
                 <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রেটিং ও রিভিউ:</h3>
                 <div id="reviewsList" class="space-y-3">
-                    <!-- Sample Review -->
-                    <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-200">আরিফ আহমেদ</span>
-                            <span class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <p class="text-sm text-gray-400">খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।</p>
-                    </div>
+                    <!-- Dynamic reviews will be loaded here from LocalStorage -->
                 </div>
             </div>
         </section>
@@ -229,6 +222,52 @@
     <script>
         let selectedRating = 0;
 
+        // ডিফল্ট ডেমো রিভিউ (যদি প্রথমবার পেজ লোড হয়)
+        const initialReviews = [
+            {
+                name: "আরিফ আহমেদ",
+                rating: 5,
+                comment: "খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।"
+            }
+        ];
+
+        // পেজ লোড হলেই পূর্বের রিভিউগুলো লোড করা
+        window.addEventListener('DOMContentLoaded', () => {
+            loadReviews();
+        });
+
+        function loadReviews() {
+            let reviews = JSON.parse(localStorage.getItem('salon_reviews'));
+            if (!reviews || reviews.length === 0) {
+                reviews = initialReviews;
+                localStorage.setItem('salon_reviews', JSON.stringify(reviews));
+            }
+            renderReviews(reviews);
+        }
+
+        function renderReviews(reviews) {
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.innerHTML = '';
+
+            reviews.forEach(review => {
+                const starsText = '⭐'.repeat(review.rating);
+                const commentHtml = review.comment !== "" 
+                    ? `<p class="text-sm text-gray-400">${review.comment}</p>` 
+                    : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
+
+                const reviewHtml = `
+                    <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-200">${review.name}</span>
+                            <span class="text-amber-400 text-sm">${starsText}</span>
+                        </div>
+                        ${commentHtml}
+                    </div>
+                `;
+                reviewsList.insertAdjacentHTML('beforeend', reviewHtml);
+            });
+        }
+
         function setRating(rating) {
             selectedRating = rating;
             const stars = document.getElementById('starContainer').children;
@@ -268,26 +307,24 @@
             }
 
             const commentInput = document.getElementById('custComment').value.trim();
-            const starsText = '⭐'.repeat(selectedRating);
-            
-            const commentHtml = commentInput !== "" 
-                ? `<p class="text-sm text-gray-400">${commentInput}</p>` 
-                : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
 
-            const newReviewHtml = `
-                <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-gray-200">${nameInput}</span>
-                        <span class="text-amber-400 text-sm">${starsText}</span>
-                    </div>
-                    ${commentHtml}
-                </div>
-            `;
+            const newReview = {
+                name: nameInput,
+                rating: selectedRating,
+                comment: commentInput
+            };
 
-            document.getElementById('reviewsList').insertAdjacentHTML('afterbegin', newReviewHtml);
+            // LocalStorage-এ নতুন রিভিউ সেভ করা
+            let reviews = JSON.parse(localStorage.getItem('salon_reviews')) || [];
+            reviews.unshift(newReview); // সবার উপরে দেখাবে
+            localStorage.setItem('salon_reviews', JSON.stringify(reviews));
+
+            // তালিকা রেন্ডার করা
+            renderReviews(reviews);
+
             document.getElementById('ratingForm').reset();
             resetRating();
-            alert('রেটিং দেওয়ার জন্য আপনাকে ধন্যবাদ!');
+            alert('রেটিং সফলভাবে জমা হয়েছে এবং সংরক্ষিত থাকবে!');
         }
 
         function toggleAccordion(contentId, iconId) {
