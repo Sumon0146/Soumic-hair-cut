@@ -682,7 +682,7 @@
         }
 
         // -------------------------------------------------------------
-        // 4. WhatsApp Booking & Reviews Handling
+        // 4. WhatsApp & Telegram Booking Notification
         // -------------------------------------------------------------
         function sendWhatsAppBooking(event) {
             event.preventDefault();
@@ -696,6 +696,7 @@
             const currentUser = auth.currentUser;
             const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
 
+            // ১. ফায়ারস্টোরে ডেটা সেভ করা
             db.collection("bookings").add({
                 customerName: name,
                 customerPhone: phone,
@@ -707,6 +708,29 @@
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).catch(e => console.log("Database record error:", e));
 
+            // ২. টেলিগ্রাম বটে নোটিফিকেশন পাঠানো
+            const telegramBotToken = "8847976532:AAHcKafdKbxfZ39ZbI25fxaKgzOvRGw9-jI";
+            const telegramChatId = "6091423501";
+            
+            const telegramMsg = `💈 *নতুন সেলুন বুকিং এসেছে!* 💈\n\n` +
+                                `👤 *নাম:* ${name}\n` +
+                                `📞 *ফোন:* ${phone}\n` +
+                                `✂️ *সার্ভিস:* ${service}\n` +
+                                `📅 *তারিখ:* ${date}\n` +
+                                `⏰ *সময়:* ${time}\n` +
+                                `🏷️ *টাইপ:* ${userStatus}`;
+
+            fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: telegramChatId,
+                    text: telegramMsg,
+                    parse_mode: "Markdown"
+                })
+            }).catch(err => console.log("Telegram API Error:", err));
+
+            // ৩. হোয়াটসঅ্যাপ মেসেজ তৈরি করে পাঠানো
             const textMessage = `হ্যালো সৌমিক হেয়ার কাটিং,\nআমি একটি সিরিয়াল বুক করতে চাই।\n\n📌 *বুকিং বিবরণী (${userStatus}):*\n👤 নাম: ${name}\n📞 মোবাইল: ${phone}\n✂️ সার্ভিস: ${service}\n📅 তারিখ: ${date}\n⏰ সময়: ${time}`;
             const whatsappUrl = `https://wa.me/8801910947438?text=${encodeURIComponent(textMessage)}`;
 
