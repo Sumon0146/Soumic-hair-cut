@@ -11,7 +11,7 @@
     <!-- Google Font (Hind Siliguri) -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Firebase App & Auth SDKs (Compat version for simple setup) -->
+    <!-- Firebase App & Auth SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -30,7 +30,6 @@
             </a>
             
             <div id="navUserArea">
-                <!-- User Login/Profile state will load dynamically -->
                 <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
                     <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
                 </button>
@@ -205,7 +204,7 @@
             </div>
         </section>
 
-        <!-- Online Serial Booking Form (Supports both Logged-in & Guest Customers) -->
+        <!-- Online Serial Booking Form -->
         <section id="booking" class="bg-gray-800 p-6 md:p-8 rounded-lg border border-emerald-500/50 shadow-xl scroll-mt-6 space-y-6">
             <div class="max-w-md mx-auto text-center">
                 <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
@@ -219,7 +218,6 @@
                 </p>
             </div>
 
-            <!-- Booking Form -->
             <form onsubmit="sendWhatsAppBooking(event)" class="max-w-xl mx-auto bg-gray-900 p-5 md:p-6 rounded-lg space-y-4 border border-gray-700">
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
@@ -272,14 +270,12 @@
                 ⭐ গ্রাহকদের মতামত ও রেটিং
             </h2>
 
-            <!-- Rating Summary Card -->
             <div id="ratingSummary" class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 text-center flex flex-col items-center justify-center space-y-1">
                 <span class="text-3xl font-bold text-amber-400" id="avgScore">5.0</span>
                 <div class="text-amber-400 text-lg" id="avgStars">⭐⭐⭐⭐⭐</div>
                 <span class="text-xs text-gray-400" id="totalReviewsCount">(১টি রিভিউর ভিত্তিতে)</span>
             </div>
 
-            <!-- Rating Form -->
             <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-900 p-5 rounded-lg space-y-4 border border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
                 
@@ -301,7 +297,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য (ঐচ্ছিক)</label>
-                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন (না লিখলেও চলবে)..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500"></textarea>
+                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500"></textarea>
                 </div>
 
                 <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded transition duration-300">
@@ -309,12 +305,9 @@
                 </button>
             </form>
 
-            <!-- Reviews Display -->
             <div class="space-y-4 pt-4">
                 <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রেটিং ও রিভিউ:</h3>
-                <div id="reviewsList" class="space-y-3">
-                    <!-- Dynamic reviews will be loaded here from LocalStorage -->
-                </div>
+                <div id="reviewsList" class="space-y-3"></div>
             </div>
         </section>
 
@@ -335,10 +328,9 @@
             </div>
         </section>
 
-        <!-- Location & Contact Section -->
+        <!-- Location Section -->
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-6">
             <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div class="space-y-4">
                     <p class="flex items-start">
@@ -357,10 +349,6 @@
                         <i class="fa-brands fa-whatsapp text-emerald-500 mr-3 text-xl"></i>
                         <span><strong>হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801910947438" target="_blank" class="hover:underline">01910947438</a></span>
                     </p>
-                    <p class="flex items-center">
-                        <i class="fa-brands fa-facebook text-blue-500 mr-3 text-xl"></i>
-                        <span><strong>ফেসবুক পেজ:</strong> <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-amber-400 hover:underline">আমাদের ফেসবুকে ফলো করুন</a></span>
-                    </p>
                     <div>
                         <a href="https://maps.app.goo.gl/5dJt2dXfqp5bTknu5" target="_blank" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg transition duration-300 w-full mt-2">
                             <i class="fa-solid fa-map-location-dot mr-2"></i> গুগল ম্যাপ অ্যাপে দেখুন
@@ -368,16 +356,8 @@
                     </div>
                 </div>
 
-                <!-- Google Map Embed Box -->
                 <div class="w-full h-64 rounded-lg overflow-hidden border border-gray-700 shadow-md">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.8543881234!2d89.4167!3d22.8000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ4JzAwLjAiTiA4OcKwMjUnMDAuMCJF!5e0!3m2!1sbn!2sbd!4v1620000000000!5m2!1sbn!2sbd" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.8543881234!2d89.4167!3d22.8000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ4JzAwLjAiTiA4OcKwMjUnMDAuMCJF!5e0!3m2!1sbn!2sbd!4v1620000000000!5m2!1sbn!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
@@ -391,7 +371,6 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Modal Header / Tabs -->
             <div class="flex border-b border-gray-700 pb-2">
                 <button id="tabLogin" onclick="switchTab('login')" class="flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500">লগইন</button>
                 <button id="tabSignup" onclick="switchTab('signup')" class="flex-1 py-2 font-bold text-gray-400">রেজিস্টার</button>
@@ -437,6 +416,63 @@
         </div>
     </div>
 
+    <!-- Admin Panel Dashboard Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl max-w-3xl w-full p-6 border border-amber-500/50 relative max-h-[90vh] overflow-y-auto space-y-6">
+            <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h2 class="text-2xl font-bold text-amber-500 border-b border-gray-700 pb-2">
+                👑 এডমিন ড্যাশবোর্ড
+            </h2>
+
+            <!-- Section 1: Registered Users -->
+            <div class="space-y-3">
+                <h3 class="text-lg font-semibold text-gray-200 flex items-center">
+                    <i class="fa-solid fa-users mr-2 text-amber-400"></i> নিবন্ধিত কাস্টমার তালিকা
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
+                        <thead class="bg-gray-900 text-amber-400 border-b border-gray-700">
+                            <tr>
+                                <th class="p-2.5">নাম</th>
+                                <th class="p-2.5">মোবাইল</th>
+                                <th class="p-2.5">ইমেইল</th>
+                                <th class="p-2.5">রোল</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminUsersTable">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 2: Online Bookings -->
+            <div class="space-y-3">
+                <h3 class="text-lg font-semibold text-gray-200 flex items-center">
+                    <i class="fa-solid fa-list-check mr-2 text-emerald-400"></i> সাম্প্রতিক বুকিং সমূহ
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
+                        <thead class="bg-gray-900 text-emerald-400 border-b border-gray-700">
+                            <tr>
+                                <th class="p-2.5">নাম</th>
+                                <th class="p-2.5">সার্ভিস</th>
+                                <th class="p-2.5">তারিখ ও সময়</th>
+                                <th class="p-2.5">টাইপ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBookingsTable">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
         <div class="flex justify-center space-x-6 text-2xl">
@@ -456,7 +492,7 @@
     <!-- JavaScript & Firebase Script -->
     <script>
         // -------------------------------------------------------------
-        // 1. Firebase Config Setup
+        // 1. Firebase Config Setup & Role Assignment
         // -------------------------------------------------------------
         const firebaseConfig = {
             apiKey: "AIzaSyAeDy08BLz4pJ0-dqtgKs6i888ckiq-EeY",
@@ -467,47 +503,46 @@
             appId: "1:765972921304:web:e022a48c77ac56a27c90ad"
         };
 
-        // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Check Auth State Change
+        // Admin Email Address Setting
+        const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
+
+        // Check Auth State
         auth.onAuthStateChanged((user) => {
             const navUserArea = document.getElementById('navUserArea');
             if (user) {
-                // User logged in, fetch user details
                 db.collection("users").doc(user.uid).get().then((doc) => {
-                    if (doc.exists) {
-                        const userData = doc.data();
-                        
-                        // Auto fill booking form fields for logged-in users
-                        if(document.getElementById('bookName')) document.getElementById('bookName').value = userData.name || "";
-                        if(document.getElementById('bookPhone')) document.getElementById('bookPhone').value = userData.phone || "";
-                        if(document.getElementById('custName')) document.getElementById('custName').value = userData.name || "";
+                    let userData = doc.exists ? doc.data() : { name: "User", role: "client" };
+                    
+                    if (document.getElementById('bookName') && userData.name) document.getElementById('bookName').value = userData.name;
+                    if (document.getElementById('bookPhone') && userData.phone) document.getElementById('bookPhone').value = userData.phone;
+                    if (document.getElementById('custName') && userData.name) document.getElementById('custName').value = userData.name;
 
-                        // Dynamic Navigation Bar depending on Admin or Client Role
-                        if (userData.role === "admin") {
-                            navUserArea.innerHTML = `
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-xs bg-amber-500 text-gray-950 font-bold px-2 py-1 rounded">ADMIN</span>
-                                    <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
-                                </div>
-                            `;
-                        } else {
-                            navUserArea.innerHTML = `
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-gray-200">👤 ${userData.name.split(' ')[0]}</span>
-                                    <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
-                                </div>
-                            `;
-                        }
+                    // Admin vs Client UI
+                    if (userData.role === "admin" || user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                        navUserArea.innerHTML = `
+                            <div class="flex items-center space-x-2 md:space-x-3">
+                                <button onclick="openAdminPanel()" class="bg-amber-500 text-gray-950 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-amber-400 flex items-center">
+                                    <i class="fa-solid fa-user-shield mr-1"></i> এডমিন প্যানেল
+                                </button>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                            </div>
+                        `;
+                    } else {
+                        navUserArea.innerHTML = `
+                            <div class="flex items-center space-x-3">
+                                <span class="text-sm text-gray-200">👤 ${userData.name ? userData.name.split(' ')[0] : 'ইউজার'}</span>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                            </div>
+                        `;
                     }
                 });
             } else {
-                // Guest state
                 navUserArea.innerHTML = `
                     <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
                         <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
@@ -516,10 +551,11 @@
             }
         });
 
-        // Auth Modal Controls
+        // -------------------------------------------------------------
+        // 2. Auth Modal & Actions
+        // -------------------------------------------------------------
         function toggleAuthModal() {
-            const modal = document.getElementById('authModal');
-            modal.classList.toggle('hidden');
+            document.getElementById('authModal').classList.toggle('hidden');
         }
 
         function switchTab(tab) {
@@ -541,14 +577,13 @@
             }
         }
 
-        // Login Handler
         function handleLogin(event) {
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
 
             auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
+                .then(() => {
                     alert("লগইন সফল হয়েছে!");
                     toggleAuthModal();
                 })
@@ -557,7 +592,6 @@
                 });
         }
 
-        // Registration Handler
         function handleSignup(event) {
             event.preventDefault();
             const name = document.getElementById('signupName').value;
@@ -565,15 +599,17 @@
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
 
+            // Automatically set role 'admin' if email matches ADMIN_EMAIL
+            const assignedRole = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? "admin" : "client";
+
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     const uid = userCredential.user.uid;
-                    // Save default role 'client'
                     return db.collection("users").doc(uid).set({
                         name: name,
                         phone: phone,
                         email: email,
-                        role: "client",
+                        role: assignedRole,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
                 })
@@ -586,7 +622,6 @@
                 });
         }
 
-        // Logout Handler
         function handleLogout() {
             auth.signOut().then(() => {
                 alert("লগআউট হয়েছে!");
@@ -595,7 +630,59 @@
         }
 
         // -------------------------------------------------------------
-        // 2. WhatsApp Booking System (Works for Guest & Logged-in Users)
+        // 3. Admin Dashboard Functions
+        // -------------------------------------------------------------
+        function toggleAdminModal() {
+            document.getElementById('adminModal').classList.toggle('hidden');
+        }
+
+        function openAdminPanel() {
+            toggleAdminModal();
+            loadAdminData();
+        }
+
+        function loadAdminData() {
+            // Fetch Users List
+            const usersTable = document.getElementById('adminUsersTable');
+            usersTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
+
+            db.collection("users").get().then((querySnapshot) => {
+                usersTable.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const u = doc.data();
+                    usersTable.innerHTML += `
+                        <tr class="border-b border-gray-700/50 hover:bg-gray-750">
+                            <td class="p-2.5 font-medium">${u.name || 'N/A'}</td>
+                            <td class="p-2.5">${u.phone || 'N/A'}</td>
+                            <td class="p-2.5">${u.email || 'N/A'}</td>
+                            <td class="p-2.5"><span class="px-2 py-0.5 rounded text-xs ${u.role==='admin'?'bg-amber-500 text-gray-950 font-bold':'bg-gray-700 text-gray-300'}">${u.role || 'client'}</span></td>
+                        </tr>
+                    `;
+                });
+            });
+
+            // Fetch Bookings List
+            const bookingsTable = document.getElementById('adminBookingsTable');
+            bookingsTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
+
+            db.collection("bookings").orderBy("createdAt", "desc").limit(10).get().then((querySnapshot) => {
+                bookingsTable.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const b = doc.data();
+                    bookingsTable.innerHTML += `
+                        <tr class="border-b border-gray-700/50 hover:bg-gray-750">
+                            <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-gray-400">${b.customerPhone}</span></td>
+                            <td class="p-2.5 text-amber-400">${b.service}</td>
+                            <td class="p-2.5">${b.bookingDate} (${b.bookingTime})</td>
+                            <td class="p-2.5"><span class="text-xs ${b.userType==='নিবন্ধিত গ্রাহক'?'text-emerald-400':'text-gray-400'}">${b.userType}</span></td>
+                        </tr>
+                    `;
+                });
+            });
+        }
+
+        // -------------------------------------------------------------
+        // 4. WhatsApp Booking & Reviews Handling
         // -------------------------------------------------------------
         function sendWhatsAppBooking(event) {
             event.preventDefault();
@@ -609,7 +696,6 @@
             const currentUser = auth.currentUser;
             const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
 
-            // Save booking copy to Firestore Database
             db.collection("bookings").add({
                 customerName: name,
                 customerPhone: phone,
@@ -621,36 +707,24 @@
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).catch(e => console.log("Database record error:", e));
 
-            // Format message for WhatsApp
             const textMessage = `হ্যালো সৌমিক হেয়ার কাটিং,\nআমি একটি সিরিয়াল বুক করতে চাই।\n\n📌 *বুকিং বিবরণী (${userStatus}):*\n👤 নাম: ${name}\n📞 মোবাইল: ${phone}\n✂️ সার্ভিস: ${service}\n📅 তারিখ: ${date}\n⏰ সময়: ${time}`;
-
-            // Create WhatsApp URL
             const whatsappUrl = `https://wa.me/8801910947438?text=${encodeURIComponent(textMessage)}`;
 
-            // Open WhatsApp
             window.open(whatsappUrl, '_blank');
         }
 
-        // -------------------------------------------------------------
-        // 3. Reviews & Accordion Handling
-        // -------------------------------------------------------------
         let selectedRating = 0;
-
         const initialReviews = [
-            {
-                name: "আরিফ আহমেদ",
-                rating: 5,
-                comment: "খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।"
-            }
+            { name: "আরিফ আহমেদ", rating: 5, comment: "খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।" }
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
             loadReviews();
-            
-            // Set default date to today in booking form
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('bookDate').min = today;
-            document.getElementById('bookDate').value = today;
+            if(document.getElementById('bookDate')) {
+                document.getElementById('bookDate').min = today;
+                document.getElementById('bookDate').value = today;
+            }
         });
 
         function loadReviews() {
@@ -688,7 +762,6 @@
 
         function updateSummary(reviews) {
             if (reviews.length === 0) return;
-
             const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
             const avgScore = (totalScore / reviews.length).toFixed(1);
 
@@ -722,26 +795,19 @@
 
         function submitReview(event) {
             event.preventDefault();
-
             const nameInput = document.getElementById('custName').value.trim();
 
             if (!nameInput) {
                 alert('অনুগ্রহ করে আপনার নাম লিখুন।');
                 return;
             }
-
             if (selectedRating === 0) {
-                alert('অনুগ্রহ করে রেটিং দিতে স্টার ক্লিক করুন (১ থেকে ৫ স্টার)।');
+                alert('অনুগ্রহ করে রেটিং দিতে স্টার ক্লিক করুন।');
                 return;
             }
 
             const commentInput = document.getElementById('custComment').value.trim();
-
-            const newReview = {
-                name: nameInput,
-                rating: selectedRating,
-                comment: commentInput
-            };
+            const newReview = { name: nameInput, rating: selectedRating, comment: commentInput };
 
             let reviews = JSON.parse(localStorage.getItem('salon_reviews')) || [];
             reviews.unshift(newReview);
