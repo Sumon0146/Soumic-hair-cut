@@ -246,13 +246,14 @@
                     </div>
                 </div>
 
+                <!-- Updated Button Here -->
                 <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
-                    <i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন
+                    <i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন
                 </button>
             </form>
             
             <p class="text-xs text-center text-gray-400">
-                * বুকিং করার সাথে সাথে আপনার অনুরোধটি সরাসরি আমাদের টেলিগ্রামে জমা হয়ে যাবে।
+                * বাটনে ক্লিক করার সাথে সাথে আপনার বুকিংটির অনুরোধ জমা হয়ে যাবে।
             </p>
         </section>
 
@@ -464,7 +465,7 @@
     <!-- Footer -->
     <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
         <div class="flex justify-center space-x-6 text-2xl">
-            <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300" title="Facebook">
+            <a href="https://www.facebook.0com/share/1NKDh4djwY/" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300" title="Facebook">
                 <i class="fa-brands fa-facebook"></i>
             </a>
             <a href="tel:01910947438" class="text-amber-500 hover:text-amber-400 transition duration-300" title="Call Us">
@@ -666,7 +667,7 @@
         }
 
         // -------------------------------------------------------------
-        // 4. Pure Telegram Booking Notification
+        // 4. Telegram Booking Notification Function (Button Text Updated)
         // -------------------------------------------------------------
         function sendTelegramBooking(event) {
             event.preventDefault();
@@ -718,7 +719,7 @@
                 })
             })
             .then(res => {
-                btn.innerHTML = `<i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন`;
+                btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
                 btn.disabled = false;
                 if (res.ok) {
                     alert("আপনার বুকিং অনুরোধ সফলভাবে পাঠানো হয়েছে!");
@@ -729,7 +730,7 @@
             })
             .catch(err => {
                 console.log("Telegram API Error:", err);
-                btn.innerHTML = `<i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন`;
+                btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
                 btn.disabled = false;
                 alert("বুকিং জমা হয়েছে, ধন্যবাদ!");
             });
