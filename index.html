@@ -456,15 +456,15 @@
     <!-- JavaScript & Firebase Script -->
     <script>
         // -------------------------------------------------------------
-        // 1. Firebase Config Setup (আপনার Firebase keys এখানে সেট করুন)
+        // 1. Firebase Config Setup
         // -------------------------------------------------------------
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyAeDy08BLz4pJ0-dqtgKs6i888ckiq-EeY",
+            authDomain: "soumic-hair-cut.firebaseapp.com",
+            projectId: "soumic-hair-cut",
+            storageBucket: "soumic-hair-cut.firebasestorage.app",
+            messagingSenderId: "765972921304",
+            appId: "1:765972921304:web:e022a48c77ac56a27c90ad"
         };
 
         // Initialize Firebase
@@ -609,7 +609,7 @@
             const currentUser = auth.currentUser;
             const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
 
-            // Save booking copy to Firestore Database (Optional)
+            // Save booking copy to Firestore Database
             db.collection("bookings").add({
                 customerName: name,
                 customerPhone: phone,
