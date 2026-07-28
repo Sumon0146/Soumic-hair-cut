@@ -37,21 +37,13 @@
         </div>
     </nav>
 
-    <!-- Sticky Floating WhatsApp Button -->
-    <a href="https://wa.me/8801910947438?text=হ্যালো%20সৌমিক%20হেয়ার%20কাটিং,%20আমি%20একটি%20সিরিয়াল%20বুক%20করতে%20চাই।" 
-       target="_blank" 
-       class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition duration-300 transform hover:scale-110 flex items-center justify-center text-3xl border-2 border-white/20"
-       title="WhatsApp-এ মেসেজ দিন">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
     <!-- Header / Hero Section -->
     <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
         <div>
             <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500">সৌমিক হেয়ার কাটিং</h1>
             <p class="text-lg md:text-xl text-gray-300 mb-6">আপনার নিখুঁত লুকের সঠিক ঠিকানা</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#booking" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
+                <a href="#booking" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
                     <i class="fa-solid fa-calendar-check mr-2"></i> সিরিয়াল বুক করুন
                 </a>
                 <a href="tel:01910947438" class="bg-gray-800 hover:bg-gray-700 text-amber-500 border border-amber-500 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
@@ -64,7 +56,7 @@
     <!-- Scrolling Notice / Marquee Section -->
     <div class="bg-amber-500/10 border-y border-amber-500/30 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
         <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
-            ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই হোয়াটসঅ্যাপে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
+            ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই অনলাইনে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
         </marquee>
     </div>
 
@@ -205,12 +197,12 @@
         </section>
 
         <!-- Online Serial Booking Form -->
-        <section id="booking" class="bg-gray-800 p-6 md:p-8 rounded-lg border border-emerald-500/50 shadow-xl scroll-mt-6 space-y-6">
+        <section id="booking" class="bg-gray-800 p-6 md:p-8 rounded-lg border border-sky-500/50 shadow-xl scroll-mt-6 space-y-6">
             <div class="max-w-md mx-auto text-center">
-                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <div class="w-16 h-16 bg-sky-500/20 text-sky-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
                     <i class="fa-solid fa-calendar-check"></i>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">
+                <h2 class="text-2xl md:text-3xl font-bold text-sky-400 mb-2">
                     📅 অনলাইন সিরিয়াল বুকিং
                 </h2>
                 <p class="text-gray-300 text-sm">
@@ -218,20 +210,20 @@
                 </p>
             </div>
 
-            <form onsubmit="sendWhatsAppBooking(event)" class="max-w-xl mx-auto bg-gray-900 p-5 md:p-6 rounded-lg space-y-4 border border-gray-700">
+            <form onsubmit="sendTelegramBooking(event)" class="max-w-xl mx-auto bg-gray-900 p-5 md:p-6 rounded-lg space-y-4 border border-gray-700">
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
-                    <input type="text" id="bookName" required placeholder="উদাহরণ: মোঃ রহিম" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="bookName" required placeholder="উদাহরণ: মোঃ রহিম" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">মোবাইল নম্বর <span class="text-red-500">*</span></label>
-                        <input type="tel" id="bookPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-emerald-500">
+                        <input type="tel" id="bookPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের সার্ভিস <span class="text-red-500">*</span></label>
-                        <select id="bookService" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-emerald-500">
+                        <select id="bookService" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
                             <option value="">সার্ভিস নির্বাচন করুন</option>
                             <option value="হেয়ার কাট">হেয়ার কাট</option>
                             <option value="দাড়ি স্টাইলিং/ট্রিম">দাড়ি স্টাইলিং / ট্রিম</option>
@@ -246,21 +238,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">তারিখ <span class="text-red-500">*</span></label>
-                        <input type="date" id="bookDate" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-emerald-500">
+                        <input type="date" id="bookDate" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">সময় <span class="text-red-500">*</span></label>
-                        <input type="time" id="bookTime" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-emerald-500">
+                        <input type="time" id="bookTime" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-2xl mr-2"></i> WhatsApp-এ বুকিং নিশ্চিত করুন
+                <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
+                    <i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন
                 </button>
             </form>
             
             <p class="text-xs text-center text-gray-400">
-                * বাটনে ক্লিক করলে তথ্যসহ মেসেজ তৈরি হয়ে আপনার হোয়াটসঅ্যাপ অ্যাপ খুলবে।
+                * বুকিং করার সাথে সাথে আপনার অনুরোধটি সরাসরি আমাদের টেলিগ্রামে জমা হয়ে যাবে।
             </p>
         </section>
 
@@ -319,7 +311,7 @@
             <div class="space-y-3">
                 <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
                     <h3 class="font-semibold text-amber-400">প্রশ্ন: আগে থেকে সিরিয়াল দেওয়া কি বাধ্যতামূলক?</h3>
-                    <p class="text-sm text-gray-300 mt-1">উত্তর: বাধ্যতামূলক নয়, তবে এসে যেন আপনাকে অতিরিক্ত অপেক্ষা করতে না হয়, তাই আগে থেকে হোয়াটসঅ্যাপে সময় নিশ্চিত করে আসাই ভালো।</p>
+                    <p class="text-sm text-gray-300 mt-1">উত্তর: বাধ্যতামূলক নয়, তবে এসে যেন আপনাকে অতিরিক্ত অপেক্ষা করতে না হয়, তাই আগে থেকে অনলাইন বুকিং করে আসাই ভালো।</p>
                 </div>
                 <div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
                     <h3 class="font-semibold text-amber-400">প্রশ্ন: আপনাদের সেলুন কি সপ্তাহের প্রতিদিন খোলা থাকে?</h3>
@@ -344,10 +336,6 @@
                     <p class="flex items-center">
                         <i class="fa-solid fa-phone text-amber-500 mr-3 text-lg"></i>
                         <span><strong>মোবাইল:</strong> <a href="tel:01910947438" class="hover:underline">01910947438</a></span>
-                    </p>
-                    <p class="flex items-center">
-                        <i class="fa-brands fa-whatsapp text-emerald-500 mr-3 text-xl"></i>
-                        <span><strong>হোয়াটসঅ্যাপ:</strong> <a href="https://wa.me/8801910947438" target="_blank" class="hover:underline">01910947438</a></span>
                     </p>
                     <div>
                         <a href="https://maps.app.goo.gl/5dJt2dXfqp5bTknu5" target="_blank" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg transition duration-300 w-full mt-2">
@@ -452,11 +440,11 @@
             <!-- Section 2: Online Bookings -->
             <div class="space-y-3">
                 <h3 class="text-lg font-semibold text-gray-200 flex items-center">
-                    <i class="fa-solid fa-list-check mr-2 text-emerald-400"></i> সাম্প্রতিক বুকিং সমূহ
+                    <i class="fa-solid fa-list-check mr-2 text-sky-400"></i> সাম্প্রতিক বুকিং সমূহ
                 </h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
-                        <thead class="bg-gray-900 text-emerald-400 border-b border-gray-700">
+                        <thead class="bg-gray-900 text-sky-400 border-b border-gray-700">
                             <tr>
                                 <th class="p-2.5">নাম</th>
                                 <th class="p-2.5">সার্ভিস</th>
@@ -478,9 +466,6 @@
         <div class="flex justify-center space-x-6 text-2xl">
             <a href="https://www.facebook.com/share/1NKDh4djwY/" target="_blank" class="text-blue-500 hover:text-blue-400 transition duration-300" title="Facebook">
                 <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://wa.me/8801910947438" target="_blank" class="text-emerald-500 hover:text-emerald-400 transition duration-300" title="WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
             </a>
             <a href="tel:01910947438" class="text-amber-500 hover:text-amber-400 transition duration-300" title="Call Us">
                 <i class="fa-solid fa-phone"></i>
@@ -599,7 +584,6 @@
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
 
-            // Automatically set role 'admin' if email matches ADMIN_EMAIL
             const assignedRole = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? "admin" : "client";
 
             auth.createUserWithEmailAndPassword(email, password)
@@ -674,7 +658,7 @@
                             <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-gray-400">${b.customerPhone}</span></td>
                             <td class="p-2.5 text-amber-400">${b.service}</td>
                             <td class="p-2.5">${b.bookingDate} (${b.bookingTime})</td>
-                            <td class="p-2.5"><span class="text-xs ${b.userType==='নিবন্ধিত গ্রাহক'?'text-emerald-400':'text-gray-400'}">${b.userType}</span></td>
+                            <td class="p-2.5"><span class="text-xs ${b.userType==='নিবন্ধিত গ্রাহক'?'text-sky-400':'text-gray-400'}">${b.userType}</span></td>
                         </tr>
                     `;
                 });
@@ -682,9 +666,9 @@
         }
 
         // -------------------------------------------------------------
-        // 4. WhatsApp & Telegram Booking Notification
+        // 4. Pure Telegram Booking Notification
         // -------------------------------------------------------------
-        function sendWhatsAppBooking(event) {
+        function sendTelegramBooking(event) {
             event.preventDefault();
 
             const name = document.getElementById('bookName').value.trim();
@@ -695,6 +679,10 @@
 
             const currentUser = auth.currentUser;
             const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
+
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "পাঠানো হচ্ছে...";
+            btn.disabled = true;
 
             // ১. ফায়ারস্টোরে ডেটা সেভ করা
             db.collection("bookings").add({
@@ -728,13 +716,23 @@
                     text: telegramMsg,
                     parse_mode: "Markdown"
                 })
-            }).catch(err => console.log("Telegram API Error:", err));
-
-            // ৩. হোয়াটসঅ্যাপ মেসেজ তৈরি করে পাঠানো
-            const textMessage = `হ্যালো সৌমিক হেয়ার কাটিং,\nআমি একটি সিরিয়াল বুক করতে চাই।\n\n📌 *বুকিং বিবরণী (${userStatus}):*\n👤 নাম: ${name}\n📞 মোবাইল: ${phone}\n✂️ সার্ভিস: ${service}\n📅 তারিখ: ${date}\n⏰ সময়: ${time}`;
-            const whatsappUrl = `https://wa.me/8801910947438?text=${encodeURIComponent(textMessage)}`;
-
-            window.open(whatsappUrl, '_blank');
+            })
+            .then(res => {
+                btn.innerHTML = `<i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন`;
+                btn.disabled = false;
+                if (res.ok) {
+                    alert("আপনার বুকিং অনুরোধ সফলভাবে পাঠানো হয়েছে!");
+                    event.target.reset();
+                } else {
+                    alert("বুকিং ডাটাবেজে সংরক্ষণ হয়েছে, ধন্যবাদ!");
+                }
+            })
+            .catch(err => {
+                console.log("Telegram API Error:", err);
+                btn.innerHTML = `<i class="fa-brands fa-telegram text-2xl mr-2"></i> টেলিগ্রামে বুকিং নিশ্চিত করুন`;
+                btn.disabled = false;
+                alert("বুকিং জমা হয়েছে, ধন্যবাদ!");
+            });
         }
 
         let selectedRating = 0;
