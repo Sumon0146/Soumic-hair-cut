@@ -10,11 +10,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Font (Hind Siliguri) -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase App & Auth SDKs (Compat version for simple setup) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <style>
         body { font-family: 'Hind Siliguri', sans-serif; }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 relative">
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-gray-950 border-b border-gray-800 px-4 py-3 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-amber-500 flex items-center">
+                <i class="fa-solid fa-scissors mr-2"></i> সৌমিক হেয়ার কাটিং
+            </a>
+            
+            <div id="navUserArea">
+                <!-- User Login/Profile state will load dynamically -->
+                <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
+                    <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <!-- Sticky Floating WhatsApp Button -->
     <a href="https://wa.me/8801910947438?text=হ্যালো%20সৌমিক%20হেয়ার%20কাটিং,%20আমি%20একটি%20সিরিয়াল%20বুক%20করতে%20চাই।" 
@@ -73,7 +95,7 @@
             </div>
         </section>
 
-        <!-- Special Combo Offers Section (New Added) -->
+        <!-- Special Combo Offers Section -->
         <section class="bg-gradient-to-r from-amber-500/20 via-gray-800 to-amber-500/20 p-6 rounded-xl border border-amber-500/40 shadow-xl space-y-4">
             <h2 class="text-2xl font-bold text-amber-400 text-center flex items-center justify-center">
                 <i class="fa-solid fa-gift text-2xl mr-2"></i> স্পেশাল কম্বো অফার
@@ -183,7 +205,7 @@
             </div>
         </section>
 
-        <!-- WhatsApp Direct Booking Form Section (UPDATED) -->
+        <!-- Online Serial Booking Form (Supports both Logged-in & Guest Customers) -->
         <section id="booking" class="bg-gray-800 p-6 md:p-8 rounded-lg border border-emerald-500/50 shadow-xl scroll-mt-6 space-y-6">
             <div class="max-w-md mx-auto text-center">
                 <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
@@ -193,7 +215,7 @@
                     📅 অনলাইন সিরিয়াল বুকিং
                 </h2>
                 <p class="text-gray-300 text-sm">
-                    নিচের তথ্যগুলো দিয়ে সিরিয়াল নিশ্চিত করুন। সাবমিট করলে সরাসরি হোয়াটসঅ্যাপ চ্যাট ওপেন হয়ে যাবে।
+                    লগইন করেও বুকিং করতে পারেন, অথবা লগইন না করেও সরাসরি অতিথি (Guest) হিসেবে বুকিং সম্পন্ন করতে পারেন।
                 </p>
             </div>
 
@@ -313,7 +335,7 @@
             </div>
         </section>
 
-        <!-- Location & Contact Section (Google Map Embedded) -->
+        <!-- Location & Contact Section -->
         <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-6">
             <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             
@@ -362,6 +384,59 @@
 
     </div>
 
+    <!-- Login / Sign Up Popup Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl max-w-md w-full p-6 border border-amber-500/30 relative space-y-4">
+            <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header / Tabs -->
+            <div class="flex border-b border-gray-700 pb-2">
+                <button id="tabLogin" onclick="switchTab('login')" class="flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500">লগইন</button>
+                <button id="tabSignup" onclick="switchTab('signup')" class="flex-1 py-2 font-bold text-gray-400">রেজিস্টার</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">ইমেইল</label>
+                    <input type="email" id="loginEmail" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
+                    <input type="password" id="loginPassword" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded transition duration-300">
+                    লগইন করুন
+                </button>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">আপনার নাম</label>
+                    <input type="text" id="signupName" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">মোবাইল নম্বর</label>
+                    <input type="tel" id="signupPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">ইমেইল</label>
+                    <input type="email" id="signupEmail" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
+                    <input type="password" id="signupPassword" required minlength="6" class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                </div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded transition duration-300">
+                    নতুন অ্যাকাউন্ট খুলুন
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
         <div class="flex justify-center space-x-6 text-2xl">
@@ -378,9 +453,150 @@
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript & Firebase Script -->
     <script>
-        // WhatsApp Booking Functionality (NEW ADDED)
+        // -------------------------------------------------------------
+        // 1. Firebase Config Setup (আপনার Firebase keys এখানে সেট করুন)
+        // -------------------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Check Auth State Change
+        auth.onAuthStateChanged((user) => {
+            const navUserArea = document.getElementById('navUserArea');
+            if (user) {
+                // User logged in, fetch user details
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const userData = doc.data();
+                        
+                        // Auto fill booking form fields for logged-in users
+                        if(document.getElementById('bookName')) document.getElementById('bookName').value = userData.name || "";
+                        if(document.getElementById('bookPhone')) document.getElementById('bookPhone').value = userData.phone || "";
+                        if(document.getElementById('custName')) document.getElementById('custName').value = userData.name || "";
+
+                        // Dynamic Navigation Bar depending on Admin or Client Role
+                        if (userData.role === "admin") {
+                            navUserArea.innerHTML = `
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xs bg-amber-500 text-gray-950 font-bold px-2 py-1 rounded">ADMIN</span>
+                                    <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                                </div>
+                            `;
+                        } else {
+                            navUserArea.innerHTML = `
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-200">👤 ${userData.name.split(' ')[0]}</span>
+                                    <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                                </div>
+                            `;
+                        }
+                    }
+                });
+            } else {
+                // Guest state
+                navUserArea.innerHTML = `
+                    <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
+                        <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
+                    </button>
+                `;
+            }
+        });
+
+        // Auth Modal Controls
+        function toggleAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabLogin = document.getElementById('tabLogin');
+            const tabSignup = document.getElementById('tabSignup');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                tabLogin.className = "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500";
+                tabSignup.className = "flex-1 py-2 font-bold text-gray-400";
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                tabSignup.className = "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500";
+                tabLogin.className = "flex-1 py-2 font-bold text-gray-400";
+            }
+        }
+
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("লগইন সফল হয়েছে!");
+                    toggleAuthModal();
+                })
+                .catch((error) => {
+                    alert("লগইন ব্যর্থ হয়েছে: " + error.message);
+                });
+        }
+
+        // Registration Handler
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const phone = document.getElementById('signupPhone').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const uid = userCredential.user.uid;
+                    // Save default role 'client'
+                    return db.collection("users").doc(uid).set({
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        role: "client",
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    alert("অ্যাকাউন্ট তৈরি সফল হয়েছে!");
+                    toggleAuthModal();
+                })
+                .catch((error) => {
+                    alert("অ্যাকাউন্ট খুলতে সমস্যা হয়েছে: " + error.message);
+                });
+        }
+
+        // Logout Handler
+        function handleLogout() {
+            auth.signOut().then(() => {
+                alert("লগআউট হয়েছে!");
+                location.reload();
+            });
+        }
+
+        // -------------------------------------------------------------
+        // 2. WhatsApp Booking System (Works for Guest & Logged-in Users)
+        // -------------------------------------------------------------
         function sendWhatsAppBooking(event) {
             event.preventDefault();
 
@@ -390,16 +606,34 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // Format message
-            const textMessage = `হ্যালো সৌমিক হেয়ার কাটিং,\nআমি একটি সিরিয়াল বুক করতে চাই।\n\n📌 *বুকিং বিবরণী:*\n👤 নাম: ${name}\n📞 মোবাইল: ${phone}\n✂️ সার্ভিস: ${service}\n📅 তারিখ: ${date}\n⏰ সময়: ${time}`;
+            const currentUser = auth.currentUser;
+            const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
+
+            // Save booking copy to Firestore Database (Optional)
+            db.collection("bookings").add({
+                customerName: name,
+                customerPhone: phone,
+                service: service,
+                bookingDate: date,
+                bookingTime: time,
+                userType: userStatus,
+                userId: currentUser ? currentUser.uid : "guest",
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).catch(e => console.log("Database record error:", e));
+
+            // Format message for WhatsApp
+            const textMessage = `হ্যালো সৌমিক হেয়ার কাটিং,\nআমি একটি সিরিয়াল বুক করতে চাই।\n\n📌 *বুকিং বিবরণী (${userStatus}):*\n👤 নাম: ${name}\n📞 মোবাইল: ${phone}\n✂️ সার্ভিস: ${service}\n📅 তারিখ: ${date}\n⏰ সময়: ${time}`;
 
             // Create WhatsApp URL
             const whatsappUrl = `https://wa.me/8801910947438?text=${encodeURIComponent(textMessage)}`;
 
-            // Open WhatsApp in new tab
+            // Open WhatsApp
             window.open(whatsappUrl, '_blank');
         }
 
+        // -------------------------------------------------------------
+        // 3. Reviews & Accordion Handling
+        // -------------------------------------------------------------
         let selectedRating = 0;
 
         const initialReviews = [
