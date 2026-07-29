@@ -83,7 +83,7 @@
             <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3"></div>
         </section>
 
-        <!-- Booking Section with New Staff & Coupon Features -->
+        <!-- Booking Section -->
         <section id="booking" class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-sky-500/30 shadow-xl space-y-6">
             <div class="max-w-md mx-auto text-center">
                 <h2 class="text-2xl md:text-3xl font-bold text-sky-400 mb-2">📅 অনলাইন সিরিয়াল বুকিং</h2>
@@ -114,7 +114,6 @@
                     </div>
                 </div>
 
-                <!-- NEW: Staff Selector & Coupon -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের কারিগর (স্টাফ)</label>
@@ -126,7 +125,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">কুপন কোড (যদি থাকে)</label>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">কুপন কোড</label>
                         <div class="flex gap-2">
                             <input type="text" id="couponInput" placeholder="EID2026" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 uppercase focus:border-sky-500">
                             <button type="button" onclick="applyCoupon()" class="bg-amber-500 text-gray-950 font-bold px-3 rounded-lg text-xs">Apply</button>
@@ -145,7 +144,6 @@
                     </div>
                 </div>
 
-                <!-- Price Breakdown Display -->
                 <div class="bg-gray-900 p-3 rounded-xl border border-gray-800 flex justify-between items-center text-sm">
                     <span class="text-gray-400">মোট সার্ভিস ফি:</span>
                     <span id="displayPrice" class="font-bold text-amber-400 text-base">৳ 0</span>
@@ -182,7 +180,7 @@
         </div>
     </div>
 
-    <!-- MASTER ADMIN DASHBOARD WITH ALL FEATURES -->
+    <!-- MASTER ADMIN DASHBOARD -->
     <div id="adminModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-3 md:p-6 backdrop-blur-md">
         <div id="adminModalContainer" class="glass-modal rounded-3xl max-w-5xl w-full p-4 md:p-7 border border-amber-500/30 relative max-h-[92vh] overflow-y-auto custom-scrollbar space-y-6 shadow-2xl gold-glow">
             
@@ -201,31 +199,37 @@
 
             <!-- STATS & FINANCIAL CARDS -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div onclick="filterByCardStatus('All')" class="bg-gray-900/90 p-4 rounded-2xl border border-amber-500/30 cursor-pointer hover:scale-[1.02] transition">
+                <div class="bg-gray-900/90 p-4 rounded-2xl border border-amber-500/30">
                     <p class="text-[11px] text-amber-300/80 font-semibold uppercase">আজকের মোট বুকিং</p>
                     <h3 id="statTodayBookings" class="text-2xl font-bold text-amber-400 mt-1">0</h3>
                 </div>
-                <div onclick="filterByCardStatus('Confirmed')" class="bg-gray-900/90 p-4 rounded-2xl border border-emerald-500/30 cursor-pointer hover:scale-[1.02] transition">
+                <div class="bg-gray-900/90 p-4 rounded-2xl border border-emerald-500/30">
                     <p class="text-[11px] text-emerald-300/80 font-semibold uppercase">আজ কনফার্মড</p>
                     <h3 id="statConfirmed" class="text-2xl font-bold text-emerald-400 mt-1">0</h3>
                 </div>
                 <div class="bg-gray-900/90 p-4 rounded-2xl border border-sky-500/30">
-                    <p class="text-[11px] text-sky-300/80 font-semibold uppercase">আজকের মোট আয় (Estimated)</p>
+                    <p class="text-[11px] text-sky-300/80 font-semibold uppercase">আজকের মোট আয়</p>
                     <h3 id="statEarnings" class="text-2xl font-bold text-sky-400 mt-1">৳ 0</h3>
                 </div>
-                <div onclick="scrollToRegisteredUsers()" class="bg-gray-900/90 p-4 rounded-2xl border border-purple-500/30 cursor-pointer hover:scale-[1.02] transition">
+                <div class="bg-gray-900/90 p-4 rounded-2xl border border-purple-500/30">
                     <p class="text-[11px] text-purple-300/80 font-semibold uppercase">মোট ইউজার</p>
                     <h3 id="statTotalUsers" class="text-2xl font-bold text-purple-400 mt-1">0</h3>
                 </div>
             </div>
 
+            <!-- NEW: STAFF PERFORMANCE SUMMARY BOX -->
+            <div class="bg-gray-900/90 p-4 rounded-2xl border border-amber-500/20 space-y-2">
+                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wide"><i class="fa-solid fa-user-gear mr-1.5"></i> আজকের কারিগর পারফরম্যান্স (স্টাফ ওয়াইজ বুকিং)</h3>
+                <div id="staffPerformanceBox" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-300">
+                    <!-- Dynamic staff count will load here -->
+                </div>
+            </div>
+
             <!-- EXPENSE MANAGEMENT & EXPORT TOOLBAR -->
             <div class="flex flex-wrap justify-between items-center bg-gray-950/80 p-3 rounded-xl border border-gray-800 gap-3">
-                <div class="flex items-center gap-2">
-                    <button onclick="exportTableToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center transition shadow">
-                        <i class="fa-solid fa-file-excel mr-1.5"></i> এক্সেল ড্যাশবোর্ড এক্সপোর্ট (.CSV)
-                    </button>
-                </div>
+                <button onclick="exportTableToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center transition shadow">
+                    <i class="fa-solid fa-file-excel mr-1.5"></i> এক্সেল ড্যাশবোর্ড এক্সপোর্ট (.CSV)
+                </button>
                 <div class="flex items-center gap-2">
                     <input type="text" id="expenseNote" placeholder="আজকের খরচ (যেমন: ব্লেড কেনা)" class="bg-gray-900 text-xs p-2 rounded-lg border border-gray-800 focus:outline-none">
                     <input type="number" id="expenseAmount" placeholder="টাকা" class="bg-gray-900 text-xs p-2 w-20 rounded-lg border border-gray-800 focus:outline-none">
@@ -322,7 +326,6 @@
             document.getElementById('displayPrice').innerText = `৳ ${finalPrice} ${discountPercent > 0 ? `(${discountPercent}% ছাড়)` : ''}`;
         }
 
-        // Auth Logic
         auth.onAuthStateChanged((user) => {
             const navUserArea = document.getElementById('navUserArea');
             if (user) {
@@ -375,7 +378,6 @@
 
         function handleLogout() { auth.signOut().then(() => location.reload()); }
 
-        // ADMIN PANEL & EXCEL EXPORT
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); }
         function openAdminPanel() {
             toggleAdminModal();
@@ -396,7 +398,7 @@
             });
         }
 
-        function filterBookingsByDate(statusFilter = 'All') {
+        function filterBookingsByDate() {
             const selectedDate = document.getElementById('adminDateFilter').value;
             const bookingsTable = document.getElementById('adminBookingsTable');
             if (!selectedDate) return;
@@ -404,6 +406,7 @@
             db.collection("bookings").where("bookingDate", "==", selectedDate).get().then(snap => {
                 bookingsTable.innerHTML = '';
                 let totalEarnings = 0, confCount = 0;
+                let staffCounts = { "সৌমিক": 0, "রহিম": 0, "কার্তিক": 0, "যে কেউ": 0 };
 
                 document.getElementById('statTodayBookings').innerText = snap.size;
                 document.getElementById('bookingCountBadge').innerText = `তারিখ: ${selectedDate} | মোট: ${snap.size} টি`;
@@ -412,16 +415,22 @@
                 snap.forEach(doc => {
                     let b = doc.data();
                     let price = b.price || 0;
-                    if (b.status === 'Confirmed') { confCount++; totalEarnings += price; }
+                    let staffName = b.staff || "যে কেউ";
+                    
+                    if(staffCounts[staffName] !== undefined) {
+                        staffCounts[staffName]++;
+                    } else {
+                        staffCounts[staffName] = 1;
+                    }
 
-                    if (statusFilter !== 'All' && b.status !== statusFilter) return;
+                    if (b.status === 'Confirmed') { confCount++; totalEarnings += price; }
 
                     bookingsTable.innerHTML += `
                         <tr class="border-b border-gray-800 hover:bg-gray-800/30">
                             <td class="p-3 text-center text-amber-400 font-bold">#${serial++}</td>
                             <td class="p-3">${b.customerName}<br><span class="text-xs text-amber-400 font-mono">${b.customerPhone}</span></td>
                             <td class="p-3">${b.service}<br><span class="text-xs text-emerald-400 font-bold">৳ ${price}</span></td>
-                            <td class="p-3 text-sky-400">${b.staff || 'যে কেউ'}</td>
+                            <td class="p-3 text-sky-400">${staffName}</td>
                             <td class="p-3 font-mono">${b.bookingTime}</td>
                             <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${b.status==='Confirmed'?'bg-emerald-500/20 text-emerald-400':'bg-yellow-500/20 text-yellow-400'}">${b.status||'Pending'}</span></td>
                             <td class="p-3 text-center">
@@ -432,6 +441,13 @@
                         </tr>
                     `;
                 });
+
+                // Render Staff Performance Box
+                let staffHtml = '';
+                for (let staff in staffCounts) {
+                    staffHtml += `<div class="bg-gray-950 p-2 rounded-lg border border-gray-800 flex justify-between items-center"><span class="text-gray-400">${staff}:</span><span class="font-bold text-amber-400">${staffCounts[staff]} টি</span></div>`;
+                }
+                document.getElementById('staffPerformanceBox').innerHTML = staffHtml;
 
                 document.getElementById('statConfirmed').innerText = confCount;
                 document.getElementById('statEarnings').innerText = `৳ ${totalEarnings}`;
@@ -482,12 +498,12 @@
             }).then(() => {
                 alert("বুকিং সফলভাবে জমা হয়েছে!");
                 e.target.reset();
+                discountPercent = 0;
+                basePrice = 0;
                 updateFinalPriceDisplay();
             });
         }
 
-        function filterByCardStatus(status) { filterBookingsByDate(status); }
-        function scrollToRegisteredUsers() { document.getElementById('registeredUsersSection').scrollIntoView({ behavior: 'smooth' }); }
         function searchBookingsTable() {
             let val = document.getElementById('adminSearchInput').value.toLowerCase();
             document.querySelectorAll('#adminBookingsTable tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(val) ? '' : 'none');
