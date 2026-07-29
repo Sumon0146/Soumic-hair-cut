@@ -86,7 +86,7 @@
             </div>
         </section>
 
-        <!-- Track Booking Section (Website Direct Check) -->
+        <!-- Track Booking Section -->
         <section id="trackBooking" class="bg-gray-800 p-6 rounded-xl border border-amber-500/40 shadow-xl space-y-4 scroll-mt-20">
             <div class="text-center">
                 <h2 class="text-2xl font-bold text-amber-400 flex items-center justify-center">
@@ -102,10 +102,7 @@
                 </button>
             </div>
 
-            <!-- Booking Result Output -->
-            <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-3">
-                <!-- Data will load here dynamically -->
-            </div>
+            <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-3"></div>
         </section>
 
         <!-- Online Serial Booking Form -->
@@ -120,10 +117,6 @@
                 
                 <p class="text-amber-300/90 text-sm bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 mb-3">
                     📌 <strong>বিশেষ দ্রষ্টব্য:</strong> সেলুনে কাস্টমার চাপের কারণে নির্ধারিত সময়ের কিছুটা আগে-পরে সার্ভিস শুরু হতে পারে। আপনার ধৈর্যের জন্য আন্তরিক ধন্যবাদ।
-                </p>
-                
-                <p class="text-gray-400 text-xs">
-                    লগইন করেও বুকিং করতে পারেন, অথবা লগইন না করেও সরাসরি অতিথি (Guest) হিসেবে বুকিং সম্পন্ন করতে পারেন।
                 </p>
             </div>
 
@@ -295,72 +288,105 @@
         </div>
     </div>
 
-    <!-- Admin Panel Dashboard Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-800 rounded-xl max-w-4xl w-full p-6 border border-amber-500/50 relative max-h-[90vh] overflow-y-auto space-y-6">
-            <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <!-- IMPROVED ADMIN DASHBOARD MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-3 md:p-6">
+        <div class="bg-gray-800 rounded-2xl max-w-5xl w-full p-4 md:p-6 border border-amber-500/40 relative max-h-[92vh] overflow-y-auto space-y-6 shadow-2xl">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-gray-700 pb-3">
+                <h2 class="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 flex items-center">
+                    <i class="fa-solid fa-crown text-amber-400 mr-2.5"></i> এডমিন মাস্টার ড্যাশবোর্ড
+                </h2>
+                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white text-2xl transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
-            <h2 class="text-2xl font-bold text-amber-500 border-b border-gray-700 pb-2 flex items-center justify-between">
-                <span>👑 এডমিন ড্যাশবোর্ড</span>
-            </h2>
+            <!-- TOP STATS CARDS -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-gradient-to-br from-amber-500/20 to-gray-900 p-3.5 rounded-xl border border-amber-500/30 text-center">
+                    <i class="fa-solid fa-calendar-day text-amber-400 text-xl mb-1"></i>
+                    <p class="text-xs text-gray-400 font-medium">আজকের বুকিং</p>
+                    <h3 id="statTodayBookings" class="text-2xl font-bold text-amber-400">0</h3>
+                </div>
+                <div class="bg-gradient-to-br from-green-500/20 to-gray-900 p-3.5 rounded-xl border border-green-500/30 text-center">
+                    <i class="fa-solid fa-circle-check text-green-400 text-xl mb-1"></i>
+                    <p class="text-xs text-gray-400 font-medium">আজ কনফার্মড</p>
+                    <h3 id="statConfirmed" class="text-2xl font-bold text-green-400">0</h3>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-500/20 to-gray-900 p-3.5 rounded-xl border border-yellow-500/30 text-center">
+                    <i class="fa-solid fa-clock text-yellow-400 text-xl mb-1"></i>
+                    <p class="text-xs text-gray-400 font-medium">আজ পেন্ডিং</p>
+                    <h3 id="statPending" class="text-2xl font-bold text-yellow-400">0</h3>
+                </div>
+                <div class="bg-gradient-to-br from-sky-500/20 to-gray-900 p-3.5 rounded-xl border border-sky-500/30 text-center">
+                    <i class="fa-solid fa-users text-sky-400 text-xl mb-1"></i>
+                    <p class="text-xs text-gray-400 font-medium">মোট রেজিস্টার্ড ইউজার</p>
+                    <h3 id="statTotalUsers" class="text-2xl font-bold text-sky-400">0</h3>
+                </div>
+            </div>
 
-            <!-- Registered Users -->
-            <div class="space-y-3">
-                <h3 class="text-lg font-semibold text-gray-200 flex items-center">
-                    <i class="fa-solid fa-users mr-2 text-amber-400"></i> নিবন্ধিত কাস্টমার তালিকা
+            <!-- BOOKINGS MANAGEMENT SECTION -->
+            <div class="space-y-4 bg-gray-900/80 p-4 rounded-xl border border-gray-700">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800 pb-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-amber-400 flex items-center">
+                            <i class="fa-solid fa-list-ol mr-2"></i> তারিখ অনুযায়ী সিরিয়াল ব্যবস্থাপনা
+                        </h3>
+                        <p id="bookingCountBadge" class="text-xs text-gray-400 mt-0.5">তারিখ নির্বাচন করুন</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label class="text-xs text-gray-300 font-medium">তারিখ:</label>
+                        <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-gray-800 border border-amber-500/50 rounded-lg px-3 py-1.5 text-xs text-amber-300 font-bold focus:outline-none">
+                        
+                        <!-- Search Box -->
+                        <input type="text" id="adminSearchInput" onkeyup="searchBookingsTable()" placeholder="🔍 নাম/ফোন দিয়ে খুঁজুন..." class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <!-- Bookings Table -->
+                <div class="overflow-x-auto rounded-lg border border-gray-800">
+                    <table class="w-full text-xs md:text-sm text-left text-gray-300">
+                        <thead class="bg-gray-950 text-amber-400 uppercase text-[11px] tracking-wider border-b border-gray-800">
+                            <tr>
+                                <th class="p-3 text-center">সিরিয়াল #</th>
+                                <th class="p-3">গ্রাহক ও ফোন</th>
+                                <th class="p-3">সার্ভিস</th>
+                                <th class="p-3">সময়</th>
+                                <th class="p-3 text-center">স্ট্যাটাস</th>
+                                <th class="p-3 text-center">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBookingsTable" class="divide-y divide-gray-800 bg-gray-900/50">
+                            <!-- Loaded Dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- REGISTERED USERS SECTION -->
+            <div class="space-y-3 bg-gray-900/60 p-4 rounded-xl border border-gray-700">
+                <h3 class="text-md font-bold text-gray-300 flex items-center">
+                    <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
                 </h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
-                        <thead class="bg-gray-900 text-amber-400 border-b border-gray-700">
+                <div class="overflow-x-auto max-h-48 overflow-y-auto rounded-lg border border-gray-800">
+                    <table class="w-full text-xs text-left text-gray-300">
+                        <thead class="bg-gray-950 text-sky-400 sticky top-0 border-b border-gray-800">
                             <tr>
                                 <th class="p-2.5">নাম</th>
                                 <th class="p-2.5">মোবাইল</th>
                                 <th class="p-2.5">ইমেইল</th>
-                                <th class="p-2.5">রোল</th>
+                                <th class="p-2.5 text-center">রোল</th>
                             </tr>
                         </thead>
-                        <tbody id="adminUsersTable">
-                            <!-- Loaded dynamically -->
+                        <tbody id="adminUsersTable" class="divide-y divide-gray-800">
+                            <!-- Loaded Dynamically -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Date-by-Date Booking Section -->
-            <div class="space-y-3 pt-2">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gray-900 p-3.5 rounded-lg border border-gray-700">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-200 flex items-center">
-                            <i class="fa-solid fa-calendar-days mr-2 text-sky-400"></i> তারিখ অনুযায়ী সিরিয়াল দেখুন
-                        </h3>
-                        <p id="bookingCountBadge" class="text-xs text-sky-300 mt-0.5">একটি তারিখ বেছে নিন</p>
-                    </div>
-                    
-                    <div class="flex items-center gap-2">
-                        <label class="text-sm text-gray-300">তারিখ বেছে নিন:</label>
-                        <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-gray-800 border border-sky-500/50 rounded-lg px-3 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-400">
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
-                        <thead class="bg-gray-900 text-sky-400 border-b border-gray-700">
-                            <tr>
-                                <th class="p-2.5">নাম ও ফোন</th>
-                                <th class="p-2.5">সার্ভিস</th>
-                                <th class="p-2.5">তারিখ ও সময়</th>
-                                <th class="p-2.5">স্ট্যাটাস</th>
-                                <th class="p-2.5">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminBookingsTable">
-                            <!-- Loaded dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -401,10 +427,10 @@
                     if (userData.role === "admin" || user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-2 md:space-x-3">
-                                <button onclick="openAdminPanel()" class="bg-amber-500 text-gray-950 text-xs font-bold px-3 py-1.5 rounded-full hover:bg-amber-400 flex items-center">
-                                    <i class="fa-solid fa-user-shield mr-1"></i> এডমিন প্যানেল
+                                <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 text-gray-950 text-xs font-bold px-3.5 py-1.5 rounded-full hover:shadow-lg hover:shadow-amber-500/20 flex items-center transition">
+                                    <i class="fa-solid fa-crown mr-1.5"></i> এডমিন ড্যাশবোর্ড
                                 </button>
-                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-xs md:text-sm font-medium">লগআউট</button>
                             </div>
                         `;
                     } else {
@@ -426,7 +452,7 @@
         });
 
         // -------------------------------------------------------------
-        // Guest Track Booking Function
+        // Guest Track Booking
         // -------------------------------------------------------------
         function trackBookingByPhone() {
             const phoneInput = document.getElementById('trackPhoneInput').value.trim();
@@ -477,9 +503,7 @@
               });
         }
 
-        // -------------------------------------------------------------
-        // Auth Modal Actions
-        // -------------------------------------------------------------
+        // Auth Modals
         function toggleAuthModal() {
             document.getElementById('authModal').classList.toggle('hidden');
         }
@@ -555,7 +579,7 @@
         }
 
         // -------------------------------------------------------------
-        // Admin Dashboard & Date Filtering
+        // ADMIN DASHBOARD ENHANCED FUNCTIONS
         // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
@@ -563,7 +587,6 @@
 
         function openAdminPanel() {
             toggleAdminModal();
-            // Default select today's date in date filter
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('adminDateFilter').value = today;
             
@@ -577,14 +600,16 @@
 
             db.collection("users").get().then((querySnapshot) => {
                 usersTable.innerHTML = '';
+                document.getElementById('statTotalUsers').innerText = querySnapshot.size;
+
                 querySnapshot.forEach((doc) => {
                     const u = doc.data();
                     usersTable.innerHTML += `
-                        <tr class="border-b border-gray-700/50 hover:bg-gray-750">
+                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
                             <td class="p-2.5 font-medium">${u.name || 'N/A'}</td>
-                            <td class="p-2.5">${u.phone || 'N/A'}</td>
-                            <td class="p-2.5">${u.email || 'N/A'}</td>
-                            <td class="p-2.5"><span class="px-2 py-0.5 rounded text-xs ${u.role==='admin'?'bg-amber-500 text-gray-950 font-bold':'bg-gray-700 text-gray-300'}">${u.role || 'client'}</span></td>
+                            <td class="p-2.5 text-amber-400">${u.phone || 'N/A'}</td>
+                            <td class="p-2.5 text-gray-400">${u.email || 'N/A'}</td>
+                            <td class="p-2.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] ${u.role==='admin'?'bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold':'bg-gray-800 text-gray-400'}">${u.role || 'client'}</span></td>
                         </tr>
                     `;
                 });
@@ -598,7 +623,7 @@
 
             if (!selectedDate) return;
 
-            bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
+            bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
 
             db.collection("bookings")
               .where("bookingDate", "==", selectedDate)
@@ -606,60 +631,102 @@
               .then((querySnapshot) => {
                   bookingsTable.innerHTML = '';
                   const totalCount = querySnapshot.size;
+                  let confCount = 0;
+                  let pendCount = 0;
 
-                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-sky-500 text-white font-bold px-2 py-0.5 rounded-full text-xs">${totalCount} টি</span>`;
+                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30 text-xs">${totalCount} টি</span>`;
 
                   if (querySnapshot.empty) {
-                      bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-amber-400/80">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
+                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
+                      document.getElementById('statTodayBookings').innerText = 0;
+                      document.getElementById('statConfirmed').innerText = 0;
+                      document.getElementById('statPending').innerText = 0;
                       return;
                   }
+
+                  let serialNo = 1;
 
                   querySnapshot.forEach((doc) => {
                       const b = doc.data();
                       const docId = doc.id;
                       const currentStatus = b.status || 'Pending';
 
+                      if (currentStatus === 'Confirmed') confCount++;
+                      if (currentStatus === 'Pending') pendCount++;
+
                       let statusBadge = '';
                       if (currentStatus === 'Confirmed') {
-                          statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/40 px-2 py-0.5 rounded text-xs font-bold">Confirmed</span>`;
+                          statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-check text-[10px]"></i> Confirmed</span>`;
                       } else if (currentStatus === 'Rejected') {
-                          statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-xs font-bold">Rejected</span>`;
+                          statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-xmark text-[10px]"></i> Rejected</span>`;
                       } else {
-                          statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded text-xs font-bold">Pending</span>`;
+                          statusBadge = `<span class="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-spinner animate-spin text-[10px]"></i> Pending</span>`;
                       }
 
                       let actionButtons = `
-                          <div class="flex space-x-1">
-                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2.5 py-1 rounded transition">Confirm</button>
-                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1 rounded transition">Reject</button>
+                          <div class="flex items-center justify-center space-x-1.5">
+                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" title="Confirm Booking" class="bg-green-600 hover:bg-green-500 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-check"></i></button>
+                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" title="Reject Booking" class="bg-yellow-600 hover:bg-yellow-500 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-ban"></i></button>
+                              <button onclick="deleteBooking('${docId}')" title="Delete Order" class="bg-red-600/80 hover:bg-red-600 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-trash-can"></i></button>
                           </div>
                       `;
 
                       bookingsTable.innerHTML += `
-                          <tr class="border-b border-gray-700/50 hover:bg-gray-750">
-                              <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-amber-400">${b.customerPhone}</span></td>
-                              <td class="p-2.5">${b.service}</td>
-                              <td class="p-2.5">${b.bookingDate}<br><span class="text-xs text-gray-400">${b.bookingTime}</span></td>
-                              <td class="p-2.5">${statusBadge}</td>
-                              <td class="p-2.5">${actionButtons}</td>
+                          <tr class="border-b border-gray-800 hover:bg-gray-800/40 transition">
+                              <td class="p-3 text-center font-bold text-amber-400 text-base">#${serialNo++}</td>
+                              <td class="p-3 font-medium text-gray-200">
+                                  ${b.customerName}
+                                  <div class="text-xs text-amber-400 flex items-center gap-1 mt-0.5">
+                                      <span>${b.customerPhone}</span>
+                                      <a href="tel:${b.customerPhone}" title="Call Customer" class="bg-green-500/20 hover:bg-green-500 text-green-400 hover:text-gray-950 p-1 rounded-full text-[10px] transition"><i class="fa-solid fa-phone"></i></a>
+                                  </div>
+                              </td>
+                              <td class="p-3 text-gray-300">${b.service}</td>
+                              <td class="p-3 text-gray-300 font-semibold">${b.bookingTime}</td>
+                              <td class="p-3 text-center">${statusBadge}</td>
+                              <td class="p-3 text-center">${actionButtons}</td>
                           </tr>
                       `;
                   });
+
+                  document.getElementById('statTodayBookings').innerText = totalCount;
+                  document.getElementById('statConfirmed').innerText = confCount;
+                  document.getElementById('statPending').innerText = pendCount;
               })
               .catch((error) => {
-                  bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
+                  bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
               });
+        }
+
+        function searchBookingsTable() {
+            const input = document.getElementById('adminSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#adminBookingsTable tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? '' : 'none';
+            });
         }
 
         function updateBookingStatus(docId, newStatus) {
             db.collection("bookings").doc(docId).update({
                 status: newStatus
             }).then(() => {
-                alert(`বুকিংটি ${newStatus === 'Confirmed' ? 'কনফার্ম' : 'রিজেক্ট'} করা হয়েছে!`);
-                filterBookingsByDate(); // Reload same date
+                filterBookingsByDate(); 
             }).catch((error) => {
                 alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে: " + error.message);
             });
+        }
+
+        function deleteBooking(docId) {
+            if (confirm("আপনি কি নিশ্চিত এই বুকিংটি মুছে ফেলতে চান?")) {
+                db.collection("bookings").doc(docId).delete().then(() => {
+                    alert("বুকিংটি সফলভাবে মুছে ফেলা হয়েছে!");
+                    filterBookingsByDate();
+                }).catch((error) => {
+                    alert("মুছে ফেলতে সমস্যা হয়েছে: " + error.message);
+                });
+            }
         }
 
         // -------------------------------------------------------------
