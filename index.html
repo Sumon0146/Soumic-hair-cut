@@ -165,16 +165,26 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের সার্ভিস <span class="text-red-500">*</span></label>
-                        <select id="bookService" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
+                        <select id="bookService" onchange="calculatePrice()" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                             <option value="">সার্ভিস নির্বাচন করুন</option>
-                            <option value="হেয়ার কাট">হেয়ার কাট</option>
-                            <option value="দাড়ি স্টাইলিং/ট্রিম">দাড়ি স্টাইলিং / ট্রিম</option>
-                            <option value="কম্বো ১ (হেয়ারকাট + দাড়ি)">কম্বো ১ (হেয়ারকাট + দাড়ি)</option>
-                            <option value="কম্বো ২ (ফুল গ্রুমিং)">কম্বো ২ (ফুল গ্রুমিং)</option>
-                            <option value="ফেসিয়াল / স্কিন কেয়ার">ফেসিয়াল / স্কিন কেয়ার</option>
-                            <option value="অন্যান্য">অন্যান্য</option>
+                            <option value="হেয়ার কাট" data-price="100">হেয়ার কাট (৳১০০)</option>
+                            <option value="দাড়ি স্টাইলিং/ট্রিম" data-price="60">দাড়ি স্টাইলিং / ট্রিম (৳৬০)</option>
+                            <option value="কম্বো ১ (হেয়ারকাট + দাড়ি)" data-price="150">কম্বো ১ (হেয়ারকাট + দাড়ি) (৳১৫০)</option>
+                            <option value="কম্বো ২ (ফুল গ্রুমিং)" data-price="300">কম্বো ২ (ফুল গ্রুমিং) (৳৩০০)</option>
+                            <option value="ফেসিয়াল / স্কিন কেয়ার" data-price="200">ফেসিয়াল / স্কিন কেয়ার (৳২০০)</option>
+                            <option value="অন্যান্য" data-price="80">অন্যান্য (৳৮০)</option>
                         </select>
                     </div>
+                </div>
+
+                <!-- [FEATURE 2] Barber Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের কারিগর (Barber/Staff) <span class="text-red-500">*</span></label>
+                    <select id="bookBarber" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
+                        <option value="সৌমিক">সৌমিক</option>
+                        <option value="রহিম">রহিম</option>
+                        <option value="কার্তিক">কার্তিক</option>
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -186,6 +196,21 @@
                         <label class="block text-sm font-medium text-gray-300 mb-1">সময় <span class="text-red-500">*</span></label>
                         <input type="time" id="bookTime" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                     </div>
+                </div>
+
+                <!-- [FEATURE 3] Coupon Code -->
+                <div class="bg-gray-900/60 p-3 rounded-lg border border-gray-800 space-y-2">
+                    <label class="block text-xs font-medium text-amber-400">কুপন কোড (যদি থাকে):</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="couponInput" placeholder="যেমন: EID2026" class="flex-1 bg-gray-950 border border-gray-800 rounded-lg p-2 text-xs text-gray-100 focus:outline-none focus:border-amber-500">
+                        <button type="button" onclick="applyCoupon()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">প্রয়োগ করুন</button>
+                    </div>
+                    <p id="couponMsg" class="text-xs hidden"></p>
+                </div>
+
+                <!-- Price Display -->
+                <div class="text-right text-sm font-bold text-amber-400 pt-1">
+                    মোট প্রাক্কলিত মূল্য: ৳<span id="finalPriceDisplay">0</span>
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg shadow-sky-500/20 transition duration-300 flex items-center justify-center">
@@ -342,7 +367,7 @@
                 </button>
             </div>
 
-            <!-- INTERACTIVE STATS CARDS (CLICK TO FILTER) -->
+            <!-- INTERACTIVE STATS CARDS -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <div onclick="filterByCardStatus('All')" title="সব বুকিং দেখুন" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
@@ -368,28 +393,64 @@
                     </div>
                 </div>
 
-                <div onclick="filterByCardStatus('Pending')" title="শুধু পেন্ডিং বুকিং দেখুন" class="bg-gradient-to-br from-yellow-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-yellow-500/25 shadow-lg relative overflow-hidden group hover:border-yellow-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
+                <!-- [FEATURE 1] Income Card -->
+                <div class="bg-gradient-to-br from-green-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-green-500/25 shadow-lg relative overflow-hidden group hover:border-green-500/50 transition duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-yellow-300/80 uppercase font-semibold tracking-wider">আজ পেন্ডিং</p>
-                            <h3 id="statPending" class="text-2xl md:text-3xl font-extrabold text-yellow-400 mt-1">0</h3>
+                            <p class="text-[11px] text-green-300/80 uppercase font-semibold tracking-wider">আজকের মোট আয়</p>
+                            <h3 id="statTodayEarnings" class="text-2xl md:text-3xl font-extrabold text-green-400 mt-1">৳ 0</h3>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
-                            <i class="fa-solid fa-clock text-lg"></i>
+                        <div class="p-2.5 rounded-xl bg-green-500/10 text-green-400 border border-green-500/20">
+                            <i class="fa-solid fa-sack-dollar text-lg"></i>
                         </div>
                     </div>
                 </div>
 
-                <div onclick="scrollToRegisteredUsers()" title="রেজিস্টার্ড ইউজারদের তালিকা দেখুন" class="bg-gradient-to-br from-sky-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-sky-500/25 shadow-lg relative overflow-hidden group hover:border-sky-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
+                <!-- [FEATURE 1] Expense Card -->
+                <div class="bg-gradient-to-br from-rose-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-rose-500/25 shadow-lg relative overflow-hidden group hover:border-rose-500/50 transition duration-300">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-sky-300/80 uppercase font-semibold tracking-wider">মোট রেজিস্টার্ড ইউজার</p>
-                            <h3 id="statTotalUsers" class="text-2xl md:text-3xl font-extrabold text-sky-400 mt-1">0</h3>
+                            <p class="text-[11px] text-rose-300/80 uppercase font-semibold tracking-wider">আজকের খরচ</p>
+                            <h3 id="statTodayExpense" class="text-2xl md:text-3xl font-extrabold text-rose-400 mt-1">৳ 0</h3>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                            <i class="fa-solid fa-users text-lg"></i>
+                        <div class="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                            <i class="fa-solid fa-receipt text-lg"></i>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- [FEATURE 1 B] Expense Tracker Entry Section -->
+            <div class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+                <h3 class="text-sm font-bold text-amber-400 flex items-center">
+                    <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
+                </h3>
+                <div class="flex flex-col md:flex-row gap-2">
+                    <input type="text" id="expenseTitle" placeholder="খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="number" id="expenseAmount" placeholder="টাকার পরিমাণ (৳)" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 w-full md:w-36 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <button onclick="addExpense()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">খরচ যোগ করুন</button>
+                </div>
+                <div id="expenseList" class="text-xs text-gray-400 space-y-1 max-h-24 overflow-y-auto"></div>
+            </div>
+
+            <!-- [FEATURE 5] Time Slot & Off-Day Lock Controls -->
+            <div class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+                <h3 class="text-sm font-bold text-amber-400 flex items-center">
+                    <i class="fa-solid fa-lock mr-2"></i> অফ-ডে ও টাইম স্লট লক কন্ট্রোল
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex gap-2">
+                        <input type="date" id="blockDateInput" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2 text-amber-300 flex-1">
+                        <button onclick="blockOffDay()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold text-xs px-3 rounded-xl">তারিখ লক করুন</button>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="time" id="blockTimeInput" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2 text-amber-300 flex-1">
+                        <button onclick="blockSlot()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold text-xs px-3 rounded-xl">স্লট লক করুন</button>
+                    </div>
+                </div>
+                <div class="flex gap-4 text-xs text-gray-400">
+                    <div>লককৃত তারিখ: <span id="blockedDatesDisplay" class="text-rose-400">নেই</span></div>
+                    <div>লককৃত স্লট: <span id="blockedSlotsDisplay" class="text-rose-400">নেই</span></div>
                 </div>
             </div>
 
@@ -404,6 +465,11 @@
                     </div>
                     
                     <div class="flex flex-wrap items-center gap-2">
+                        <!-- [FEATURE 4] Excel Export Button -->
+                        <button onclick="exportBookingsToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition flex items-center shadow-md">
+                            <i class="fa-solid fa-file-excel mr-1.5"></i> এক্সেল এক্সপোর্ট (.csv)
+                        </button>
+
                         <div class="flex items-center bg-gray-900 border border-amber-500/30 rounded-xl px-2.5 py-1 shadow-inner">
                             <i class="fa-solid fa-calendar text-xs text-amber-400 mr-2"></i>
                             <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-transparent text-xs text-amber-300 font-bold focus:outline-none cursor-pointer">
@@ -424,8 +490,8 @@
                             <tr>
                                 <th class="p-3 text-center">সিরিয়াল #</th>
                                 <th class="p-3">গ্রাহক ও ফোন</th>
-                                <th class="p-3">সার্ভিস</th>
-                                <th class="p-3">সময়</th>
+                                <th class="p-3">সার্ভিস ও কারিগর</th>
+                                <th class="p-3">সময় ও মূল্য</th>
                                 <th class="p-3 text-center">স্ট্যাটাস</th>
                                 <th class="p-3 text-center">অ্যাকশন</th>
                             </tr>
@@ -486,6 +552,19 @@
 
         const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
 
+        // Global State Variables for Features
+        let currentDiscountPercent = 0;
+        let blockedDates = JSON.parse(localStorage.getItem('blockedDates')) || [];
+        let blockedSlots = JSON.parse(localStorage.getItem('blockedSlots')) || [];
+        let dailyExpenses = JSON.parse(localStorage.getItem('dailyExpenses')) || [];
+        let loadedBookingsData = []; // for export
+
+        // Coupons Dataset
+        const coupons = {
+            'EID2026': 20,
+            'SOUMIK10': 10
+        };
+
         // Check Auth State
         auth.onAuthStateChanged((user) => {
             const navUserArea = document.getElementById('navUserArea');
@@ -522,6 +601,39 @@
                 `;
             }
         });
+
+        // Price Calculation & Coupon Handling
+        function calculatePrice() {
+            const select = document.getElementById('bookService');
+            const selectedOption = select.options[select.selectedIndex];
+            const basePrice = parseFloat(selectedOption.getAttribute('data-price') || 0);
+
+            let finalPrice = basePrice;
+            if (currentDiscountPercent > 0) {
+                finalPrice = basePrice - (basePrice * (currentDiscountPercent / 100));
+            }
+
+            document.getElementById('finalPriceDisplay').innerText = finalPrice.toFixed(0);
+            return finalPrice;
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            const msg = document.getElementById('couponMsg');
+            msg.classList.remove('hidden');
+
+            if (coupons[code]) {
+                currentDiscountPercent = coupons[code];
+                msg.className = "text-xs text-emerald-400 font-semibold";
+                msg.innerText = `অভিনন্দন! ${currentDiscountPercent}% ডিসকাউন্ট প্রযোজ্য হয়েছে।`;
+                calculatePrice();
+            } else {
+                currentDiscountPercent = 0;
+                msg.className = "text-xs text-rose-400 font-semibold";
+                msg.innerText = "অবৈধ বা মেয়াদোত্তীর্ণ কুপন কোড!";
+                calculatePrice();
+            }
+        }
 
         // Track Booking
         function trackBookingByPhone() {
@@ -560,7 +672,7 @@
 
                       html += `
                           <div class="space-y-1 text-sm border-b border-gray-800/80 pb-2 mb-2">
-                              <p><strong>সার্ভিস:</strong> ${data.service}</p>
+                              <p><strong>সার্ভিস:</strong> ${data.service} (${data.barber || 'সৌমিক'})</p>
                               <p><strong>তারিখ ও সময়:</strong> ${data.bookingDate} (${data.bookingTime})</p>
                               <p class="pt-1"><strong>স্ট্যাটাস:</strong> ${statusBadge}</p>
                           </div>
@@ -649,7 +761,7 @@
         }
 
         // -------------------------------------------------------------
-        // ADMIN DASHBOARD HIGH PREMIUM & INTERACTIVE FUNCTIONS
+        // ADMIN DASHBOARD & ADVANCED FEATURES
         // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
@@ -662,6 +774,94 @@
             
             loadAdminUsers();
             filterBookingsByDate();
+            renderExpenses();
+            updateLockControlsUI();
+        }
+
+        // Expense Management Logic
+        function addExpense() {
+            const title = document.getElementById('expenseTitle').value.trim();
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+
+            if (!title || !amount) {
+                alert("খরচের খাত ও পরিমাণ সঠিকভাবে দিন!");
+                return;
+            }
+
+            dailyExpenses.push({ title, amount, date: new Date().toISOString().split('T')[0] });
+            localStorage.setItem('dailyExpenses', JSON.stringify(dailyExpenses));
+            
+            document.getElementById('expenseTitle').value = '';
+            document.getElementById('expenseAmount').value = '';
+            renderExpenses();
+        }
+
+        function renderExpenses() {
+            const container = document.getElementById('expenseList');
+            const totalExpenseEl = document.getElementById('statTodayExpense');
+            
+            container.innerHTML = '';
+            let total = 0;
+
+            dailyExpenses.forEach((exp, idx) => {
+                total += exp.amount;
+                container.innerHTML += `
+                    <div class="flex justify-between items-center border-b border-gray-800/50 py-1">
+                        <span>• ${exp.title}</span>
+                        <span class="text-rose-400 font-mono">৳${exp.amount}</span>
+                    </div>
+                `;
+            });
+
+            totalExpenseEl.innerText = `৳ ${total}`;
+        }
+
+        // Lock Slot & Off-Day Control
+        function blockOffDay() {
+            const val = document.getElementById('blockDateInput').value;
+            if (val && !blockedDates.includes(val)) {
+                blockedDates.push(val);
+                localStorage.setItem('blockedDates', JSON.stringify(blockedDates));
+                updateLockControlsUI();
+            }
+        }
+
+        function blockSlot() {
+            const val = document.getElementById('blockTimeInput').value;
+            if (val && !blockedSlots.includes(val)) {
+                blockedSlots.push(val);
+                localStorage.setItem('blockedSlots', JSON.stringify(blockedSlots));
+                updateLockControlsUI();
+            }
+        }
+
+        function updateLockControlsUI() {
+            document.getElementById('blockedDatesDisplay').innerText = blockedDates.join(', ') || 'নেই';
+            document.getElementById('blockedSlotsDisplay').innerText = blockedSlots.join(', ') || 'নেই';
+        }
+
+        // Excel Export
+        function exportBookingsToCSV() {
+            if (!loadedBookingsData || loadedBookingsData.length === 0) {
+                alert("ডাউনলোড করার মতো কোনো বুকিং তথ্য নেই!");
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+            csvContent += "সিরিয়াল,গ্রাহক,ফোন,সার্ভিস,কারিগর,তারিখ,সময়,মূল্য,স্ট্যাটাস\n";
+
+            loadedBookingsData.forEach((b, index) => {
+                let row = `"${index + 1}","${b.customerName}","${b.customerPhone}","${b.service}","${b.barber || 'সৌমিক'}","${b.bookingDate}","${b.bookingTime}","${b.price || 0}","${b.status}"`;
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Salon_Bookings_${document.getElementById('adminDateFilter').value}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         function loadAdminUsers() {
@@ -701,9 +901,12 @@
               .get()
               .then((querySnapshot) => {
                   bookingsTable.innerHTML = '';
+                  loadedBookingsData = [];
+
                   const totalCount = querySnapshot.size;
                   let confCount = 0;
                   let pendCount = 0;
+                  let totalEarnings = 0;
 
                   countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/15 text-amber-300 font-bold px-2 py-0.5 rounded-lg border border-amber-500/30 text-xs">${totalCount} টি</span>`;
 
@@ -711,7 +914,7 @@
                       bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80 font-medium">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
                       document.getElementById('statTodayBookings').innerText = 0;
                       document.getElementById('statConfirmed').innerText = 0;
-                      document.getElementById('statPending').innerText = 0;
+                      document.getElementById('statTodayEarnings').innerText = "৳ 0";
                       return;
                   }
 
@@ -721,11 +924,16 @@
                       const b = doc.data();
                       const docId = doc.id;
                       const currentStatus = b.status || 'Pending';
+                      const itemPrice = parseFloat(b.price || 0);
 
-                      if (currentStatus === 'Confirmed') confCount++;
+                      loadedBookingsData.push(b);
+
+                      if (currentStatus === 'Confirmed') {
+                          confCount++;
+                          totalEarnings += itemPrice; // Calculate earnings
+                      }
                       if (currentStatus === 'Pending') pendCount++;
 
-                      // Apply Card Filter if Clicked
                       if (statusFilter !== 'All' && currentStatus !== statusFilter) {
                           return;
                       }
@@ -757,8 +965,14 @@
                                       <a href="tel:${b.customerPhone}" title="Call Customer" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-gray-950 w-5 h-5 rounded-full transition flex items-center justify-center text-[10px]"><i class="fa-solid fa-phone"></i></a>
                                   </div>
                               </td>
-                              <td class="p-3 text-gray-300">${b.service}</td>
-                              <td class="p-3 text-gray-300 font-semibold font-mono">${b.bookingTime}</td>
+                              <td class="p-3 text-gray-300">
+                                  <div>${b.service}</div>
+                                  <div class="text-xs text-sky-400">কারিগর: ${b.barber || 'সৌমিক'}</div>
+                              </td>
+                              <td class="p-3 text-gray-300 font-semibold font-mono">
+                                  <div>${b.bookingTime}</div>
+                                  <div class="text-xs text-green-400">৳${b.price || 0}</div>
+                              </td>
                               <td class="p-3 text-center">${statusBadge}</td>
                               <td class="p-3 text-center">${actionButtons}</td>
                           </tr>
@@ -771,14 +985,13 @@
 
                   document.getElementById('statTodayBookings').innerText = totalCount;
                   document.getElementById('statConfirmed').innerText = confCount;
-                  document.getElementById('statPending').innerText = pendCount;
+                  document.getElementById('statTodayEarnings').innerText = `৳ ${totalEarnings}`;
               })
               .catch((error) => {
                   bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
               });
         }
 
-        // CLICK CARDS TO FILTER AND SCROLL
         function filterByCardStatus(status) {
             filterBookingsByDate(status);
             const target = document.getElementById('bookingTableSection');
@@ -825,11 +1038,24 @@
         function sendTelegramBooking(event) {
             event.preventDefault();
 
+            const date = document.getElementById('bookDate').value;
+            const time = document.getElementById('bookTime').value;
+
+            // Lock Check
+            if (blockedDates.includes(date)) {
+                alert("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে। অনুগ্রহ করে অন্য দিন নির্বাচন করুন।");
+                return;
+            }
+            if (blockedSlots.includes(time)) {
+                alert("দুঃখিত! এই নির্দিষ্ট সময়ের স্লটটি বুকিংয়ের জন্য ব্লক করা রয়েছে।");
+                return;
+            }
+
             const name = document.getElementById('bookName').value.trim();
             const phone = document.getElementById('bookPhone').value.trim();
             const service = document.getElementById('bookService').value;
-            const date = document.getElementById('bookDate').value;
-            const time = document.getElementById('bookTime').value;
+            const barber = document.getElementById('bookBarber').value;
+            const price = calculatePrice();
 
             const currentUser = auth.currentUser;
             const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
@@ -842,6 +1068,8 @@
                 customerName: name,
                 customerPhone: phone,
                 service: service,
+                barber: barber,
+                price: price,
                 bookingDate: date,
                 bookingTime: time,
                 userType: userStatus,
@@ -857,6 +1085,8 @@
                                 `👤 *নাম:* ${name}\n` +
                                 `📞 *ফোন:* ${phone}\n` +
                                 `✂️ *সার্ভিস:* ${service}\n` +
+                                `💈 *কারিগর:* ${barber}\n` +
+                                `💰 *মূল্য:* ৳${price}\n` +
                                 `📅 *তারিখ:* ${date}\n` +
                                 `⏰ *সময়:* ${time}\n` +
                                 `🏷️ *টাইপ:* ${userStatus}\n` +
@@ -874,8 +1104,9 @@
             .then(res => {
                 btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
                 btn.disabled = false;
-                alert("আপনার বুকিং অনুরোধটি পেন্ডিং অবস্থায় জমা হয়েছে! আপনার মোবাইল নম্বর দিয়ে পেজের 'বুকিং স্ট্যাটাস জানুন' সেকশনে যেকোনো সময় আপডেট চেক করতে পারবেন।");
+                alert("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!");
                 event.target.reset();
+                calculatePrice();
             })
             .catch(err => {
                 btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
