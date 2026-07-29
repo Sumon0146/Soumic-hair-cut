@@ -18,19 +18,51 @@
 
     <style>
         body { font-family: 'Hind Siliguri', sans-serif; }
+        
+        /* Custom Scrollbar for Admin Panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.4);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.8);
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-modal {
+            background: rgba(10, 15, 29, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .gold-glow {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.15);
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 relative">
+<body class="bg-gray-950 text-gray-100 relative selection:bg-amber-500 selection:text-gray-950">
 
     <!-- Top Navigation Bar -->
-    <nav class="bg-gray-950 border-b border-gray-800 px-4 py-3 sticky top-0 z-40 shadow-lg">
+    <nav class="bg-gray-950/80 backdrop-blur-md border-b border-gray-800/80 px-4 py-3 sticky top-0 z-40 shadow-lg">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-amber-500 flex items-center">
                 <i class="fa-solid fa-scissors mr-2"></i> সৌমিক হেয়ার কাটিং
             </a>
             
             <div id="navUserArea">
-                <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
+                <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
                     <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
                 </button>
             </div>
@@ -38,15 +70,15 @@
     </nav>
 
     <!-- Header / Hero Section -->
-    <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
+    <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
         <div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500">সৌমিক হেয়ার কাটিং</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500 tracking-wide">সৌমিক হেয়ার কাটিং</h1>
             <p class="text-lg md:text-xl text-gray-300 mb-6">আপনার নিখুঁত লুকের সঠিক ঠিকানা</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#booking" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
+                <a href="#booking" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-sky-500/20">
                     <i class="fa-solid fa-calendar-check mr-2"></i> সিরিয়াল বুক করুন
                 </a>
-                <a href="#trackBooking" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center">
+                <a href="#trackBooking" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-amber-500/20">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i> বুকিং স্ট্যাটাস চেক
                 </a>
             </div>
@@ -54,7 +86,7 @@
     </header>
 
     <!-- Scrolling Notice -->
-    <div class="bg-amber-500/10 border-y border-amber-500/30 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
+    <div class="bg-amber-500/10 border-y border-amber-500/20 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
         <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
             ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই অনলাইনে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
         </marquee>
@@ -64,22 +96,22 @@
 
         <!-- Features Section -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
+            <div class="bg-gray-900/80 p-4 rounded-xl border border-gray-800 shadow-lg space-y-2">
                 <i class="fa-solid fa-pump-soap text-3xl text-amber-400"></i>
                 <h3 class="font-bold text-sm md:text-base">১০০% জীবাণুমুক্ত</h3>
                 <p class="text-xs text-gray-400">পরিষ্কার ও সেফ ইকুইপমেন্ট</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
+            <div class="bg-gray-900/80 p-4 rounded-xl border border-gray-800 shadow-lg space-y-2">
                 <i class="fa-solid fa-user-ninja text-3xl text-amber-400"></i>
                 <h3 class="font-bold text-sm md:text-base">অভিজ্ঞ কারিগর</h3>
                 <p class="text-xs text-gray-400">ট্রেন্ডি ও নিখুঁত কাটিং</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
+            <div class="bg-gray-900/80 p-4 rounded-xl border border-gray-800 shadow-lg space-y-2">
                 <i class="fa-solid fa-couch text-3xl text-amber-400"></i>
                 <h3 class="font-bold text-sm md:text-base">আরামদায়ক পরিবেশ</h3>
                 <p class="text-xs text-gray-400">মনোরম অভিজ্ঞতা</p>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 space-y-2">
+            <div class="bg-gray-900/80 p-4 rounded-xl border border-gray-800 shadow-lg space-y-2">
                 <i class="fa-solid fa-clock text-3xl text-amber-400"></i>
                 <h3 class="font-bold text-sm md:text-base">দ্রুত সার্ভিস</h3>
                 <p class="text-xs text-gray-400">সিরিয়ালে সময়ের সঞ্চয়</p>
@@ -87,53 +119,53 @@
         </section>
 
         <!-- Track Booking Section -->
-        <section id="trackBooking" class="bg-gray-800 p-6 rounded-xl border border-amber-500/40 shadow-xl space-y-4 scroll-mt-20">
+        <section id="trackBooking" class="bg-gray-900/90 p-6 rounded-2xl border border-amber-500/30 shadow-xl space-y-4 scroll-mt-20 gold-glow">
             <div class="text-center">
                 <h2 class="text-2xl font-bold text-amber-400 flex items-center justify-center">
                     <i class="fa-solid fa-magnifying-glass-location mr-2"></i> বুকিং স্ট্যাটাস জানুন
                 </h2>
-                <p class="text-sm text-gray-300 mt-1">লগইন ছাড়াই আপনার দেওয়া মোবাইল নম্বরটি দিয়ে বুকিংয়ের সর্বশেষ স্ট্যাটাস চেক করুন</p>
+                <p class="text-sm text-gray-400 mt-1">লগইন ছাড়াই আপনার দেওয়া মোবাইল নম্বরটি দিয়ে বুকিংয়ের সর্বশেষ স্ট্যাটাস চেক করুন</p>
             </div>
 
             <div class="max-w-md mx-auto flex gap-2">
-                <input type="tel" id="trackPhoneInput" placeholder="আপনার বুকিংকৃত ফোন নম্বর লিখুন" class="flex-1 bg-gray-900 border border-gray-700 rounded-lg p-3 text-gray-100 focus:outline-none focus:border-amber-500">
-                <button onclick="trackBookingByPhone()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-5 py-3 rounded-lg transition duration-300">
+                <input type="tel" id="trackPhoneInput" placeholder="আপনার বুকিংকৃত ফোন নম্বর লিখুন" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl p-3 text-gray-100 focus:outline-none focus:border-amber-500 transition">
+                <button onclick="trackBookingByPhone()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-5 py-3 rounded-xl transition duration-300">
                     খুঁজুন
                 </button>
             </div>
 
-            <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-3"></div>
+            <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3"></div>
         </section>
 
         <!-- Online Serial Booking Form -->
-        <section id="booking" class="bg-gray-800 p-6 md:p-8 rounded-lg border border-sky-500/50 shadow-xl scroll-mt-6 space-y-6">
+        <section id="booking" class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-sky-500/30 shadow-xl scroll-mt-6 space-y-6">
             <div class="max-w-md mx-auto text-center">
-                <div class="w-16 h-16 bg-sky-500/20 text-sky-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <div class="w-16 h-16 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-lg shadow-sky-500/10">
                     <i class="fa-solid fa-calendar-check"></i>
                 </div>
                 <h2 class="text-2xl md:text-3xl font-bold text-sky-400 mb-2">
                     📅 অনলাইন সিরিয়াল বুকিং
                 </h2>
                 
-                <p class="text-amber-300/90 text-sm bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 mb-3">
+                <p class="text-amber-300/90 text-sm bg-amber-500/10 p-3 rounded-xl border border-amber-500/20 mb-3">
                     📌 <strong>বিশেষ দ্রষ্টব্য:</strong> সেলুনে কাস্টমার চাপের কারণে নির্ধারিত সময়ের কিছুটা আগে-পরে সার্ভিস শুরু হতে পারে। আপনার ধৈর্যের জন্য আন্তরিক ধন্যবাদ।
                 </p>
             </div>
 
-            <form onsubmit="sendTelegramBooking(event)" class="max-w-xl mx-auto bg-gray-900 p-5 md:p-6 rounded-lg space-y-4 border border-gray-700">
+            <form onsubmit="sendTelegramBooking(event)" class="max-w-xl mx-auto bg-gray-950/80 p-5 md:p-6 rounded-xl space-y-4 border border-gray-800">
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
-                    <input type="text" id="bookName" required placeholder="উদাহরণ: মোঃ রহিম" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
+                    <input type="text" id="bookName" required placeholder="উদাহরণ: মোঃ রহিম" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">মোবাইল নম্বর <span class="text-red-500">*</span></label>
-                        <input type="tel" id="bookPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
+                        <input type="tel" id="bookPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের সার্ভিস <span class="text-red-500">*</span></label>
-                        <select id="bookService" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
+                        <select id="bookService" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                             <option value="">সার্ভিস নির্বাচন করুন</option>
                             <option value="হেয়ার কাট">হেয়ার কাট</option>
                             <option value="দাড়ি স্টাইলিং/ট্রিম">দাড়ি স্টাইলিং / ট্রিম</option>
@@ -148,70 +180,70 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">তারিখ <span class="text-red-500">*</span></label>
-                        <input type="date" id="bookDate" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
+                        <input type="date" id="bookDate" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">সময় <span class="text-red-500">*</span></label>
-                        <input type="time" id="bookTime" required class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-sky-500">
+                        <input type="time" id="bookTime" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
                     </div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
+                <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg shadow-sky-500/20 transition duration-300 flex items-center justify-center">
                     <i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন
                 </button>
             </form>
         </section>
 
         <!-- Customer Rating & Review Section -->
-        <section class="bg-gray-800 p-6 md:p-8 rounded-lg border border-amber-500/30 shadow-xl space-y-6">
-            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">
+        <section class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-amber-500/20 shadow-xl space-y-6">
+            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-800 pb-3">
                 ⭐ গ্রাহকদের মতামত ও রেটিং
             </h2>
 
-            <div id="ratingSummary" class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 text-center flex flex-col items-center justify-center space-y-1">
+            <div id="ratingSummary" class="bg-gray-950 p-4 rounded-xl border border-gray-800 text-center flex flex-col items-center justify-center space-y-1">
                 <span class="text-3xl font-bold text-amber-400" id="avgScore">5.0</span>
                 <div class="text-amber-400 text-lg" id="avgStars">⭐⭐⭐⭐⭐</div>
                 <span class="text-xs text-gray-400" id="totalReviewsCount">(১টি রিভিউর ভিত্তিতে)</span>
             </div>
 
-            <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-900 p-5 rounded-lg space-y-4 border border-gray-700">
+            <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-950 p-5 rounded-xl space-y-4 border border-gray-800">
                 <h3 class="text-lg font-semibold text-gray-200">আপনার মতামত জানান:</h3>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
-                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="custName" required placeholder="আপনার নাম লিখুন" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500 transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-1">রেটিং নির্বাচন করুন <span class="text-red-500">*</span></label>
-                    <div class="flex gap-2 text-3xl text-gray-600 cursor-pointer py-1" id="starContainer">
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(1)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(2)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(3)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(4)"></i>
-                        <i class="fa-solid fa-star transition duration-200" onclick="setRating(5)"></i>
+                    <div class="flex gap-2 text-3xl text-gray-700 cursor-pointer py-1" id="starContainer">
+                        <i class="fa-solid fa-star transition duration-200 hover:scale-110" onclick="setRating(1)"></i>
+                        <i class="fa-solid fa-star transition duration-200 hover:scale-110" onclick="setRating(2)"></i>
+                        <i class="fa-solid fa-star transition duration-200 hover:scale-110" onclick="setRating(3)"></i>
+                        <i class="fa-solid fa-star transition duration-200 hover:scale-110" onclick="setRating(4)"></i>
+                        <i class="fa-solid fa-star transition duration-200 hover:scale-110" onclick="setRating(5)"></i>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-1">আপনার অভিজ্ঞতা / মন্তব্য (ঐচ্ছিক)</label>
-                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন..." class="w-full bg-gray-800 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500"></textarea>
+                    <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500 transition"></textarea>
                 </div>
 
-                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded transition duration-300">
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-lg transition duration-300">
                     রেটিং জমা দিন
                 </button>
             </form>
 
-            <div class="space-y-4 pt-4">
+            <div class="space-y-4 pt-2">
                 <h3 class="text-lg font-semibold text-amber-400">সাম্প্রতিক রেটিং ও রিভিউ:</h3>
                 <div id="reviewsList" class="space-y-3"></div>
             </div>
         </section>
 
         <!-- Location Section -->
-        <section class="bg-gray-800 p-6 rounded-lg border border-gray-700 space-y-6">
-            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-700 pb-2">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
+        <section class="bg-gray-900/90 p-6 rounded-2xl border border-gray-800 space-y-6">
+            <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-800 pb-3">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div class="space-y-4">
                     <p class="flex items-start">
@@ -224,11 +256,11 @@
                     </p>
                     <p class="flex items-center">
                         <i class="fa-solid fa-phone text-amber-500 mr-3 text-lg"></i>
-                        <span><strong>মোবাইল:</strong> <a href="tel:01910947438" class="hover:underline">01910947438</a></span>
+                        <span><strong>মোবাইল:</strong> <a href="tel:01910947438" class="hover:underline text-amber-400">01910947438</a></span>
                     </p>
                 </div>
 
-                <div class="w-full h-64 rounded-lg overflow-hidden border border-gray-700 shadow-md">
+                <div class="w-full h-64 rounded-xl overflow-hidden border border-gray-800 shadow-md">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.8543881234!2d89.4167!3d22.8000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ4JzAwLjAiTiA4OcKwMjUnMDAuMCJF!5e0!3m2!1sbn!2sbd!4v1620000000000!5m2!1sbn!2sbd" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -237,13 +269,13 @@
     </div>
 
     <!-- Login / Sign Up Popup Modal -->
-    <div id="authModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-800 rounded-xl max-w-md w-full p-6 border border-amber-500/30 relative space-y-4">
+    <div id="authModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="glass-card rounded-2xl max-w-md w-full p-6 border border-amber-500/30 relative space-y-4 shadow-2xl gold-glow">
             <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="flex border-b border-gray-700 pb-2">
+            <div class="flex border-b border-gray-800 pb-2">
                 <button id="tabLogin" onclick="switchTab('login')" class="flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500">লগইন</button>
                 <button id="tabSignup" onclick="switchTab('signup')" class="flex-1 py-2 font-bold text-gray-400">রেজিস্টার</button>
             </div>
@@ -252,13 +284,13 @@
             <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">ইমেইল</label>
-                    <input type="email" id="loginEmail" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="email" id="loginEmail" required class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
-                    <input type="password" id="loginPassword" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="password" id="loginPassword" required class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded transition duration-300">
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
                     লগইন করুন
                 </button>
             </form>
@@ -267,88 +299,128 @@
             <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">আপনার নাম</label>
-                    <input type="text" id="signupName" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="signupName" required class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">মোবাইল নম্বর</label>
-                    <input type="tel" id="signupPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="tel" id="signupPhone" required placeholder="017XXXXXXXX" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">ইমেইল</label>
-                    <input type="email" id="signupEmail" required class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="email" id="signupEmail" required class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
-                    <input type="password" id="signupPassword" required minlength="6" class="w-full bg-gray-900 border border-gray-700 rounded p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
+                    <input type="password" id="signupPassword" required minlength="6" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded transition duration-300">
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
                     নতুন অ্যাকাউন্ট খুলুন
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- IMPROVED ADMIN DASHBOARD MODAL -->
-    <div id="adminModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-3 md:p-6">
-        <div class="bg-gray-800 rounded-2xl max-w-5xl w-full p-4 md:p-6 border border-amber-500/40 relative max-h-[92vh] overflow-y-auto space-y-6 shadow-2xl">
+    <!-- HIGH-PREMIUM GLASSMORPHISM ADMIN DASHBOARD MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-3 md:p-6 backdrop-blur-md">
+        <div class="glass-modal rounded-3xl max-w-5xl w-full p-4 md:p-7 border border-amber-500/30 relative max-h-[92vh] overflow-y-auto custom-scrollbar space-y-6 shadow-2xl gold-glow">
             
             <!-- Header -->
-            <div class="flex items-center justify-between border-b border-gray-700 pb-3">
-                <h2 class="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 flex items-center">
-                    <i class="fa-solid fa-crown text-amber-400 mr-2.5"></i> এডমিন মাস্টার ড্যাশবোর্ড
-                </h2>
-                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white text-2xl transition">
+            <div class="flex items-center justify-between border-b border-gray-800/80 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 text-gray-950 flex items-center justify-center font-bold text-xl shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200">
+                            এডমিন মাস্টার ড্যাশবোর্ড
+                        </h2>
+                        <p class="text-xs text-gray-400">সৌমিক হেয়ার কাটিং ম্যানেজমেন্ট সিস্টেম</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminModal()" class="w-8 h-8 rounded-full bg-gray-800/80 text-gray-400 hover:text-white hover:bg-gray-700 flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- TOP STATS CARDS -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="bg-gradient-to-br from-amber-500/20 to-gray-900 p-3.5 rounded-xl border border-amber-500/30 text-center">
-                    <i class="fa-solid fa-calendar-day text-amber-400 text-xl mb-1"></i>
-                    <p class="text-xs text-gray-400 font-medium">আজকের বুকিং</p>
-                    <h3 id="statTodayBookings" class="text-2xl font-bold text-amber-400">0</h3>
+            <!-- TOP PREMIUM STATS CARDS -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-[11px] text-amber-300/80 uppercase font-semibold tracking-wider">আজকের বুকিং</p>
+                            <h3 id="statTodayBookings" class="text-2xl md:text-3xl font-extrabold text-amber-400 mt-1">0</h3>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                            <i class="fa-solid fa-calendar-day text-lg"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gradient-to-br from-green-500/20 to-gray-900 p-3.5 rounded-xl border border-green-500/30 text-center">
-                    <i class="fa-solid fa-circle-check text-green-400 text-xl mb-1"></i>
-                    <p class="text-xs text-gray-400 font-medium">আজ কনফার্মড</p>
-                    <h3 id="statConfirmed" class="text-2xl font-bold text-green-400">0</h3>
+
+                <div class="bg-gradient-to-br from-emerald-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-emerald-500/25 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-[11px] text-emerald-300/80 uppercase font-semibold tracking-wider">আজ কনফার্মড</p>
+                            <h3 id="statConfirmed" class="text-2xl md:text-3xl font-extrabold text-emerald-400 mt-1">0</h3>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <i class="fa-solid fa-circle-check text-lg"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gradient-to-br from-yellow-500/20 to-gray-900 p-3.5 rounded-xl border border-yellow-500/30 text-center">
-                    <i class="fa-solid fa-clock text-yellow-400 text-xl mb-1"></i>
-                    <p class="text-xs text-gray-400 font-medium">আজ পেন্ডিং</p>
-                    <h3 id="statPending" class="text-2xl font-bold text-yellow-400">0</h3>
+
+                <div class="bg-gradient-to-br from-yellow-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-yellow-500/25 shadow-lg relative overflow-hidden group hover:border-yellow-500/50 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-[11px] text-yellow-300/80 uppercase font-semibold tracking-wider">আজ পেন্ডিং</p>
+                            <h3 id="statPending" class="text-2xl md:text-3xl font-extrabold text-yellow-400 mt-1">0</h3>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                            <i class="fa-solid fa-clock text-lg"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gradient-to-br from-sky-500/20 to-gray-900 p-3.5 rounded-xl border border-sky-500/30 text-center">
-                    <i class="fa-solid fa-users text-sky-400 text-xl mb-1"></i>
-                    <p class="text-xs text-gray-400 font-medium">মোট রেজিস্টার্ড ইউজার</p>
-                    <h3 id="statTotalUsers" class="text-2xl font-bold text-sky-400">0</h3>
+
+                <div class="bg-gradient-to-br from-sky-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-sky-500/25 shadow-lg relative overflow-hidden group hover:border-sky-500/50 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-[11px] text-sky-300/80 uppercase font-semibold tracking-wider">মোট রেজিস্টার্ড ইউজার</p>
+                            <h3 id="statTotalUsers" class="text-2xl md:text-3xl font-extrabold text-sky-400 mt-1">0</h3>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                            <i class="fa-solid fa-users text-lg"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- BOOKINGS MANAGEMENT SECTION -->
-            <div class="space-y-4 bg-gray-900/80 p-4 rounded-xl border border-gray-700">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800 pb-3">
+            <div class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800/80 pb-3">
                     <div>
-                        <h3 class="text-lg font-bold text-amber-400 flex items-center">
-                            <i class="fa-solid fa-list-ol mr-2"></i> তারিখ অনুযায়ী সিরিয়াল ব্যবস্থাপনা
+                        <h3 class="text-base md:text-lg font-bold text-amber-400 flex items-center">
+                            <i class="fa-solid fa-list-ol mr-2 text-amber-400"></i> তারিখ অনুযায়ী সিরিয়াল ব্যবস্থাপনা
                         </h3>
                         <p id="bookingCountBadge" class="text-xs text-gray-400 mt-0.5">তারিখ নির্বাচন করুন</p>
                     </div>
                     
                     <div class="flex flex-wrap items-center gap-2">
-                        <label class="text-xs text-gray-300 font-medium">তারিখ:</label>
-                        <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-gray-800 border border-amber-500/50 rounded-lg px-3 py-1.5 text-xs text-amber-300 font-bold focus:outline-none">
+                        <div class="flex items-center bg-gray-900 border border-amber-500/30 rounded-xl px-2.5 py-1 shadow-inner">
+                            <i class="fa-solid fa-calendar text-xs text-amber-400 mr-2"></i>
+                            <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-transparent text-xs text-amber-300 font-bold focus:outline-none cursor-pointer">
+                        </div>
                         
                         <!-- Search Box -->
-                        <input type="text" id="adminSearchInput" onkeyup="searchBookingsTable()" placeholder="🔍 নাম/ফোন দিয়ে খুঁজুন..." class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-amber-500">
+                        <div class="relative flex-1 md:flex-initial">
+                            <input type="text" id="adminSearchInput" onkeyup="searchBookingsTable()" placeholder="নাম/ফোন দিয়ে খুঁজুন..." class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3 py-1.5 pl-8 text-xs text-gray-200 focus:outline-none focus:border-amber-500/60 transition">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-xs text-gray-500"></i>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Bookings Table -->
-                <div class="overflow-x-auto rounded-lg border border-gray-800">
+                <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md">
                     <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-950 text-amber-400 uppercase text-[11px] tracking-wider border-b border-gray-800">
+                        <thead class="bg-gray-900/90 text-amber-400 uppercase text-[11px] font-bold tracking-wider border-b border-gray-800">
                             <tr>
                                 <th class="p-3 text-center">সিরিয়াল #</th>
                                 <th class="p-3">গ্রাহক ও ফোন</th>
@@ -358,7 +430,7 @@
                                 <th class="p-3 text-center">অ্যাকশন</th>
                             </tr>
                         </thead>
-                        <tbody id="adminBookingsTable" class="divide-y divide-gray-800 bg-gray-900/50">
+                        <tbody id="adminBookingsTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
                             <!-- Loaded Dynamically -->
                         </tbody>
                     </table>
@@ -366,13 +438,13 @@
             </div>
 
             <!-- REGISTERED USERS SECTION -->
-            <div class="space-y-3 bg-gray-900/60 p-4 rounded-xl border border-gray-700">
-                <h3 class="text-md font-bold text-gray-300 flex items-center">
+            <div class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+                <h3 class="text-sm font-bold text-gray-300 flex items-center">
                     <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
                 </h3>
-                <div class="overflow-x-auto max-h-48 overflow-y-auto rounded-lg border border-gray-800">
+                <div class="overflow-x-auto max-h-48 overflow-y-auto custom-scrollbar rounded-xl border border-gray-800/80">
                     <table class="w-full text-xs text-left text-gray-300">
-                        <thead class="bg-gray-950 text-sky-400 sticky top-0 border-b border-gray-800">
+                        <thead class="bg-gray-900/90 text-sky-400 sticky top-0 border-b border-gray-800 font-semibold">
                             <tr>
                                 <th class="p-2.5">নাম</th>
                                 <th class="p-2.5">মোবাইল</th>
@@ -380,7 +452,7 @@
                                 <th class="p-2.5 text-center">রোল</th>
                             </tr>
                         </thead>
-                        <tbody id="adminUsersTable" class="divide-y divide-gray-800">
+                        <tbody id="adminUsersTable" class="divide-y divide-gray-800/60">
                             <!-- Loaded Dynamically -->
                         </tbody>
                     </table>
@@ -391,7 +463,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10 border-t border-gray-800 space-y-3">
+    <footer class="bg-gray-950 text-gray-500 text-center py-6 mt-10 border-t border-gray-900 space-y-3 text-xs">
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
@@ -427,33 +499,31 @@
                     if (userData.role === "admin" || user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-2 md:space-x-3">
-                                <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 text-gray-950 text-xs font-bold px-3.5 py-1.5 rounded-full hover:shadow-lg hover:shadow-amber-500/20 flex items-center transition">
+                                <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-amber-500/20 flex items-center transition duration-300">
                                     <i class="fa-solid fa-crown mr-1.5"></i> এডমিন ড্যাশবোর্ড
                                 </button>
-                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-xs md:text-sm font-medium">লগআউট</button>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-xs md:text-sm font-medium transition">লগআউট</button>
                             </div>
                         `;
                     } else {
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-3">
                                 <span class="text-sm text-gray-200">👤 ${userData.name ? userData.name.split(' ')[0] : 'ইউজার'}</span>
-                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium">লগআউট</button>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-sm font-medium transition">লগআউট</button>
                             </div>
                         `;
                     }
                 });
             } else {
                 navUserArea.innerHTML = `
-                    <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center">
+                    <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
                         <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
                     </button>
                 `;
             }
         });
 
-        // -------------------------------------------------------------
-        // Guest Track Booking
-        // -------------------------------------------------------------
+        // Track Booking
         function trackBookingByPhone() {
             const phoneInput = document.getElementById('trackPhoneInput').value.trim();
             const resultBox = document.getElementById('trackResultContainer');
@@ -475,21 +545,21 @@
                       return;
                   }
 
-                  let html = `<h4 class="text-amber-400 font-bold border-b border-gray-700 pb-1 mb-2">আপনার বুকিংয়ের তথ্য:</h4>`;
+                  let html = `<h4 class="text-amber-400 font-bold border-b border-gray-800 pb-1 mb-2">আপনার বুকিংয়ের তথ্য:</h4>`;
                   querySnapshot.forEach((doc) => {
                       const data = doc.data();
                       let statusBadge = '';
 
                       if (data.status === 'Confirmed') {
-                          statusBadge = `<span class="text-green-400 font-bold bg-green-500/10 border border-green-500/30 px-2 py-0.5 rounded text-xs">✅ কনফার্ম হয়েছে (Confirmed)</span>`;
+                          statusBadge = `<span class="text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full text-xs">✅ কনফার্ম হয়েছে (Confirmed)</span>`;
                       } else if (data.status === 'Rejected') {
-                          statusBadge = `<span class="text-red-400 font-bold bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded text-xs">❌ বাতিল করা হয়েছে (Rejected)</span>`;
+                          statusBadge = `<span class="text-red-400 font-bold bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded-full text-xs">❌ বাতিল করা হয়েছে (Rejected)</span>`;
                       } else {
-                          statusBadge = `<span class="text-amber-400 font-bold bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded text-xs">⏳ পেন্ডিং (Pending)</span>`;
+                          statusBadge = `<span class="text-yellow-400 font-bold bg-yellow-500/10 border border-yellow-500/30 px-2 py-0.5 rounded-full text-xs">⏳ পেন্ডিং (Pending)</span>`;
                       }
 
                       html += `
-                          <div class="space-y-1 text-sm border-b border-gray-800 pb-2 mb-2">
+                          <div class="space-y-1 text-sm border-b border-gray-800/80 pb-2 mb-2">
                               <p><strong>সার্ভিস:</strong> ${data.service}</p>
                               <p><strong>তারিখ ও সময়:</strong> ${data.bookingDate} (${data.bookingTime})</p>
                               <p class="pt-1"><strong>স্ট্যাটাস:</strong> ${statusBadge}</p>
@@ -579,7 +649,7 @@
         }
 
         // -------------------------------------------------------------
-        // ADMIN DASHBOARD ENHANCED FUNCTIONS
+        // ADMIN DASHBOARD HIGH PREMIUM FUNCTIONS
         // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
@@ -604,12 +674,13 @@
 
                 querySnapshot.forEach((doc) => {
                     const u = doc.data();
+                    const isAdmin = u.role === 'admin';
                     usersTable.innerHTML += `
-                        <tr class="border-b border-gray-800 hover:bg-gray-800/50">
-                            <td class="p-2.5 font-medium">${u.name || 'N/A'}</td>
-                            <td class="p-2.5 text-amber-400">${u.phone || 'N/A'}</td>
+                        <tr class="border-b border-gray-800/60 hover:bg-gray-800/30 transition">
+                            <td class="p-2.5 font-medium text-gray-200">${u.name || 'N/A'}</td>
+                            <td class="p-2.5 text-amber-400 font-mono">${u.phone || 'N/A'}</td>
                             <td class="p-2.5 text-gray-400">${u.email || 'N/A'}</td>
-                            <td class="p-2.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] ${u.role==='admin'?'bg-amber-500/20 text-amber-400 border border-amber-500/40 font-bold':'bg-gray-800 text-gray-400'}">${u.role || 'client'}</span></td>
+                            <td class="p-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${isAdmin?'bg-amber-500/20 text-amber-400 border border-amber-500/40':'bg-gray-800 text-gray-400'}">${u.role || 'client'}</span></td>
                         </tr>
                     `;
                 });
@@ -634,10 +705,10 @@
                   let confCount = 0;
                   let pendCount = 0;
 
-                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-500/30 text-xs">${totalCount} টি</span>`;
+                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/15 text-amber-300 font-bold px-2 py-0.5 rounded-lg border border-amber-500/30 text-xs">${totalCount} টি</span>`;
 
                   if (querySnapshot.empty) {
-                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
+                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80 font-medium">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
                       document.getElementById('statTodayBookings').innerText = 0;
                       document.getElementById('statConfirmed').innerText = 0;
                       document.getElementById('statPending').innerText = 0;
@@ -656,33 +727,33 @@
 
                       let statusBadge = '';
                       if (currentStatus === 'Confirmed') {
-                          statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-check text-[10px]"></i> Confirmed</span>`;
+                          statusBadge = `<span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-check text-[10px]"></i> Confirmed</span>`;
                       } else if (currentStatus === 'Rejected') {
-                          statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-xmark text-[10px]"></i> Rejected</span>`;
+                          statusBadge = `<span class="bg-red-500/15 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-xmark text-[10px]"></i> Rejected</span>`;
                       } else {
-                          statusBadge = `<span class="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full text-xs font-bold flex items-center justify-center gap-1"><i class="fa-solid fa-spinner animate-spin text-[10px]"></i> Pending</span>`;
+                          statusBadge = `<span class="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-spinner animate-spin text-[10px]"></i> Pending</span>`;
                       }
 
                       let actionButtons = `
                           <div class="flex items-center justify-center space-x-1.5">
-                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" title="Confirm Booking" class="bg-green-600 hover:bg-green-500 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-check"></i></button>
-                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" title="Reject Booking" class="bg-yellow-600 hover:bg-yellow-500 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-ban"></i></button>
-                              <button onclick="deleteBooking('${docId}')" title="Delete Order" class="bg-red-600/80 hover:bg-red-600 text-white p-1.5 rounded-lg transition shadow"><i class="fa-solid fa-trash-can"></i></button>
+                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" title="Confirm Booking" class="bg-emerald-600 hover:bg-emerald-500 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></button>
+                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" title="Reject Booking" class="bg-amber-600 hover:bg-amber-500 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-ban text-xs"></i></button>
+                              <button onclick="deleteBooking('${docId}')" title="Delete Order" class="bg-red-600/80 hover:bg-red-600 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-trash-can text-xs"></i></button>
                           </div>
                       `;
 
                       bookingsTable.innerHTML += `
-                          <tr class="border-b border-gray-800 hover:bg-gray-800/40 transition">
-                              <td class="p-3 text-center font-bold text-amber-400 text-base">#${serialNo++}</td>
+                          <tr class="border-b border-gray-800/60 hover:bg-gray-800/30 transition">
+                              <td class="p-3 text-center font-bold text-amber-400 text-sm">#${serialNo++}</td>
                               <td class="p-3 font-medium text-gray-200">
                                   ${b.customerName}
-                                  <div class="text-xs text-amber-400 flex items-center gap-1 mt-0.5">
+                                  <div class="text-xs text-amber-400 flex items-center gap-1.5 mt-0.5 font-mono">
                                       <span>${b.customerPhone}</span>
-                                      <a href="tel:${b.customerPhone}" title="Call Customer" class="bg-green-500/20 hover:bg-green-500 text-green-400 hover:text-gray-950 p-1 rounded-full text-[10px] transition"><i class="fa-solid fa-phone"></i></a>
+                                      <a href="tel:${b.customerPhone}" title="Call Customer" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-gray-950 w-5 h-5 rounded-full transition flex items-center justify-center text-[10px]"><i class="fa-solid fa-phone"></i></a>
                                   </div>
                               </td>
                               <td class="p-3 text-gray-300">${b.service}</td>
-                              <td class="p-3 text-gray-300 font-semibold">${b.bookingTime}</td>
+                              <td class="p-3 text-gray-300 font-semibold font-mono">${b.bookingTime}</td>
                               <td class="p-3 text-center">${statusBadge}</td>
                               <td class="p-3 text-center">${actionButtons}</td>
                           </tr>
@@ -729,9 +800,7 @@
             }
         }
 
-        // -------------------------------------------------------------
         // Telegram Booking Notification
-        // -------------------------------------------------------------
         function sendTelegramBooking(event) {
             event.preventDefault();
 
@@ -830,7 +899,7 @@
                     : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
 
                 const reviewHtml = `
-                    <div class="bg-gray-900 p-4 rounded-lg border border-gray-700 space-y-1">
+                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-1">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-200">${review.name}</span>
                             <span class="text-amber-400 text-sm">${starsText}</span>
@@ -858,10 +927,10 @@
             for (let i = 0; i < stars.length; i++) {
                 if (i < rating) {
                     stars[i].classList.add('text-amber-400');
-                    stars[i].classList.remove('text-gray-600');
+                    stars[i].classList.remove('text-gray-700');
                 } else {
                     stars[i].classList.remove('text-amber-400');
-                    stars[i].classList.add('text-gray-600');
+                    stars[i].classList.add('text-gray-700');
                 }
             }
         }
@@ -871,7 +940,7 @@
             const stars = document.getElementById('starContainer').children;
             for (let i = 0; i < stars.length; i++) {
                 stars[i].classList.remove('text-amber-400');
-                stars[i].classList.add('text-gray-600');
+                stars[i].classList.add('text-gray-700');
             }
         }
 
