@@ -118,7 +118,6 @@
                     📅 অনলাইন সিরিয়াল বুকিং
                 </h2>
                 
-                <!-- কাস্টমারদের জন্য বিনয়ী নোটিশ (অপশন ৩) -->
                 <p class="text-amber-300/90 text-sm bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 mb-3">
                     📌 <strong>বিশেষ দ্রষ্টব্য:</strong> সেলুনে কাস্টমার চাপের কারণে নির্ধারিত সময়ের কিছুটা আগে-পরে সার্ভিস শুরু হতে পারে। আপনার ধৈর্যের জন্য আন্তরিক ধন্যবাদ।
                 </p>
@@ -303,8 +302,8 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <h2 class="text-2xl font-bold text-amber-500 border-b border-gray-700 pb-2">
-                👑 এডমিন ড্যাশবোর্ড
+            <h2 class="text-2xl font-bold text-amber-500 border-b border-gray-700 pb-2 flex items-center justify-between">
+                <span>👑 এডমিন ড্যাশবোর্ড</span>
             </h2>
 
             <!-- Registered Users -->
@@ -329,11 +328,22 @@
                 </div>
             </div>
 
-            <!-- Online Bookings Table with Action -->
-            <div class="space-y-3">
-                <h3 class="text-lg font-semibold text-gray-200 flex items-center">
-                    <i class="fa-solid fa-list-check mr-2 text-sky-400"></i> সাম্প্রতিক বুকিং সমূহ
-                </h3>
+            <!-- Date-by-Date Booking Section -->
+            <div class="space-y-3 pt-2">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-gray-900 p-3.5 rounded-lg border border-gray-700">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-200 flex items-center">
+                            <i class="fa-solid fa-calendar-days mr-2 text-sky-400"></i> তারিখ অনুযায়ী সিরিয়াল দেখুন
+                        </h3>
+                        <p id="bookingCountBadge" class="text-xs text-sky-300 mt-0.5">একটি তারিখ বেছে নিন</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <label class="text-sm text-gray-300">তারিখ বেছে নিন:</label>
+                        <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-gray-800 border border-sky-500/50 rounded-lg px-3 py-1.5 text-sm text-amber-400 focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-300 border border-gray-700">
                         <thead class="bg-gray-900 text-sky-400 border-b border-gray-700">
@@ -545,7 +555,7 @@
         }
 
         // -------------------------------------------------------------
-        // Admin Dashboard Functions
+        // Admin Dashboard & Date Filtering
         // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
@@ -553,10 +563,15 @@
 
         function openAdminPanel() {
             toggleAdminModal();
-            loadAdminData();
+            // Default select today's date in date filter
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('adminDateFilter').value = today;
+            
+            loadAdminUsers();
+            filterBookingsByDate();
         }
 
-        function loadAdminData() {
+        function loadAdminUsers() {
             const usersTable = document.getElementById('adminUsersTable');
             usersTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
 
@@ -574,44 +589,66 @@
                     `;
                 });
             });
+        }
 
+        function filterBookingsByDate() {
+            const selectedDate = document.getElementById('adminDateFilter').value;
             const bookingsTable = document.getElementById('adminBookingsTable');
-            bookingsTable.innerHTML = `<tr><td colspan="5" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
+            const countBadge = document.getElementById('bookingCountBadge');
 
-            db.collection("bookings").orderBy("createdAt", "desc").limit(15).get().then((querySnapshot) => {
-                bookingsTable.innerHTML = '';
-                querySnapshot.forEach((doc) => {
-                    const b = doc.data();
-                    const docId = doc.id;
-                    const currentStatus = b.status || 'Pending';
+            if (!selectedDate) return;
 
-                    let statusBadge = '';
-                    if (currentStatus === 'Confirmed') {
-                        statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/40 px-2 py-0.5 rounded text-xs font-bold">Confirmed</span>`;
-                    } else if (currentStatus === 'Rejected') {
-                        statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-xs font-bold">Rejected</span>`;
-                    } else {
-                        statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded text-xs font-bold">Pending</span>`;
-                    }
+            bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
 
-                    let actionButtons = `
-                        <div class="flex space-x-1">
-                            <button onclick="updateBookingStatus('${docId}', 'Confirmed')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2.5 py-1 rounded transition">Confirm</button>
-                            <button onclick="updateBookingStatus('${docId}', 'Rejected')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1 rounded transition">Reject</button>
-                        </div>
-                    `;
+            db.collection("bookings")
+              .where("bookingDate", "==", selectedDate)
+              .get()
+              .then((querySnapshot) => {
+                  bookingsTable.innerHTML = '';
+                  const totalCount = querySnapshot.size;
 
-                    bookingsTable.innerHTML += `
-                        <tr class="border-b border-gray-700/50 hover:bg-gray-750">
-                            <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-amber-400">${b.customerPhone}</span></td>
-                            <td class="p-2.5">${b.service}</td>
-                            <td class="p-2.5">${b.bookingDate}<br><span class="text-xs text-gray-400">${b.bookingTime}</span></td>
-                            <td class="p-2.5">${statusBadge}</td>
-                            <td class="p-2.5">${actionButtons}</td>
-                        </tr>
-                    `;
-                });
-            });
+                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-sky-500 text-white font-bold px-2 py-0.5 rounded-full text-xs">${totalCount} টি</span>`;
+
+                  if (querySnapshot.empty) {
+                      bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-amber-400/80">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
+                      return;
+                  }
+
+                  querySnapshot.forEach((doc) => {
+                      const b = doc.data();
+                      const docId = doc.id;
+                      const currentStatus = b.status || 'Pending';
+
+                      let statusBadge = '';
+                      if (currentStatus === 'Confirmed') {
+                          statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/40 px-2 py-0.5 rounded text-xs font-bold">Confirmed</span>`;
+                      } else if (currentStatus === 'Rejected') {
+                          statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-xs font-bold">Rejected</span>`;
+                      } else {
+                          statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded text-xs font-bold">Pending</span>`;
+                      }
+
+                      let actionButtons = `
+                          <div class="flex space-x-1">
+                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2.5 py-1 rounded transition">Confirm</button>
+                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2.5 py-1 rounded transition">Reject</button>
+                          </div>
+                      `;
+
+                      bookingsTable.innerHTML += `
+                          <tr class="border-b border-gray-700/50 hover:bg-gray-750">
+                              <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-amber-400">${b.customerPhone}</span></td>
+                              <td class="p-2.5">${b.service}</td>
+                              <td class="p-2.5">${b.bookingDate}<br><span class="text-xs text-gray-400">${b.bookingTime}</span></td>
+                              <td class="p-2.5">${statusBadge}</td>
+                              <td class="p-2.5">${actionButtons}</td>
+                          </tr>
+                      `;
+                  });
+              })
+              .catch((error) => {
+                  bookingsTable.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
+              });
         }
 
         function updateBookingStatus(docId, newStatus) {
@@ -619,7 +656,7 @@
                 status: newStatus
             }).then(() => {
                 alert(`বুকিংটি ${newStatus === 'Confirmed' ? 'কনফার্ম' : 'রিজেক্ট'} করা হয়েছে!`);
-                loadAdminData();
+                filterBookingsByDate(); // Reload same date
             }).catch((error) => {
                 alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে: " + error.message);
             });
