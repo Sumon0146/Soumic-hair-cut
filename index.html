@@ -246,7 +246,6 @@
                     </div>
                 </div>
 
-                <!-- Updated Button Here -->
                 <button type="submit" id="submitBtn" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg transition duration-300 flex items-center justify-center">
                     <i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন
                 </button>
@@ -407,7 +406,7 @@
 
     <!-- Admin Panel Dashboard Modal -->
     <div id="adminModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-gray-800 rounded-xl max-w-3xl w-full p-6 border border-amber-500/50 relative max-h-[90vh] overflow-y-auto space-y-6">
+        <div class="bg-gray-800 rounded-xl max-w-4xl w-full p-6 border border-amber-500/50 relative max-h-[90vh] overflow-y-auto space-y-6">
             <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -438,7 +437,7 @@
                 </div>
             </div>
 
-            <!-- Section 2: Online Bookings -->
+            <!-- Section 2: Online Bookings with Status & Action -->
             <div class="space-y-3">
                 <h3 class="text-lg font-semibold text-gray-200 flex items-center">
                     <i class="fa-solid fa-list-check mr-2 text-sky-400"></i> সাম্প্রতিক বুকিং সমূহ
@@ -451,6 +450,8 @@
                                 <th class="p-2.5">সার্ভিস</th>
                                 <th class="p-2.5">তারিখ ও সময়</th>
                                 <th class="p-2.5">টাইপ</th>
+                                <th class="p-2.5">স্ট্যাটাস</th>
+                                <th class="p-2.5">অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody id="adminBookingsTable">
@@ -646,28 +647,66 @@
                 });
             });
 
-            // Fetch Bookings List
+            // Fetch Bookings List with Status & Actions
             const bookingsTable = document.getElementById('adminBookingsTable');
-            bookingsTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
+            bookingsTable.innerHTML = `<tr><td colspan="6" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
 
-            db.collection("bookings").orderBy("createdAt", "desc").limit(10).get().then((querySnapshot) => {
+            db.collection("bookings").orderBy("createdAt", "desc").limit(15).get().then((querySnapshot) => {
                 bookingsTable.innerHTML = '';
                 querySnapshot.forEach((doc) => {
                     const b = doc.data();
+                    const docId = doc.id;
+                    const currentStatus = b.status || 'Pending';
+
+                    let statusBadge = '';
+                    if (currentStatus === 'Confirmed') {
+                        statusBadge = `<span class="bg-green-500/20 text-green-400 border border-green-500/40 px-2 py-0.5 rounded text-xs font-bold">Confirmed</span>`;
+                    } else if (currentStatus === 'Rejected') {
+                        statusBadge = `<span class="bg-red-500/20 text-red-400 border border-red-500/40 px-2 py-0.5 rounded text-xs font-bold">Rejected</span>`;
+                    } else {
+                        statusBadge = `<span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded text-xs font-bold">Pending</span>`;
+                    }
+
+                    let actionButtons = '';
+                    if (currentStatus === 'Pending') {
+                        actionButtons = `
+                            <div class="flex space-x-1">
+                                <button onclick="updateBookingStatus('${docId}', 'Confirmed')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1 rounded transition">Confirm</button>
+                                <button onclick="updateBookingStatus('${docId}', 'Rejected')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded transition">Reject</button>
+                            </div>
+                        `;
+                    } else {
+                        actionButtons = `<span class="text-xs text-gray-400">সম্পন্ন</span>`;
+                    }
+
                     bookingsTable.innerHTML += `
                         <tr class="border-b border-gray-700/50 hover:bg-gray-750">
                             <td class="p-2.5 font-medium">${b.customerName}<br><span class="text-xs text-gray-400">${b.customerPhone}</span></td>
                             <td class="p-2.5 text-amber-400">${b.service}</td>
                             <td class="p-2.5">${b.bookingDate} (${b.bookingTime})</td>
                             <td class="p-2.5"><span class="text-xs ${b.userType==='নিবন্ধিত গ্রাহক'?'text-sky-400':'text-gray-400'}">${b.userType}</span></td>
+                            <td class="p-2.5">${statusBadge}</td>
+                            <td class="p-2.5">${actionButtons}</td>
                         </tr>
                     `;
                 });
             });
         }
 
+        // Status Update Function
+        function updateBookingStatus(docId, newStatus) {
+            db.collection("bookings").doc(docId).update({
+                status: newStatus
+            }).then(() => {
+                alert(`বুকিংটি ${newStatus === 'Confirmed' ? 'কনফার্ম' : 'রিজেক্ট'} করা হয়েছে!`);
+                loadAdminData(); // ড্যাশবোর্ড রিফ্রেশ হবে
+            }).catch((error) => {
+                alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে: " + error.message);
+            });
+        }
+
         // -------------------------------------------------------------
-        // 4. Telegram Booking Notification Function (Button Text Updated)
+        // 4. Telegram Booking Notification Function
         // -------------------------------------------------------------
         function sendTelegramBooking(event) {
             event.preventDefault();
@@ -685,7 +724,7 @@
             btn.innerText = "পাঠানো হচ্ছে...";
             btn.disabled = true;
 
-            // ১. ফায়ারস্টোরে ডেটা সেভ করা
+            // ১. ফায়ারস্টোরে ডেটা সেভ করা (ডিফল্ট স্ট্যাটাস: Pending)
             db.collection("bookings").add({
                 customerName: name,
                 customerPhone: phone,
@@ -693,6 +732,7 @@
                 bookingDate: date,
                 bookingTime: time,
                 userType: userStatus,
+                status: "Pending",
                 userId: currentUser ? currentUser.uid : "guest",
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).catch(e => console.log("Database record error:", e));
@@ -707,7 +747,8 @@
                                 `✂️ *সার্ভিস:* ${service}\n` +
                                 `📅 *তারিখ:* ${date}\n` +
                                 `⏰ *সময়:* ${time}\n` +
-                                `🏷️ *টাইপ:* ${userStatus}`;
+                                `🏷️ *টাইপ:* ${userStatus}\n` +
+                                `⏳ *স্ট্যাটাস:* Pending`;
 
             fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
                 method: "POST",
@@ -722,7 +763,7 @@
                 btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
                 btn.disabled = false;
                 if (res.ok) {
-                    alert("আপনার বুকিং অনুরোধ সফলভাবে পাঠানো হয়েছে!");
+                    alert("আপনার বুকিং অনুরোধ সফলভাবে পাঠানো হয়েছে! বুকিংটি পেন্ডিং অবস্থায় রয়েছে।");
                     event.target.reset();
                 } else {
                     alert("বুকিং ডাটাবেজে সংরক্ষণ হয়েছে, ধন্যবাদ!");
