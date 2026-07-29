@@ -322,7 +322,7 @@
 
     <!-- HIGH-PREMIUM GLASSMORPHISM ADMIN DASHBOARD MODAL -->
     <div id="adminModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-3 md:p-6 backdrop-blur-md">
-        <div class="glass-modal rounded-3xl max-w-5xl w-full p-4 md:p-7 border border-amber-500/30 relative max-h-[92vh] overflow-y-auto custom-scrollbar space-y-6 shadow-2xl gold-glow">
+        <div id="adminModalContainer" class="glass-modal rounded-3xl max-w-5xl w-full p-4 md:p-7 border border-amber-500/30 relative max-h-[92vh] overflow-y-auto custom-scrollbar space-y-6 shadow-2xl gold-glow scroll-smooth">
             
             <!-- Header -->
             <div class="flex items-center justify-between border-b border-gray-800/80 pb-4">
@@ -342,9 +342,9 @@
                 </button>
             </div>
 
-            <!-- TOP PREMIUM STATS CARDS -->
+            <!-- INTERACTIVE STATS CARDS (CLICK TO FILTER) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 transition duration-300">
+                <div onclick="filterByCardStatus('All')" title="সব বুকিং দেখুন" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-[11px] text-amber-300/80 uppercase font-semibold tracking-wider">আজকের বুকিং</p>
@@ -356,7 +356,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-emerald-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-emerald-500/25 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 transition duration-300">
+                <div onclick="filterByCardStatus('Confirmed')" title="শুধু কনফার্মড বুকিং দেখুন" class="bg-gradient-to-br from-emerald-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-emerald-500/25 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-[11px] text-emerald-300/80 uppercase font-semibold tracking-wider">আজ কনফার্মড</p>
@@ -368,7 +368,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-yellow-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-yellow-500/25 shadow-lg relative overflow-hidden group hover:border-yellow-500/50 transition duration-300">
+                <div onclick="filterByCardStatus('Pending')" title="শুধু পেন্ডিং বুকিং দেখুন" class="bg-gradient-to-br from-yellow-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-yellow-500/25 shadow-lg relative overflow-hidden group hover:border-yellow-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-[11px] text-yellow-300/80 uppercase font-semibold tracking-wider">আজ পেন্ডিং</p>
@@ -380,7 +380,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-sky-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-sky-500/25 shadow-lg relative overflow-hidden group hover:border-sky-500/50 transition duration-300">
+                <div onclick="scrollToRegisteredUsers()" title="রেজিস্টার্ড ইউজারদের তালিকা দেখুন" class="bg-gradient-to-br from-sky-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-sky-500/25 shadow-lg relative overflow-hidden group hover:border-sky-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-[11px] text-sky-300/80 uppercase font-semibold tracking-wider">মোট রেজিস্টার্ড ইউজার</p>
@@ -394,7 +394,7 @@
             </div>
 
             <!-- BOOKINGS MANAGEMENT SECTION -->
-            <div class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl">
+            <div id="bookingTableSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl scroll-mt-6">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800/80 pb-3">
                     <div>
                         <h3 class="text-base md:text-lg font-bold text-amber-400 flex items-center">
@@ -438,7 +438,7 @@
             </div>
 
             <!-- REGISTERED USERS SECTION -->
-            <div class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+            <div id="registeredUsersSection" class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg scroll-mt-6">
                 <h3 class="text-sm font-bold text-gray-300 flex items-center">
                     <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
                 </h3>
@@ -649,7 +649,7 @@
         }
 
         // -------------------------------------------------------------
-        // ADMIN DASHBOARD HIGH PREMIUM FUNCTIONS
+        // ADMIN DASHBOARD HIGH PREMIUM & INTERACTIVE FUNCTIONS
         // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
@@ -687,7 +687,7 @@
             });
         }
 
-        function filterBookingsByDate() {
+        function filterBookingsByDate(statusFilter = 'All') {
             const selectedDate = document.getElementById('adminDateFilter').value;
             const bookingsTable = document.getElementById('adminBookingsTable');
             const countBadge = document.getElementById('bookingCountBadge');
@@ -725,6 +725,11 @@
                       if (currentStatus === 'Confirmed') confCount++;
                       if (currentStatus === 'Pending') pendCount++;
 
+                      // Apply Card Filter if Clicked
+                      if (statusFilter !== 'All' && currentStatus !== statusFilter) {
+                          return;
+                      }
+
                       let statusBadge = '';
                       if (currentStatus === 'Confirmed') {
                           statusBadge = `<span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-check text-[10px]"></i> Confirmed</span>`;
@@ -760,6 +765,10 @@
                       `;
                   });
 
+                  if (bookingsTable.innerHTML === '') {
+                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-yellow-400/80 font-medium">এই ফিল্টারে কোনো তথ্য পাওয়া যায়নি।</td></tr>`;
+                  }
+
                   document.getElementById('statTodayBookings').innerText = totalCount;
                   document.getElementById('statConfirmed').innerText = confCount;
                   document.getElementById('statPending').innerText = pendCount;
@@ -767,6 +776,18 @@
               .catch((error) => {
                   bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
               });
+        }
+
+        // CLICK CARDS TO FILTER AND SCROLL
+        function filterByCardStatus(status) {
+            filterBookingsByDate(status);
+            const target = document.getElementById('bookingTableSection');
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToRegisteredUsers() {
+            const target = document.getElementById('registeredUsersSection');
+            target.scrollIntoView({ behavior: 'smooth' });
         }
 
         function searchBookingsTable() {
