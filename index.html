@@ -420,13 +420,78 @@
                 </div>
             </div>
 
-            <!-- [FEATURE 1 B] Expense Tracker Entry Section -->
+            <!-- [FEATURE 1 B] Expense Tracker Entry Section (DROPDOWN ADDED HERE) -->
             <div class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
                 </h3>
                 <div class="flex flex-col md:flex-row gap-2">
-                    <input type="text" id="expenseTitle" placeholder="খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
+                    
+                    <!-- Dropdown Select for Expense Categories -->
+                    <select id="expenseTitle" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
+                        <option value="" disabled selected>খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)</option>
+
+                        <!-- ১. কাটার ও ট্রিম করার যন্ত্রপাতি -->
+                        <optgroup label="১. কাটার ও ট্রিম করার যন্ত্রপাতি">
+                            <option value="হেয়ার ক্লিপার (ক্লিপ সেটসহ)">হেয়ার ক্লিপার (ক্লিপ সেটসহ)</option>
+                            <option value="হেয়ার ট্রিমার">হেয়ার ট্রিমার</option>
+                            <option value="চুল কাটার কাঁচি">চুল কাটার কাঁচি</option>
+                            <option value="থিনিং কাঁচি (Thinning Shears)">থিনিং কাঁচি (Thinning Shears)</option>
+                            <option value="খুর (Straight Razor)">খুর (Straight Razor)</option>
+                            <option value="ব্লেড (একবার ব্যবহারযোগ্য)">ব্লেড (একবার ব্যবহারযোগ্য)</option>
+                        </optgroup>
+
+                        <!-- ২. চুলের প্রসাধন ও সরঞ্জাম -->
+                        <optgroup label="২. চুলের প্রসাধন ও সরঞ্জাম">
+                            <option value="শ্যাম্পু">শ্যাম্পু</option>
+                            <option value="কন্ডিশনার">কন্ডিশনার</option>
+                            <option value="হেয়ার জেল">হেয়ার জেল</option>
+                            <option value="হেয়ার ওয়াক্স">হেয়ার ওয়াক্স</option>
+                            <option value="হেয়ার পোমেড">হেয়ার পোমেড</option>
+                            <option value="হেয়ার স্প্রে">হেয়ার স্প্রে</option>
+                            <option value="হেয়ার ড্রায়ার">হেয়ার ড্রায়ার</option>
+                            <option value="বিভিন্ন সাইজের চিরুনি">বিভিন্ন সাইজের চিরুনি</option>
+                            <option value="গোল ব্রাশ (Round Brush)">গোল ব্রাশ (Round Brush)</option>
+                        </optgroup>
+
+                        <!-- ৩. শেভিং ও ত্বকের যত্ন -->
+                        <optgroup label="৩. শেভিং ও ত্বকের যত্ন">
+                            <option value="শেভিং ফোম">শেভিং ফোম</option>
+                            <option value="শেভিং জেল">শেভিং জেল</option>
+                            <option value="শেভিং ক্রিম">শেভিং ক্রিম</option>
+                            <option value="আফটারশেভ লোশন">আফটারশেভ লোশন</option>
+                            <option value="ফিটকিরি (Alum Block)">ফিটকিরি (Alum Block)</option>
+                            <option value="ফেস ওয়াশ">ফেস ওয়াশ</option>
+                            <option value="ফেস স্ক্রাব">ফেস স্ক্রাব</option>
+                            <option value="ফেস প্যাক">ফেস প্যাক</option>
+                            <option value="ময়েশ্চারাইজার ক্রিম">ময়েশ্চারাইজার ক্রিম</option>
+                            <option value="ট্যালকম পাউডার">ট্যালকম পাউডার</option>
+                        </optgroup>
+
+                        <!-- ৪. পরিচ্ছন্নতা ও আনুষঙ্গিক সামগ্রী -->
+                        <optgroup label="৪. পরিচ্ছন্নতা ও আনুষঙ্গিক সামগ্রী">
+                            <option value="তোয়ালে (ছোট ও বড়)">তোয়ালে (ছোট ও বড়)</option>
+                            <option value="কাটিং অ্যাপ্রন বা কেপ">কাটিং অ্যাপ্রন বা কেপ</option>
+                            <option value="নেক স্ট্রিপ">নেক স্ট্রিপ</option>
+                            <option value="টিস্যু পেপার">টিস্যু পেপার</option>
+                            <option value="ডাস্টার ব্রাশ">ডাস্টার ব্রাশ</option>
+                            <option value="ওয়াটার স্প্রে বোতল">ওয়াটার স্প্রে বোতল</option>
+                            <option value="জীবাণুনাশক লিকুইড (যেমন: স্যাবলন বা ডেটল)">জীবাণুনাশক লিকুইড (যেমন: স্যাবলন বা ডেটল)</option>
+                            <option value="ক্লিপার অয়েল">ক্লিপার অয়েল</option>
+                        </optgroup>
+
+                        <!-- ৫. আসবাবপত্র ও ইলেকট্রনিক্স -->
+                        <optgroup label="৫. আসবাবপত্র ও ইলেকট্রনিক্স">
+                            <option value="সেলুনের চেয়ার">সেলুনের চেয়ার</option>
+                            <option value="বড় আয়না">বড় আয়না</option>
+                            <option value="হ্যান্ড মিরর (ছোট আয়না)">হ্যান্ড মিরর (ছোট আয়না)</option>
+                            <option value="মালামাল রাখার ট্রলি">মালামাল রাখার ট্রলি</option>
+                            <option value="হেয়ার ওয়াশ বেসিন">হেয়ার ওয়াশ বেসিন</option>
+                            <option value="ফেসিয়াল স্টিমার মেশিন">ফেসিয়াল স্টিমার মেশিন</option>
+                            <option value="গরম পানির গিজার (প্রয়োজন হলে)">গরম পানির গিজার (প্রয়োজন হলে)</option>
+                        </optgroup>
+                    </select>
+
                     <input type="number" id="expenseAmount" placeholder="টাকার পরিমাণ (৳)" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 w-full md:w-36 text-gray-100 focus:outline-none focus:border-amber-500">
                     <button onclick="addExpense()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">খরচ যোগ করুন</button>
                 </div>
@@ -870,7 +935,9 @@
 
             db.collection("users").get().then((querySnapshot) => {
                 usersTable.innerHTML = '';
-                document.getElementById('statTotalUsers').innerText = querySnapshot.size;
+                if(document.getElementById('statTotalUsers')) {
+                    document.getElementById('statTotalUsers').innerText = querySnapshot.size;
+                }
 
                 querySnapshot.forEach((doc) => {
                     const u = doc.data();
