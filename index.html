@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সৌমিক হেয়ার কাটিং - সেরা পুরুষ সেলুন</title>
+    <title>সৌমিক হেয়ার কাটিং - সেরা পুরুষ সেলুন (উন্নত সংস্করণ)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
@@ -48,9 +48,21 @@
         .gold-glow {
             box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.15);
         }
+
+        /* Toast Animation */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast-animate {
+            animation: slideIn 0.3s ease-out forwards;
+        }
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100 relative selection:bg-amber-500 selection:text-gray-950">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-2"></div>
 
     <!-- Sidebar / Drawer Overlay -->
     <div id="drawerOverlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/70 z-50 hidden backdrop-blur-sm transition-opacity duration-300"></div>
@@ -68,7 +80,7 @@
                 </button>
             </div>
 
-            <div id="adminDrawerMenu" class="space-y-4">
+            <div id="adminDrawerMenu" class="space-y-4 hidden">
                 <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
                 
                 <div class="space-y-2">
@@ -194,7 +206,7 @@
 
             <div class="max-w-md mx-auto flex gap-2">
                 <input type="tel" id="trackPhoneInput" placeholder="আপনার বুকিংকৃত ফোন নম্বর লিখুন" class="flex-1 bg-gray-950 border border-gray-800 rounded-xl p-3 text-gray-100 focus:outline-none focus:border-amber-500 transition">
-                <button onclick="trackBookingByPhone()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-5 py-3 rounded-xl transition duration-300">
+                <button onclick="trackBookingByPhone()" id="trackBtn" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-5 py-3 rounded-xl transition duration-300">
                     খুঁজুন
                 </button>
             </div>
@@ -317,7 +329,7 @@
                     <textarea id="custComment" rows="2" placeholder="কিছু লিখতে চাইলে লিখতে পারেন..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500 transition"></textarea>
                 </div>
 
-                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-lg transition duration-300">
+                <button type="submit" id="ratingSubmitBtn" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-lg transition duration-300">
                     রেটিং জমা দিন
                 </button>
             </form>
@@ -379,7 +391,7 @@
                 <div class="text-right">
                     <button type="button" onclick="resetPassword()" class="text-xs text-amber-400 hover:underline">পাসওয়ার্ড ভুলে গেছেন?</button>
                 </div>
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
+                <button type="submit" id="loginBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
                     লগইন করুন
                 </button>
             </form>
@@ -401,7 +413,7 @@
                     <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
                     <input type="password" id="signupPassword" required minlength="6" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
+                <button type="submit" id="signupBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
                     নতুন অ্যাকাউন্ট খুলুন
                 </button>
             </form>
@@ -501,7 +513,7 @@
                     </select>
 
                     <input type="number" id="expenseAmount" placeholder="টাকার পরিমাণ (৳)" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 w-full md:w-36 text-gray-100 focus:outline-none focus:border-amber-500">
-                    <button onclick="addExpense()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">খরচ যোগ করুন</button>
+                    <button onclick="addExpense()" id="expenseBtn" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">খরচ যোগ করুন</button>
                 </div>
                 <div id="expenseList" class="text-xs text-gray-400 space-y-1 max-h-24 overflow-y-auto"></div>
             </div>
@@ -602,6 +614,12 @@
 
     <!-- JavaScript & Firestore logic -->
     <script>
+        /* 
+           SECURITY WARNING: 
+           - For production, do NOT expose API keys or Bot Tokens in client-side code.
+           - Use environment variables and a backend proxy for sensitive operations.
+           - Ensure Firestore Security Rules are strictly configured.
+        */
         const firebaseConfig = {
             apiKey: "AIzaSyAeDy08BLz4pJ0-dqtgKs6i888ckiq-EeY",
             authDomain: "soumic-hair-cut.firebaseapp.com",
@@ -629,6 +647,52 @@
             'EID2026': 20,
             'SOUMIK10': 10
         };
+
+        // --- Utility Functions ---
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-animate flex items-center p-4 rounded-xl shadow-lg border text-sm font-medium transition-all duration-300`;
+            
+            const icons = {
+                success: 'fa-circle-check text-emerald-400',
+                error: 'fa-circle-exclamation text-rose-400',
+                info: 'fa-circle-info text-sky-400',
+                warning: 'fa-triangle-exclamation text-amber-400'
+            };
+
+            const bgColors = {
+                success: 'bg-gray-900 border-emerald-500/30 text-emerald-50',
+                error: 'bg-gray-900 border-rose-500/30 text-rose-50',
+                info: 'bg-gray-900 border-sky-500/30 text-sky-50',
+                warning: 'bg-gray-900 border-amber-500/30 text-amber-50'
+            };
+
+            toast.classList.add(...bgColors[type].split(' '));
+            toast.innerHTML = `<i class="fa-solid ${icons[type]} mr-3 text-lg"></i><span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function setBtnLoading(btnId, isLoading, originalHtml) {
+            const btn = document.getElementById(btnId);
+            if (!btn) return;
+            if (isLoading) {
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> কাজ হচ্ছে...`;
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
+        }
+
+        // --- UI Logic ---
 
         function toggleDrawer() {
             const drawer = document.getElementById('sideDrawer');
@@ -719,10 +783,12 @@
                 currentDiscountPercent = coupons[code];
                 msg.className = "text-xs text-emerald-400 font-semibold";
                 msg.innerText = `অভিনন্দন! ${currentDiscountPercent}% ডিসকাউন্ট প্রযোজ্য হয়েছে।`;
+                showToast(`কুপন '${code}' সফলভাবে যোগ হয়েছে!`, 'success');
             } else {
                 currentDiscountPercent = 0;
                 msg.className = "text-xs text-rose-400 font-semibold";
                 msg.innerText = "অবৈধ কুপন কোড!";
+                showToast("অবৈধ কুপন কোড!", 'error');
             }
             calculatePrice();
         }
@@ -731,19 +797,22 @@
         function trackBookingByPhone() {
             const phoneInput = document.getElementById('trackPhoneInput').value.trim();
             const resultBox = document.getElementById('trackResultContainer');
+            const originalHtml = document.getElementById('trackBtn').innerHTML;
 
             if (!phoneInput) {
-                alert("অনুগ্রহ করে মোবাইল নম্বরটি লিখুন।");
+                showToast("অনুগ্রহ করে মোবাইল নম্বরটি লিখুন।", 'warning');
                 return;
             }
 
+            setBtnLoading('trackBtn', true, originalHtml);
             resultBox.classList.remove('hidden');
-            resultBox.innerHTML = `<p class="text-center text-sm text-amber-400">তথ্য খোঁজা হচ্ছে...</p>`;
+            resultBox.innerHTML = `<p class="text-center text-sm text-amber-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> তথ্য খোঁজা হচ্ছে...</p>`;
 
             db.collection("bookings")
               .where("customerPhone", "==", phoneInput)
               .get()
               .then((querySnapshot) => {
+                  setBtnLoading('trackBtn', false, originalHtml);
                   if (querySnapshot.empty) {
                       resultBox.innerHTML = `<p class="text-center text-sm text-red-400">বুকিং খুঁজে পাওয়া যায়নি!</p>`;
                       return;
@@ -769,6 +838,7 @@
                   resultBox.innerHTML = html;
               })
               .catch((error) => {
+                  setBtnLoading('trackBtn', false, originalHtml);
                   resultBox.innerHTML = `<p class="text-center text-sm text-red-400">ত্রুটি: ${error.message}</p>`;
               });
         }
@@ -788,24 +858,29 @@
             event.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
+            const originalHtml = document.getElementById('loginBtn').innerHTML;
 
+            setBtnLoading('loginBtn', true, originalHtml);
             auth.signInWithEmailAndPassword(email, password)
                 .then(() => {
-                    alert("লগইন সফল হয়েছে!");
+                    showToast("লগইন সফল হয়েছে!", 'success');
                     toggleAuthModal();
                 })
-                .catch((error) => alert("লগইন ব্যর্থ: " + error.message));
+                .catch((error) => {
+                    setBtnLoading('loginBtn', false, originalHtml);
+                    showToast("লগইন ব্যর্থ: " + error.message, 'error');
+                });
         }
 
         function resetPassword() {
             const email = document.getElementById('loginEmail').value;
             if (!email) {
-                alert("ইমেইল ফিল্ডে আপনার ইমেইলটি লিখুন!");
+                showToast("ইমেইল ফিল্ডে আপনার ইমেইলটি লিখুন!", 'warning');
                 return;
             }
             auth.sendPasswordResetEmail(email)
-                .then(() => alert("পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!"))
-                .catch((err) => alert(err.message));
+                .then(() => showToast("পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!", 'info'))
+                .catch((err) => showToast(err.message, 'error'));
         }
 
         function handleSignup(event) {
@@ -814,9 +889,11 @@
             const phone = document.getElementById('signupPhone').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
+            const originalHtml = document.getElementById('signupBtn').innerHTML;
 
             const assignedRole = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ? "admin" : "client";
 
+            setBtnLoading('signupBtn', true, originalHtml);
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     return db.collection("users").doc(userCredential.user.uid).set({
@@ -828,14 +905,20 @@
                     });
                 })
                 .then(() => {
-                    alert("অ্যাকাউন্ট তৈরি সফল হয়েছে!");
+                    showToast("অ্যাকাউন্ট তৈরি সফল হয়েছে!", 'success');
                     toggleAuthModal();
                 })
-                .catch((error) => alert("ত্রুটি: " + error.message));
+                .catch((error) => {
+                    setBtnLoading('signupBtn', false, originalHtml);
+                    showToast("ত্রুটি: " + error.message, 'error');
+                });
         }
 
         function handleLogout() {
-            auth.signOut().then(() => location.reload());
+            auth.signOut().then(() => {
+                showToast("লগআউট সফল হয়েছে!", 'info');
+                setTimeout(() => location.reload(), 1000);
+            });
         }
 
         function toggleAdminModal() {
@@ -869,7 +952,10 @@
             if (val && !blockedDates.includes(val)) {
                 blockedDates.push(val);
                 db.collection("settings").doc("locks").set({ dates: blockedDates, slots: blockedSlots }, { merge: true })
-                  .then(() => updateLockControlsUI());
+                  .then(() => {
+                      updateLockControlsUI();
+                      showToast("তারিখ লক করা হয়েছে।", 'success');
+                  });
             }
         }
 
@@ -878,7 +964,10 @@
             if (val && !blockedSlots.includes(val)) {
                 blockedSlots.push(val);
                 db.collection("settings").doc("locks").set({ dates: blockedDates, slots: blockedSlots }, { merge: true })
-                  .then(() => updateLockControlsUI());
+                  .then(() => {
+                      updateLockControlsUI();
+                      showToast("টাইম স্লট লক করা হয়েছে।", 'success');
+                  });
             }
         }
 
@@ -889,21 +978,25 @@
 
         // Expenses Management (Firestore Integrated)
         function addExpense() {
-            const title = document.getElementById('expenseTitle').value.trim();
+            const title = document.getElementById('expenseTitle').value;
             const amount = parseFloat(document.getElementById('expenseAmount').value);
             const today = new Date().toISOString().split('T')[0];
+            const originalHtml = document.getElementById('expenseBtn').innerHTML;
 
             if (!title || !amount) {
-                alert("সব তথ্য সঠিকভাবে দিন!");
+                showToast("সব তথ্য সঠিকভাবে দিন!", 'warning');
                 return;
             }
 
+            setBtnLoading('expenseBtn', true, originalHtml);
             db.collection("expenses").add({
                 title, amount, date: today, createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
+                setBtnLoading('expenseBtn', false, originalHtml);
                 document.getElementById('expenseTitle').value = '';
                 document.getElementById('expenseAmount').value = '';
                 renderExpenses();
+                showToast("খরচ যোগ করা হয়েছে।", 'success');
             });
         }
 
@@ -931,7 +1024,7 @@
 
         function exportBookingsToCSV() {
             if (!loadedBookingsData.length) {
-                alert("কোনো বুকিং তথ্য নেই!");
+                showToast("কোনো বুকিং তথ্য নেই!", 'warning');
                 return;
             }
 
@@ -948,6 +1041,7 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showToast("এক্সেল ফাইল ডাউনলোড শুরু হয়েছে।", 'success');
         }
 
         function loadAdminUsers() {
@@ -1061,12 +1155,18 @@
         }
 
         function updateBookingStatus(docId, newStatus) {
-            db.collection("bookings").doc(docId).update({ status: newStatus }).then(() => filterBookingsByDate());
+            db.collection("bookings").doc(docId).update({ status: newStatus }).then(() => {
+                filterBookingsByDate();
+                showToast(`স্ট্যাটাস '${newStatus}' করা হয়েছে।`, 'success');
+            });
         }
 
         function deleteBooking(docId) {
             if (confirm("বুকিংটি মুছে ফেলতে চান?")) {
-                db.collection("bookings").doc(docId).delete().then(() => filterBookingsByDate());
+                db.collection("bookings").doc(docId).delete().then(() => {
+                    filterBookingsByDate();
+                    showToast("বুকিং মুছে ফেলা হয়েছে।", 'info');
+                });
             }
         }
 
@@ -1080,26 +1180,25 @@
             const barber = document.getElementById('bookBarber').value;
             const name = document.getElementById('bookName').value.trim();
             const service = document.getElementById('bookService').value;
+            const originalHtml = document.getElementById('submitBtn').innerHTML;
 
             // Phone Number Validation (Bangladeshi Standard)
             const bdPhoneRegex = /^01[3-9]\d{8}$/;
             if (!bdPhoneRegex.test(phone)) {
-                alert("অনুগ্রহ করে সঠিক ১১ ডিজিটের বাংলাদেশি মোবাইল নম্বর দিন।");
+                showToast("অনুগ্রহ করে সঠিক ১১ ডিজিটের বাংলাদেশি মোবাইল নম্বর দিন।", 'warning');
                 return;
             }
 
             if (blockedDates.includes(date)) {
-                alert("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে।");
+                showToast("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে।", 'error');
                 return;
             }
             if (blockedSlots.includes(time)) {
-                alert("দুঃখিত! এই স্লটটি ইতোমধ্যে লক করা রয়েছে।");
+                showToast("দুঃখিত! এই স্লটটি ইতোমধ্যে লক করা রয়েছে।", 'error');
                 return;
             }
 
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "যাচাই করা হচ্ছে...";
-            btn.disabled = true;
+            setBtnLoading('submitBtn', true, originalHtml);
 
             try {
                 // Check Overlapping Booking for Same Date, Time and Barber
@@ -1111,9 +1210,8 @@
                     .get();
 
                 if (!existingBooking.empty) {
-                    alert(`দুঃখিত! ${barber}-এর জন্য এই সময়টি (${time}) ইতোমধ্যে বুক হয়ে গেছে। অন্য সময় বা কারিগর বেছে নিন।`);
-                    btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
-                    btn.disabled = false;
+                    showToast(`দুঃখিত! ${barber}-এর জন্য এই সময়টি (${time}) ইতোমধ্যে বুক হয়ে গেছে।`, 'error');
+                    setBtnLoading('submitBtn', false, originalHtml);
                     return;
                 }
 
@@ -1136,6 +1234,7 @@
                 });
 
                 // Telegram Alert Send
+                // WARNING: Use a backend proxy for this in production!
                 const telegramBotToken = "8847976532:AAHcKafdKbxfZ39ZbI25fxaKgzOvRGw9-jI";
                 const telegramChatId = "6091423501";
                 const telegramMsg = `💈 *নতুন সেলুন বুকিং!* 💈\n\n👤 *নাম:* ${name}\n📞 *ফোন:* ${phone}\n✂️ *সার্ভিস:* ${service}\n💈 *কারিগর:* ${barber}\n💰 *মূল্য:* ৳${price}\n📅 *তারিখ:* ${date}\n⏰ *সময়:* ${time}\n⏳ *স্ট্যাটাস:* Pending`;
@@ -1146,15 +1245,14 @@
                     body: JSON.stringify({ chat_id: telegramChatId, text: telegramMsg, parse_mode: "Markdown" })
                 }).catch(() => {});
 
-                alert("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!");
+                showToast("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!", 'success');
                 event.target.reset();
                 calculatePrice();
 
             } catch(err) {
-                alert("বুকিং জমা দিতে সমস্যা হয়েছে: " + err.message);
+                showToast("বুকিং জমা দিতে সমস্যা হয়েছে: " + err.message, 'error');
             } finally {
-                btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
-                btn.disabled = false;
+                setBtnLoading('submitBtn', false, originalHtml);
             }
         }
 
@@ -1186,15 +1284,38 @@
 
             reviews.forEach(review => {
                 const starsText = '⭐'.repeat(review.rating);
-                reviewsList.innerHTML += `
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-1">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-gray-200">${review.name}</span>
-                            <span class="text-amber-400 text-sm">${starsText}</span>
-                        </div>
-                        ${review.comment ? `<p class="text-sm text-gray-400">${review.comment}</p>` : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`}
-                    </div>
-                `;
+                
+                // --- XSS Protection Fix ---
+                // Using textContent to safely render user input
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-1';
+                
+                const header = document.createElement('div');
+                header.className = 'flex justify-between items-center';
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'font-bold text-gray-200';
+                nameSpan.textContent = review.name;
+                
+                const starsSpan = document.createElement('span');
+                starsSpan.className = 'text-amber-400 text-sm';
+                starsSpan.textContent = starsText;
+                
+                header.appendChild(nameSpan);
+                header.appendChild(starsSpan);
+                reviewCard.appendChild(header);
+                
+                const commentP = document.createElement('p');
+                if (review.comment) {
+                    commentP.className = 'text-sm text-gray-400';
+                    commentP.textContent = review.comment;
+                } else {
+                    commentP.className = 'text-xs italic text-gray-500';
+                    commentP.textContent = 'শুধুমাত্র রেটিং প্রদান করা হয়েছে';
+                }
+                reviewCard.appendChild(commentP);
+                
+                reviewsList.appendChild(reviewCard);
             });
         }
 
@@ -1228,21 +1349,27 @@
             event.preventDefault();
             const nameInput = document.getElementById('custName').value.trim();
             const commentInput = document.getElementById('custComment').value.trim();
+            const originalHtml = document.getElementById('ratingSubmitBtn').innerHTML;
 
             if (!nameInput || selectedRating === 0) {
-                alert('নাম এবং স্টার রেটিং নিশ্চিত করুন!');
+                showToast('নাম এবং স্টার রেটিং নিশ্চিত করুন!', 'warning');
                 return;
             }
 
+            setBtnLoading('ratingSubmitBtn', true, originalHtml);
             db.collection("reviews").add({
                 name: nameInput,
                 rating: selectedRating,
                 comment: commentInput,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
+                setBtnLoading('ratingSubmitBtn', false, originalHtml);
                 document.getElementById('ratingForm').reset();
                 resetRating();
-                alert('রেটিং জমা হয়েছে!');
+                showToast('আপনার রেটিং সফলভাবে জমা হয়েছে!', 'success');
+            }).catch(err => {
+                setBtnLoading('ratingSubmitBtn', false, originalHtml);
+                showToast('ত্রুটি: ' + err.message, 'error');
             });
         }
     </script>
