@@ -71,7 +71,7 @@
                 </button>
             </div>
 
-            <!-- Red Boxed Admin Sections Menu (তারে তারে সাজানো) -->
+            <!-- Admin Sections Menu -->
             <div id="adminDrawerMenu" class="space-y-4">
                 <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
                 
@@ -95,13 +95,13 @@
                     </button>
 
                     <!-- Section 4 -->
-                    <button onclick="openAdminSection('bookingTable')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('bookingTableSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-list-check mr-3 text-emerald-400"></i> ৪. তারিখ অনুযায়ী সিরিয়াল</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
                     <!-- Section 5 -->
-                    <button onclick="openAdminSection('userList')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('registeredUsersSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-users mr-3 text-sky-400"></i> ৫. নিবন্ধিত ইউজার তালিকা</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
@@ -127,7 +127,6 @@
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             
             <div class="flex items-center space-x-3">
-                <!-- Three-line Menu Button -->
                 <button onclick="toggleDrawer()" class="text-amber-500 hover:text-amber-400 text-xl focus:outline-none p-1">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -443,8 +442,27 @@
                 </button>
             </div>
 
+            <!-- Admin Tab Navigation Bar -->
+            <div class="flex flex-wrap gap-2 border-b border-gray-800/80 pb-3">
+                <button onclick="switchAdminTab('overviewStats')" class="admin-tab-btn bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-chart-pie"></i> ১. সামারি
+                </button>
+                <button onclick="switchAdminTab('expenseTracker')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-wallet"></i> ২. খরচের ডায়েরি
+                </button>
+                <button onclick="switchAdminTab('lockControls')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-lock"></i> ৩. অফ-ডে ও লক
+                </button>
+                <button onclick="switchAdminTab('bookingTableSection')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-list-check"></i> ৪. সিরিয়াল তালিকা
+                </button>
+                <button onclick="switchAdminTab('registeredUsersSection')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-users"></i> ৫. ইউজার তালিকা
+                </button>
+            </div>
+
             <!-- 1. INTERACTIVE STATS CARDS -->
-            <div id="overviewStats" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 scroll-mt-6">
+            <div id="overviewStats" class="admin-tab-content grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <div onclick="filterByCardStatus('All')" title="সব বুকিং দেখুন" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
@@ -495,7 +513,7 @@
             </div>
 
             <!-- 2. Expense Tracker Section -->
-            <div id="expenseTracker" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
+            <div id="expenseTracker" class="admin-tab-content hidden bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
                 </h3>
@@ -566,7 +584,7 @@
             </div>
 
             <!-- 3. Lock Controls Section -->
-            <div id="lockControls" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
+            <div id="lockControls" class="admin-tab-content hidden bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-lock mr-2"></i> অফ-ডে ও টাইম স্লট লক কন্ট্রোল
                 </h3>
@@ -587,7 +605,7 @@
             </div>
 
             <!-- 4. BOOKINGS MANAGEMENT SECTION -->
-            <div id="bookingTableSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl scroll-mt-6">
+            <div id="bookingTableSection" class="admin-tab-content hidden space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800/80 pb-3">
                     <div>
                         <h3 class="text-base md:text-lg font-bold text-amber-400 flex items-center">
@@ -634,7 +652,7 @@
             </div>
 
             <!-- 5. REGISTERED USERS SECTION -->
-            <div id="registeredUsersSection" class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg scroll-mt-6">
+            <div id="registeredUsersSection" class="admin-tab-content hidden space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg">
                 <h3 class="text-sm font-bold text-gray-300 flex items-center">
                     <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
                 </h3>
@@ -696,6 +714,28 @@
             }
         }
 
+        // Switch Admin Dashboard Tabs
+        function switchAdminTab(targetId) {
+            const tabs = document.querySelectorAll('.admin-tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update Tab Button Styles
+            const tabBtns = document.querySelectorAll('.admin-tab-btn');
+            tabBtns.forEach(btn => {
+                btn.className = "admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition";
+            });
+
+            // Highlight Active Tab Button
+            if (event && event.currentTarget && event.currentTarget.classList.contains('admin-tab-btn')) {
+                event.currentTarget.className = "admin-tab-btn bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition";
+            }
+        }
+
         // Open Admin Section Directly from Drawer
         function openAdminSection(sectionId) {
             toggleDrawer();
@@ -703,14 +743,7 @@
             if(modal.classList.contains('hidden')) {
                 openAdminPanel();
             }
-            setTimeout(() => {
-                let targetId = sectionId;
-                if(sectionId === 'bookingTable') targetId = 'bookingTableSection';
-                if(sectionId === 'userList') targetId = 'registeredUsersSection';
-                
-                const target = document.getElementById(targetId);
-                if(target) target.scrollIntoView({ behavior: 'smooth' });
-            }, 200);
+            switchAdminTab(sectionId);
         }
 
         // Global State Variables for Features
@@ -935,6 +968,7 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('adminDateFilter').value = today;
             
+            switchAdminTab('overviewStats');
             loadAdminUsers();
             filterBookingsByDate();
             renderExpenses();
@@ -1152,9 +1186,8 @@
         }
 
         function filterByCardStatus(status) {
+            switchAdminTab('bookingTableSection');
             filterBookingsByDate(status);
-            const target = document.getElementById('bookingTableSection');
-            target.scrollIntoView({ behavior: 'smooth' });
         }
 
         function searchBookingsTable() {
