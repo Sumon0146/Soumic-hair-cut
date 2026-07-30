@@ -54,12 +54,88 @@
 </head>
 <body class="bg-gray-950 text-gray-100 relative selection:bg-amber-500 selection:text-gray-950">
 
+    <!-- Sidebar / Drawer Overlay -->
+    <div id="drawerOverlay" onclick="toggleDrawer()" class="fixed inset-0 bg-black/70 z-50 hidden backdrop-blur-sm transition-opacity duration-300"></div>
+
+    <!-- Left Side Nav Drawer Menu -->
+    <aside id="sideDrawer" class="fixed top-0 left-0 h-full w-72 bg-gray-900 border-r border-amber-500/30 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-2xl">
+        <div class="p-5 space-y-6 overflow-y-auto custom-scrollbar">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-scissors text-amber-500 text-xl"></i>
+                    <span class="font-bold text-lg text-amber-500">সৌমিক হেয়ার কাটিং</span>
+                </div>
+                <button onclick="toggleDrawer()" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Red Boxed Admin Sections Menu (তারে তারে সাজানো) -->
+            <div id="adminDrawerMenu" class="space-y-4">
+                <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
+                
+                <div class="space-y-2">
+                    <!-- Section 1 -->
+                    <button onclick="openAdminSection('overviewStats')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-chart-pie mr-3 text-amber-400"></i> ১. সমারি ও আয়-ব্যয় কার্ড</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Section 2 -->
+                    <button onclick="openAdminSection('expenseTracker')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-wallet mr-3 text-rose-400"></i> ২. খরচের হিসাব ডায়েরি</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Section 3 -->
+                    <button onclick="openAdminSection('lockControls')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-lock mr-3 text-amber-400"></i> ৩. অফ-ডে ও স্লট লক</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Section 4 -->
+                    <button onclick="openAdminSection('bookingTable')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-list-check mr-3 text-emerald-400"></i> ৪. তারিখ অনুযায়ী সিরিয়াল</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Section 5 -->
+                    <button onclick="openAdminSection('userList')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-users mr-3 text-sky-400"></i> ৫. নিবন্ধিত ইউজার তালিকা</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="border-gray-800">
+
+            <!-- General Quick Links -->
+            <div class="space-y-2">
+                <a href="#booking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">📅 সিরিয়াল বুকিং</a>
+                <a href="#trackBooking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">🔍 বুকিং স্ট্যাটাস</a>
+            </div>
+        </div>
+
+        <div class="p-4 border-t border-gray-800 text-center text-xs text-gray-500">
+            সৌমিক হেয়ার কাটিং © 2026
+        </div>
+    </aside>
+
     <!-- Top Navigation Bar -->
     <nav class="bg-gray-950/80 backdrop-blur-md border-b border-gray-800/80 px-4 py-3 sticky top-0 z-40 shadow-lg">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-amber-500 flex items-center">
-                <i class="fa-solid fa-scissors mr-2"></i> সৌমিক হেয়ার কাটিং
-            </a>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Three-line Menu Button -->
+                <button onclick="toggleDrawer()" class="text-amber-500 hover:text-amber-400 text-xl focus:outline-none p-1">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                
+                <a href="#" class="text-xl font-bold text-amber-500 flex items-center">
+                    <i class="fa-solid fa-scissors mr-2 hidden sm:inline"></i> সৌমিক হেয়ার কাটিং
+                </a>
+            </div>
             
             <div id="navUserArea">
                 <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
@@ -177,7 +253,7 @@
                     </div>
                 </div>
 
-                <!-- [FEATURE 2] Barber Selection -->
+                <!-- Barber Selection -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের কারিগর (Barber/Staff) <span class="text-red-500">*</span></label>
                     <select id="bookBarber" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
@@ -198,7 +274,7 @@
                     </div>
                 </div>
 
-                <!-- [FEATURE 3] Coupon Code -->
+                <!-- Coupon Code -->
                 <div class="bg-gray-900/60 p-3 rounded-lg border border-gray-800 space-y-2">
                     <label class="block text-xs font-medium text-amber-400">কুপন কোড (যদি থাকে):</label>
                     <div class="flex gap-2">
@@ -367,8 +443,8 @@
                 </button>
             </div>
 
-            <!-- INTERACTIVE STATS CARDS -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <!-- 1. INTERACTIVE STATS CARDS -->
+            <div id="overviewStats" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 scroll-mt-6">
                 <div onclick="filterByCardStatus('All')" title="সব বুকিং দেখুন" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
                     <div class="flex justify-between items-start">
                         <div>
@@ -393,7 +469,6 @@
                     </div>
                 </div>
 
-                <!-- [FEATURE 1] Income Card -->
                 <div class="bg-gradient-to-br from-green-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-green-500/25 shadow-lg relative overflow-hidden group hover:border-green-500/50 transition duration-300">
                     <div class="flex justify-between items-start">
                         <div>
@@ -406,7 +481,6 @@
                     </div>
                 </div>
 
-                <!-- [FEATURE 1] Expense Card -->
                 <div class="bg-gradient-to-br from-rose-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-rose-500/25 shadow-lg relative overflow-hidden group hover:border-rose-500/50 transition duration-300">
                     <div class="flex justify-between items-start">
                         <div>
@@ -420,18 +494,15 @@
                 </div>
             </div>
 
-            <!-- [FEATURE 1 B] Expense Tracker Entry Section (DROPDOWN ADDED HERE) -->
-            <div class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+            <!-- 2. Expense Tracker Section -->
+            <div id="expenseTracker" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
                 </h3>
                 <div class="flex flex-col md:flex-row gap-2">
-                    
-                    <!-- Dropdown Select for Expense Categories -->
                     <select id="expenseTitle" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
                         <option value="" disabled selected>খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)</option>
 
-                        <!-- ১. কাটার ও ট্রিম করার যন্ত্রপাতি -->
                         <optgroup label="১. কাটার ও ট্রিম করার যন্ত্রপাতি">
                             <option value="হেয়ার ক্লিপার (ক্লিপ সেটসহ)">হেয়ার ক্লিপার (ক্লিপ সেটসহ)</option>
                             <option value="হেয়ার ট্রিমার">হেয়ার ট্রিমার</option>
@@ -441,7 +512,6 @@
                             <option value="ব্লেড (একবার ব্যবহারযোগ্য)">ব্লেড (একবার ব্যবহারযোগ্য)</option>
                         </optgroup>
 
-                        <!-- ২. চুলের প্রসাধন ও সরঞ্জাম -->
                         <optgroup label="২. চুলের প্রসাধন ও সরঞ্জাম">
                             <option value="শ্যাম্পু">শ্যাম্পু</option>
                             <option value="কন্ডিশনার">কন্ডিশনার</option>
@@ -454,7 +524,6 @@
                             <option value="গোল ব্রাশ (Round Brush)">গোল ব্রাশ (Round Brush)</option>
                         </optgroup>
 
-                        <!-- ৩. শেভিং ও ত্বকের যত্ন -->
                         <optgroup label="৩. শেভিং ও ত্বকের যত্ন">
                             <option value="শেভিং ফোম">শেভিং ফোম</option>
                             <option value="শেভিং জেল">শেভিং জেল</option>
@@ -468,7 +537,6 @@
                             <option value="ট্যালকম পাউডার">ট্যালকম পাউডার</option>
                         </optgroup>
 
-                        <!-- ৪. পরিচ্ছন্নতা ও আনুষঙ্গিক সামগ্রী -->
                         <optgroup label="৪. পরিচ্ছন্নতা ও আনুষঙ্গিক সামগ্রী">
                             <option value="তোয়ালে (ছোট ও বড়)">তোয়ালে (ছোট ও বড়)</option>
                             <option value="কাটিং অ্যাপ্রন বা কেপ">কাটিং অ্যাপ্রন বা কেপ</option>
@@ -480,7 +548,6 @@
                             <option value="ক্লিপার অয়েল">ক্লিপার অয়েল</option>
                         </optgroup>
 
-                        <!-- ৫. আসবাবপত্র ও ইলেকট্রনিক্স -->
                         <optgroup label="৫. আসবাবপত্র ও ইলেকট্রনিক্স">
                             <option value="সেলুনের চেয়ার">সেলুনের চেয়ার</option>
                             <option value="বড় আয়না">বড় আয়না</option>
@@ -498,8 +565,8 @@
                 <div id="expenseList" class="text-xs text-gray-400 space-y-1 max-h-24 overflow-y-auto"></div>
             </div>
 
-            <!-- [FEATURE 5] Time Slot & Off-Day Lock Controls -->
-            <div class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+            <!-- 3. Lock Controls Section -->
+            <div id="lockControls" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-lock mr-2"></i> অফ-ডে ও টাইম স্লট লক কন্ট্রোল
                 </h3>
@@ -519,7 +586,7 @@
                 </div>
             </div>
 
-            <!-- BOOKINGS MANAGEMENT SECTION -->
+            <!-- 4. BOOKINGS MANAGEMENT SECTION -->
             <div id="bookingTableSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl scroll-mt-6">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800/80 pb-3">
                     <div>
@@ -530,7 +597,6 @@
                     </div>
                     
                     <div class="flex flex-wrap items-center gap-2">
-                        <!-- [FEATURE 4] Excel Export Button -->
                         <button onclick="exportBookingsToCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition flex items-center shadow-md">
                             <i class="fa-solid fa-file-excel mr-1.5"></i> এক্সেল এক্সপোর্ট (.csv)
                         </button>
@@ -540,7 +606,6 @@
                             <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-transparent text-xs text-amber-300 font-bold focus:outline-none cursor-pointer">
                         </div>
                         
-                        <!-- Search Box -->
                         <div class="relative flex-1 md:flex-initial">
                             <input type="text" id="adminSearchInput" onkeyup="searchBookingsTable()" placeholder="নাম/ফোন দিয়ে খুঁজুন..." class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3 py-1.5 pl-8 text-xs text-gray-200 focus:outline-none focus:border-amber-500/60 transition">
                             <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-xs text-gray-500"></i>
@@ -568,7 +633,7 @@
                 </div>
             </div>
 
-            <!-- REGISTERED USERS SECTION -->
+            <!-- 5. REGISTERED USERS SECTION -->
             <div id="registeredUsersSection" class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg scroll-mt-6">
                 <h3 class="text-sm font-bold text-gray-300 flex items-center">
                     <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
@@ -617,14 +682,44 @@
 
         const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
 
+        // Drawer Control Function
+        function toggleDrawer() {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            
+            if (drawer.classList.contains('-translate-x-full')) {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Open Admin Section Directly from Drawer
+        function openAdminSection(sectionId) {
+            toggleDrawer();
+            const modal = document.getElementById('adminModal');
+            if(modal.classList.contains('hidden')) {
+                openAdminPanel();
+            }
+            setTimeout(() => {
+                let targetId = sectionId;
+                if(sectionId === 'bookingTable') targetId = 'bookingTableSection';
+                if(sectionId === 'userList') targetId = 'registeredUsersSection';
+                
+                const target = document.getElementById(targetId);
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            }, 200);
+        }
+
         // Global State Variables for Features
         let currentDiscountPercent = 0;
         let blockedDates = JSON.parse(localStorage.getItem('blockedDates')) || [];
         let blockedSlots = JSON.parse(localStorage.getItem('blockedSlots')) || [];
         let dailyExpenses = JSON.parse(localStorage.getItem('dailyExpenses')) || [];
-        let loadedBookingsData = []; // for export
+        let loadedBookingsData = [];
 
-        // Coupons Dataset
         const coupons = {
             'EID2026': 20,
             'SOUMIK10': 10
@@ -633,6 +728,8 @@
         // Check Auth State
         auth.onAuthStateChanged((user) => {
             const navUserArea = document.getElementById('navUserArea');
+            const adminDrawerMenu = document.getElementById('adminDrawerMenu');
+
             if (user) {
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     let userData = doc.exists ? doc.data() : { name: "User", role: "client" };
@@ -641,6 +738,7 @@
                     if (document.getElementById('bookPhone') && userData.phone) document.getElementById('bookPhone').value = userData.phone;
 
                     if (userData.role === "admin" || user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                        if(adminDrawerMenu) adminDrawerMenu.classList.remove('hidden');
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-2 md:space-x-3">
                                 <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-amber-500/20 flex items-center transition duration-300">
@@ -650,6 +748,7 @@
                             </div>
                         `;
                     } else {
+                        if(adminDrawerMenu) adminDrawerMenu.classList.add('hidden');
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-3">
                                 <span class="text-sm text-gray-200">👤 ${userData.name ? userData.name.split(' ')[0] : 'ইউজার'}</span>
@@ -659,6 +758,7 @@
                     }
                 });
             } else {
+                if(adminDrawerMenu) adminDrawerMenu.classList.add('hidden');
                 navUserArea.innerHTML = `
                     <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
                         <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
@@ -825,9 +925,7 @@
             });
         }
 
-        // -------------------------------------------------------------
         // ADMIN DASHBOARD & ADVANCED FEATURES
-        // -------------------------------------------------------------
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
         }
@@ -843,7 +941,6 @@
             updateLockControlsUI();
         }
 
-        // Expense Management Logic
         function addExpense() {
             const title = document.getElementById('expenseTitle').value.trim();
             const amount = parseFloat(document.getElementById('expenseAmount').value);
@@ -868,7 +965,7 @@
             container.innerHTML = '';
             let total = 0;
 
-            dailyExpenses.forEach((exp, idx) => {
+            dailyExpenses.forEach((exp) => {
                 total += exp.amount;
                 container.innerHTML += `
                     <div class="flex justify-between items-center border-b border-gray-800/50 py-1">
@@ -881,7 +978,6 @@
             totalExpenseEl.innerText = `৳ ${total}`;
         }
 
-        // Lock Slot & Off-Day Control
         function blockOffDay() {
             const val = document.getElementById('blockDateInput').value;
             if (val && !blockedDates.includes(val)) {
@@ -905,7 +1001,6 @@
             document.getElementById('blockedSlotsDisplay').innerText = blockedSlots.join(', ') || 'নেই';
         }
 
-        // Excel Export
         function exportBookingsToCSV() {
             if (!loadedBookingsData || loadedBookingsData.length === 0) {
                 alert("ডাউনলোড করার মতো কোনো বুকিং তথ্য নেই!");
@@ -935,9 +1030,6 @@
 
             db.collection("users").get().then((querySnapshot) => {
                 usersTable.innerHTML = '';
-                if(document.getElementById('statTotalUsers')) {
-                    document.getElementById('statTotalUsers').innerText = querySnapshot.size;
-                }
 
                 querySnapshot.forEach((doc) => {
                     const u = doc.data();
@@ -997,7 +1089,7 @@
 
                       if (currentStatus === 'Confirmed') {
                           confCount++;
-                          totalEarnings += itemPrice; // Calculate earnings
+                          totalEarnings += itemPrice;
                       }
                       if (currentStatus === 'Pending') pendCount++;
 
@@ -1065,11 +1157,6 @@
             target.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function scrollToRegisteredUsers() {
-            const target = document.getElementById('registeredUsersSection');
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-
         function searchBookingsTable() {
             const input = document.getElementById('adminSearchInput').value.toLowerCase();
             const rows = document.querySelectorAll('#adminBookingsTable tr');
@@ -1108,7 +1195,6 @@
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
 
-            // Lock Check
             if (blockedDates.includes(date)) {
                 alert("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে। অনুগ্রহ করে অন্য দিন নির্বাচন করুন।");
                 return;
