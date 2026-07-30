@@ -19,7 +19,6 @@
     <style>
         body { font-family: 'Hind Siliguri', sans-serif; }
         
-        /* Custom Scrollbar for Admin Panel */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -36,7 +35,6 @@
             background: rgba(245, 158, 11, 0.8);
         }
 
-        /* Glassmorphism Effect */
         .glass-card {
             background: rgba(17, 24, 39, 0.75);
             backdrop-filter: blur(12px);
@@ -60,7 +58,6 @@
     <!-- Left Side Nav Drawer Menu -->
     <aside id="sideDrawer" class="fixed top-0 left-0 h-full w-72 bg-gray-900 border-r border-amber-500/30 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-2xl">
         <div class="p-5 space-y-6 overflow-y-auto custom-scrollbar">
-            <!-- Header -->
             <div class="flex items-center justify-between border-b border-gray-800 pb-4">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-scissors text-amber-500 text-xl"></i>
@@ -71,37 +68,31 @@
                 </button>
             </div>
 
-            <!-- Admin Sections Menu -->
             <div id="adminDrawerMenu" class="space-y-4">
                 <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
                 
                 <div class="space-y-2">
-                    <!-- Section 1 -->
                     <button onclick="openAdminSection('overviewStats')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-chart-pie mr-3 text-amber-400"></i> ১. সমারি ও আয়-ব্যয় কার্ড</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <!-- Section 2 -->
                     <button onclick="openAdminSection('expenseTracker')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-wallet mr-3 text-rose-400"></i> ২. খরচের হিসাব ডায়েরি</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <!-- Section 3 -->
                     <button onclick="openAdminSection('lockControls')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-lock mr-3 text-amber-400"></i> ৩. অফ-ডে ও স্লট লক</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <!-- Section 4 -->
-                    <button onclick="openAdminSection('bookingTableSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('bookingTable')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-list-check mr-3 text-emerald-400"></i> ৪. তারিখ অনুযায়ী সিরিয়াল</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <!-- Section 5 -->
-                    <button onclick="openAdminSection('registeredUsersSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('userList')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-users mr-3 text-sky-400"></i> ৫. নিবন্ধিত ইউজার তালিকা</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
@@ -110,7 +101,6 @@
 
             <hr class="border-gray-800">
 
-            <!-- General Quick Links -->
             <div class="space-y-2">
                 <a href="#booking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">📅 সিরিয়াল বুকিং</a>
                 <a href="#trackBooking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">🔍 বুকিং স্ট্যাটাস</a>
@@ -144,7 +134,7 @@
         </div>
     </nav>
 
-    <!-- Header / Hero Section -->
+    <!-- Hero Section -->
     <header class="relative bg-cover bg-center h-80 text-white flex items-center justify-center text-center px-4" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1000&auto=format&fit=crop');">
         <div>
             <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500 tracking-wide">সৌমিক হেয়ার কাটিং</h1>
@@ -160,7 +150,7 @@
         </div>
     </header>
 
-    <!-- Scrolling Notice -->
+    <!-- Notice Bar -->
     <div class="bg-amber-500/10 border-y border-amber-500/20 py-3 text-amber-400 font-medium overflow-hidden shadow-inner">
         <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" class="text-base md:text-lg">
             ✨ সৌমিক হেয়ার কাটিং-এ আপনাকে স্বাগতম! ✂️ আমাদের এখানে পাচ্ছেন প্রফেশনাল হেয়ার কাটিং, দাড়ি স্টাইলিং ও ফেসিয়াল সার্ভিস। 📅 ভিড় এড়াতে আগে থেকেই অনলাইনে সিরিয়াল বুক করুন! 💈 আমাদের ঠিকানা: বাদুড়িয়া বাজার, ডুমুরিয়া, খুলনা। 📞 যোগাযোগের নম্বর: 01910947438
@@ -169,7 +159,7 @@
 
     <div class="max-w-4xl mx-auto p-4 md:p-6 space-y-12">
 
-        <!-- Features Section -->
+        <!-- Features -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div class="bg-gray-900/80 p-4 rounded-xl border border-gray-800 shadow-lg space-y-2">
                 <i class="fa-solid fa-pump-soap text-3xl text-amber-400"></i>
@@ -193,7 +183,7 @@
             </div>
         </section>
 
-        <!-- Track Booking Section -->
+        <!-- Track Booking -->
         <section id="trackBooking" class="bg-gray-900/90 p-6 rounded-2xl border border-amber-500/30 shadow-xl space-y-4 scroll-mt-20 gold-glow">
             <div class="text-center">
                 <h2 class="text-2xl font-bold text-amber-400 flex items-center justify-center">
@@ -212,7 +202,7 @@
             <div id="trackResultContainer" class="hidden max-w-md mx-auto bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3"></div>
         </section>
 
-        <!-- Online Serial Booking Form -->
+        <!-- Booking Form -->
         <section id="booking" class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-sky-500/30 shadow-xl scroll-mt-6 space-y-6">
             <div class="max-w-md mx-auto text-center">
                 <div class="w-16 h-16 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-lg shadow-sky-500/10">
@@ -223,7 +213,7 @@
                 </h2>
                 
                 <p class="text-amber-300/90 text-sm bg-amber-500/10 p-3 rounded-xl border border-amber-500/20 mb-3">
-                    📌 <strong>বিশেষ দ্রষ্টব্য:</strong> সেলুনে কাস্টমার চাপের কারণে নির্ধারিত সময়ের কিছুটা আগে-পরে সার্ভিস শুরু হতে পারে। আপনার ধৈর্যের জন্য আন্তরিক ধন্যবাদ।
+                    📌 <strong>বিশেষ দ্রষ্টব্য:</strong> সেলুনে কাস্টমার চাপের কারণে নির্ধারিত সময়ের কিছুটা আগে-পরে সার্ভিস শুরু হতে পারে।
                 </p>
             </div>
 
@@ -252,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- Barber Selection -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের কারিগর (Barber/Staff) <span class="text-red-500">*</span></label>
                     <select id="bookBarber" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
@@ -273,7 +262,6 @@
                     </div>
                 </div>
 
-                <!-- Coupon Code -->
                 <div class="bg-gray-900/60 p-3 rounded-lg border border-gray-800 space-y-2">
                     <label class="block text-xs font-medium text-amber-400">কুপন কোড (যদি থাকে):</label>
                     <div class="flex gap-2">
@@ -283,7 +271,6 @@
                     <p id="couponMsg" class="text-xs hidden"></p>
                 </div>
 
-                <!-- Price Display -->
                 <div class="text-right text-sm font-bold text-amber-400 pt-1">
                     মোট প্রাক্কলিত মূল্য: ৳<span id="finalPriceDisplay">0</span>
                 </div>
@@ -294,16 +281,16 @@
             </form>
         </section>
 
-        <!-- Customer Rating & Review Section -->
+        <!-- Customer Rating Section -->
         <section class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-amber-500/20 shadow-xl space-y-6">
             <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-800 pb-3">
                 ⭐ গ্রাহকদের মতামত ও রেটিং
             </h2>
 
             <div id="ratingSummary" class="bg-gray-950 p-4 rounded-xl border border-gray-800 text-center flex flex-col items-center justify-center space-y-1">
-                <span class="text-3xl font-bold text-amber-400" id="avgScore">5.0</span>
+                <span class="text-3xl font-bold text-amber-400" id="avgScore">0.0</span>
                 <div class="text-amber-400 text-lg" id="avgStars">⭐⭐⭐⭐⭐</div>
-                <span class="text-xs text-gray-400" id="totalReviewsCount">(১টি রিভিউর ভিত্তিতে)</span>
+                <span class="text-xs text-gray-400" id="totalReviewsCount">(০টি রিভিউর ভিত্তিতে)</span>
             </div>
 
             <form id="ratingForm" onsubmit="submitReview(event)" class="bg-gray-950 p-5 rounded-xl space-y-4 border border-gray-800">
@@ -341,7 +328,7 @@
             </div>
         </section>
 
-        <!-- Location Section -->
+        <!-- Location -->
         <section class="bg-gray-900/90 p-6 rounded-2xl border border-gray-800 space-y-6">
             <h2 class="text-2xl font-bold text-amber-500 text-center border-b border-gray-800 pb-3">📍 আমাদের ঠিকানা ও যোগাযোগ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
@@ -368,7 +355,7 @@
 
     </div>
 
-    <!-- Login / Sign Up Popup Modal -->
+    <!-- Login Modal -->
     <div id="authModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="glass-card rounded-2xl max-w-md w-full p-6 border border-amber-500/30 relative space-y-4 shadow-2xl gold-glow">
             <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
@@ -380,7 +367,6 @@
                 <button id="tabSignup" onclick="switchTab('signup')" class="flex-1 py-2 font-bold text-gray-400">রেজিস্টার</button>
             </div>
 
-            <!-- Login Form -->
             <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">ইমেইল</label>
@@ -390,12 +376,14 @@
                     <label class="block text-sm text-gray-300 mb-1">পাসওয়ার্ড</label>
                     <input type="password" id="loginPassword" required class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-500">
                 </div>
+                <div class="text-right">
+                    <button type="button" onclick="resetPassword()" class="text-xs text-amber-400 hover:underline">পাসওয়ার্ড ভুলে গেছেন?</button>
+                </div>
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
                     লগইন করুন
                 </button>
             </form>
 
-            <!-- Registration Form -->
             <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4 hidden">
                 <div>
                     <label class="block text-sm text-gray-300 mb-1">আপনার নাম</label>
@@ -420,11 +408,10 @@
         </div>
     </div>
 
-    <!-- HIGH-PREMIUM GLASSMORPHISM ADMIN DASHBOARD MODAL -->
+    <!-- Admin Dashboard Modal -->
     <div id="adminModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-3 md:p-6 backdrop-blur-md">
         <div id="adminModalContainer" class="glass-modal rounded-3xl max-w-5xl w-full p-4 md:p-7 border border-amber-500/30 relative max-h-[92vh] overflow-y-auto custom-scrollbar space-y-6 shadow-2xl gold-glow scroll-smooth">
             
-            <!-- Header -->
             <div class="flex items-center justify-between border-b border-gray-800/80 pb-4">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 text-gray-950 flex items-center justify-center font-bold text-xl shadow-lg shadow-amber-500/20">
@@ -442,31 +429,12 @@
                 </button>
             </div>
 
-            <!-- Admin Tab Navigation Bar -->
-            <div class="flex flex-wrap gap-2 border-b border-gray-800/80 pb-3">
-                <button onclick="switchAdminTab('overviewStats')" class="admin-tab-btn bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-chart-pie"></i> ১. সামারি
-                </button>
-                <button onclick="switchAdminTab('expenseTracker')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-wallet"></i> ২. খরচের ডায়েরি
-                </button>
-                <button onclick="switchAdminTab('lockControls')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-lock"></i> ৩. অফ-ডে ও লক
-                </button>
-                <button onclick="switchAdminTab('bookingTableSection')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-list-check"></i> ৪. সিরিয়াল তালিকা
-                </button>
-                <button onclick="switchAdminTab('registeredUsersSection')" class="admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-users"></i> ৫. ইউজার তালিকা
-                </button>
-            </div>
-
-            <!-- 1. INTERACTIVE STATS CARDS -->
-            <div id="overviewStats" class="admin-tab-content grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div onclick="filterByCardStatus('All')" title="সব বুকিং দেখুন" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative overflow-hidden group hover:border-amber-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
+            <!-- Stats -->
+            <div id="overviewStats" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 scroll-mt-6">
+                <div onclick="filterByCardStatus('All')" class="bg-gradient-to-br from-amber-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-amber-500/25 shadow-lg relative cursor-pointer hover:scale-[1.02] transition">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-amber-300/80 uppercase font-semibold tracking-wider">আজকের বুকিং</p>
+                            <p class="text-[11px] text-amber-300/80 uppercase font-semibold">আজকের বুকিং</p>
                             <h3 id="statTodayBookings" class="text-2xl md:text-3xl font-extrabold text-amber-400 mt-1">0</h3>
                         </div>
                         <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
@@ -475,10 +443,10 @@
                     </div>
                 </div>
 
-                <div onclick="filterByCardStatus('Confirmed')" title="শুধু কনফার্মড বুকিং দেখুন" class="bg-gradient-to-br from-emerald-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-emerald-500/25 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 cursor-pointer transition duration-300 hover:scale-[1.02]">
+                <div onclick="filterByCardStatus('Confirmed')" class="bg-gradient-to-br from-emerald-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-emerald-500/25 shadow-lg relative cursor-pointer hover:scale-[1.02] transition">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-emerald-300/80 uppercase font-semibold tracking-wider">আজ কনফার্মড</p>
+                            <p class="text-[11px] text-emerald-300/80 uppercase font-semibold">আজ কনফার্মড</p>
                             <h3 id="statConfirmed" class="text-2xl md:text-3xl font-extrabold text-emerald-400 mt-1">0</h3>
                         </div>
                         <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -487,10 +455,10 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-green-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-green-500/25 shadow-lg relative overflow-hidden group hover:border-green-500/50 transition duration-300">
+                <div class="bg-gradient-to-br from-green-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-green-500/25 shadow-lg">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-green-300/80 uppercase font-semibold tracking-wider">আজকের মোট আয়</p>
+                            <p class="text-[11px] text-green-300/80 uppercase font-semibold">আজকের মোট আয়</p>
                             <h3 id="statTodayEarnings" class="text-2xl md:text-3xl font-extrabold text-green-400 mt-1">৳ 0</h3>
                         </div>
                         <div class="p-2.5 rounded-xl bg-green-500/10 text-green-400 border border-green-500/20">
@@ -499,10 +467,10 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-rose-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-rose-500/25 shadow-lg relative overflow-hidden group hover:border-rose-500/50 transition duration-300">
+                <div class="bg-gradient-to-br from-rose-500/15 via-gray-900/90 to-gray-950 p-4 rounded-2xl border border-rose-500/25 shadow-lg">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-[11px] text-rose-300/80 uppercase font-semibold tracking-wider">আজকের খরচ</p>
+                            <p class="text-[11px] text-rose-300/80 uppercase font-semibold">আজকের খরচ</p>
                             <h3 id="statTodayExpense" class="text-2xl md:text-3xl font-extrabold text-rose-400 mt-1">৳ 0</h3>
                         </div>
                         <div class="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
@@ -512,68 +480,23 @@
                 </div>
             </div>
 
-            <!-- 2. Expense Tracker Section -->
-            <div id="expenseTracker" class="admin-tab-content hidden bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+            <!-- Expense Tracker -->
+            <div id="expenseTracker" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
                 </h3>
                 <div class="flex flex-col md:flex-row gap-2">
                     <select id="expenseTitle" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
                         <option value="" disabled selected>খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)</option>
-
-                        <optgroup label="১. কাটার ও ট্রিম করার যন্ত্রপাতি">
-                            <option value="হেয়ার ক্লিপার (ক্লিপ সেটসহ)">হেয়ার ক্লিপার (ক্লিপ সেটসহ)</option>
-                            <option value="হেয়ার ট্রিমার">হেয়ার ট্রিমার</option>
-                            <option value="চুল কাটার কাঁচি">চুল কাটার কাঁচি</option>
-                            <option value="থিনিং কাঁচি (Thinning Shears)">থিনিং কাঁচি (Thinning Shears)</option>
-                            <option value="খুর (Straight Razor)">খুর (Straight Razor)</option>
-                            <option value="ব্লেড (একবার ব্যবহারযোগ্য)">ব্লেড (একবার ব্যবহারযোগ্য)</option>
+                        <optgroup label="যন্ত্রপাতি">
+                            <option value="হেয়ার ক্লিপার">হেয়ার ক্লিপার</option>
+                            <option value="ব্লেড">ব্লেড</option>
+                            <option value="কাঁচি">কাঁচি</option>
                         </optgroup>
-
-                        <optgroup label="২. চুলের প্রসাধন ও সরঞ্জাম">
+                        <optgroup label="প্রসাধন ও সরঞ্জাম">
                             <option value="শ্যাম্পু">শ্যাম্পু</option>
-                            <option value="কন্ডিশনার">কন্ডিশনার</option>
-                            <option value="হেয়ার জেল">হেয়ার জেল</option>
-                            <option value="হেয়ার ওয়াক্স">হেয়ার ওয়াক্স</option>
-                            <option value="হেয়ার পোমেড">হেয়ার পোমেড</option>
-                            <option value="হেয়ার স্প্রে">হেয়ার স্প্রে</option>
-                            <option value="হেয়ার ড্রায়ার">হেয়ার ড্রায়ার</option>
-                            <option value="বিভিন্ন সাইজের চিরুনি">বিভিন্ন সাইজের চিরুনি</option>
-                            <option value="গোল ব্রাশ (Round Brush)">গোল ব্রাশ (Round Brush)</option>
-                        </optgroup>
-
-                        <optgroup label="৩. শেভিং ও ত্বকের যত্ন">
-                            <option value="শেভিং ফোম">শেভিং ফোম</option>
-                            <option value="শেভিং জেল">শেভিং জেল</option>
                             <option value="শেভিং ক্রিম">শেভিং ক্রিম</option>
-                            <option value="আফটারশেভ লোশন">আফটারশেভ লোশন</option>
-                            <option value="ফিটকিরি (Alum Block)">ফিটকিরি (Alum Block)</option>
-                            <option value="ফেস ওয়াশ">ফেস ওয়াশ</option>
-                            <option value="ফেস স্ক্রাব">ফেস স্ক্রাব</option>
-                            <option value="ফেস প্যাক">ফেস প্যাক</option>
-                            <option value="ময়েশ্চারাইজার ক্রিম">ময়েশ্চারাইজার ক্রিম</option>
-                            <option value="ট্যালকম পাউডার">ট্যালকম পাউডার</option>
-                        </optgroup>
-
-                        <optgroup label="৪. পরিচ্ছন্নতা ও আনুষঙ্গিক সামগ্রী">
-                            <option value="তোয়ালে (ছোট ও বড়)">তোয়ালে (ছোট ও বড়)</option>
-                            <option value="কাটিং অ্যাপ্রন বা কেপ">কাটিং অ্যাপ্রন বা কেপ</option>
-                            <option value="নেক স্ট্রিপ">নেক স্ট্রিপ</option>
                             <option value="টিস্যু পেপার">টিস্যু পেপার</option>
-                            <option value="ডাস্টার ব্রাশ">ডাস্টার ব্রাশ</option>
-                            <option value="ওয়াটার স্প্রে বোতল">ওয়াটার স্প্রে বোতল</option>
-                            <option value="জীবাণুনাশক লিকুইড (যেমন: স্যাবলন বা ডেটল)">জীবাণুনাশক লিকুইড (যেমন: স্যাবলন বা ডেটল)</option>
-                            <option value="ক্লিপার অয়েল">ক্লিপার অয়েল</option>
-                        </optgroup>
-
-                        <optgroup label="৫. আসবাবপত্র ও ইলেকট্রনিক্স">
-                            <option value="সেলুনের চেয়ার">সেলুনের চেয়ার</option>
-                            <option value="বড় আয়না">বড় আয়না</option>
-                            <option value="হ্যান্ড মিরর (ছোট আয়না)">হ্যান্ড মিরর (ছোট আয়না)</option>
-                            <option value="মালামাল রাখার ট্রলি">মালামাল রাখার ট্রলি</option>
-                            <option value="হেয়ার ওয়াশ বেসিন">হেয়ার ওয়াশ বেসিন</option>
-                            <option value="ফেসিয়াল স্টিমার মেশিন">ফেসিয়াল স্টিমার মেশিন</option>
-                            <option value="গরম পানির গিজার (প্রয়োজন হলে)">গরম পানির গিজার (প্রয়োজন হলে)</option>
                         </optgroup>
                     </select>
 
@@ -583,8 +506,8 @@
                 <div id="expenseList" class="text-xs text-gray-400 space-y-1 max-h-24 overflow-y-auto"></div>
             </div>
 
-            <!-- 3. Lock Controls Section -->
-            <div id="lockControls" class="admin-tab-content hidden bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3">
+            <!-- Lock Controls -->
+            <div id="lockControls" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-lock mr-2"></i> অফ-ডে ও টাইম স্লট লক কন্ট্রোল
                 </h3>
@@ -604,8 +527,8 @@
                 </div>
             </div>
 
-            <!-- 4. BOOKINGS MANAGEMENT SECTION -->
-            <div id="bookingTableSection" class="admin-tab-content hidden space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 backdrop-blur-sm shadow-xl">
+            <!-- Bookings Management -->
+            <div id="bookingTableSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-gray-800/80 pb-3">
                     <div>
                         <h3 class="text-base md:text-lg font-bold text-amber-400 flex items-center">
@@ -619,7 +542,7 @@
                             <i class="fa-solid fa-file-excel mr-1.5"></i> এক্সেল এক্সপোর্ট (.csv)
                         </button>
 
-                        <div class="flex items-center bg-gray-900 border border-amber-500/30 rounded-xl px-2.5 py-1 shadow-inner">
+                        <div class="flex items-center bg-gray-900 border border-amber-500/30 rounded-xl px-2.5 py-1">
                             <i class="fa-solid fa-calendar text-xs text-amber-400 mr-2"></i>
                             <input type="date" id="adminDateFilter" onchange="filterBookingsByDate()" class="bg-transparent text-xs text-amber-300 font-bold focus:outline-none cursor-pointer">
                         </div>
@@ -631,10 +554,9 @@
                     </div>
                 </div>
 
-                <!-- Bookings Table -->
                 <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md">
                     <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-900/90 text-amber-400 uppercase text-[11px] font-bold tracking-wider border-b border-gray-800">
+                        <thead class="bg-gray-900/90 text-amber-400 uppercase text-[11px] font-bold border-b border-gray-800">
                             <tr>
                                 <th class="p-3 text-center">সিরিয়াল #</th>
                                 <th class="p-3">গ্রাহক ও ফোন</th>
@@ -645,14 +567,13 @@
                             </tr>
                         </thead>
                         <tbody id="adminBookingsTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                            <!-- Loaded Dynamically -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 5. REGISTERED USERS SECTION -->
-            <div id="registeredUsersSection" class="admin-tab-content hidden space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg">
+            <!-- Users List -->
+            <div id="registeredUsersSection" class="space-y-3 bg-gray-950/50 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-lg scroll-mt-6">
                 <h3 class="text-sm font-bold text-gray-300 flex items-center">
                     <i class="fa-solid fa-users-gear mr-2 text-sky-400"></i> নিবন্ধিত ইউজার তালিকা
                 </h3>
@@ -667,7 +588,6 @@
                             </tr>
                         </thead>
                         <tbody id="adminUsersTable" class="divide-y divide-gray-800/60">
-                            <!-- Loaded Dynamically -->
                         </tbody>
                     </table>
                 </div>
@@ -676,12 +596,11 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-500 text-center py-6 mt-10 border-t border-gray-900 space-y-3 text-xs">
+    <footer class="bg-gray-950 text-gray-500 text-center py-6 mt-10 border-t border-gray-900 text-xs">
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
-    <!-- JavaScript & Firebase Script -->
+    <!-- JavaScript & Firestore logic -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyAeDy08BLz4pJ0-dqtgKs6i888ckiq-EeY",
@@ -700,63 +619,39 @@
 
         const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
 
-        // Drawer Control Function
-        function toggleDrawer() {
-            const drawer = document.getElementById('sideDrawer');
-            const overlay = document.getElementById('drawerOverlay');
-            
-            if (drawer.classList.contains('-translate-x-full')) {
-                drawer.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                drawer.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-
-        // Switch Admin Dashboard Tabs
-        function switchAdminTab(targetId) {
-            const tabs = document.querySelectorAll('.admin-tab-content');
-            tabs.forEach(tab => tab.classList.add('hidden'));
-
-            const target = document.getElementById(targetId);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-
-            // Update Tab Button Styles
-            const tabBtns = document.querySelectorAll('.admin-tab-btn');
-            tabBtns.forEach(btn => {
-                btn.className = "admin-tab-btn bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition";
-            });
-
-            // Highlight Active Tab Button
-            if (event && event.currentTarget && event.currentTarget.classList.contains('admin-tab-btn')) {
-                event.currentTarget.className = "admin-tab-btn bg-amber-500 text-gray-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition";
-            }
-        }
-
-        // Open Admin Section Directly from Drawer
-        function openAdminSection(sectionId) {
-            toggleDrawer();
-            const modal = document.getElementById('adminModal');
-            if(modal.classList.contains('hidden')) {
-                openAdminPanel();
-            }
-            switchAdminTab(sectionId);
-        }
-
-        // Global State Variables for Features
         let currentDiscountPercent = 0;
-        let blockedDates = JSON.parse(localStorage.getItem('blockedDates')) || [];
-        let blockedSlots = JSON.parse(localStorage.getItem('blockedSlots')) || [];
-        let dailyExpenses = JSON.parse(localStorage.getItem('dailyExpenses')) || [];
+        let blockedDates = [];
+        let blockedSlots = [];
+        let dailyExpenses = [];
         let loadedBookingsData = [];
 
         const coupons = {
             'EID2026': 20,
             'SOUMIK10': 10
         };
+
+        function toggleDrawer() {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            drawer.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        function openAdminSection(sectionId) {
+            toggleDrawer();
+            const modal = document.getElementById('adminModal');
+            if(modal.classList.contains('hidden')) {
+                openAdminPanel();
+            }
+            setTimeout(() => {
+                let targetId = sectionId;
+                if(sectionId === 'bookingTable') targetId = 'bookingTableSection';
+                if(sectionId === 'userList') targetId = 'registeredUsersSection';
+                
+                const target = document.getElementById(targetId);
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            }, 200);
+        }
 
         // Check Auth State
         auth.onAuthStateChanged((user) => {
@@ -774,10 +669,10 @@
                         if(adminDrawerMenu) adminDrawerMenu.classList.remove('hidden');
                         navUserArea.innerHTML = `
                             <div class="flex items-center space-x-2 md:space-x-3">
-                                <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg shadow-amber-500/20 flex items-center transition duration-300">
+                                <button onclick="openAdminPanel()" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 text-gray-950 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center transition">
                                     <i class="fa-solid fa-crown mr-1.5"></i> এডমিন ড্যাশবোর্ড
                                 </button>
-                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-xs md:text-sm font-medium transition">লগআউট</button>
+                                <button onclick="handleLogout()" class="text-red-400 hover:text-red-300 text-xs font-medium transition">লগআউট</button>
                             </div>
                         `;
                     } else {
@@ -793,14 +688,14 @@
             } else {
                 if(adminDrawerMenu) adminDrawerMenu.classList.add('hidden');
                 navUserArea.innerHTML = `
-                    <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
+                    <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition flex items-center">
                         <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
                     </button>
                 `;
             }
         });
 
-        // Price Calculation & Coupon Handling
+        // Price Calculation
         function calculatePrice() {
             const select = document.getElementById('bookService');
             const selectedOption = select.options[select.selectedIndex];
@@ -824,13 +719,12 @@
                 currentDiscountPercent = coupons[code];
                 msg.className = "text-xs text-emerald-400 font-semibold";
                 msg.innerText = `অভিনন্দন! ${currentDiscountPercent}% ডিসকাউন্ট প্রযোজ্য হয়েছে।`;
-                calculatePrice();
             } else {
                 currentDiscountPercent = 0;
                 msg.className = "text-xs text-rose-400 font-semibold";
-                msg.innerText = "অবৈধ বা মেয়াদোত্তীর্ণ কুপন কোড!";
-                calculatePrice();
+                msg.innerText = "অবৈধ কুপন কোড!";
             }
+            calculatePrice();
         }
 
         // Track Booking
@@ -839,7 +733,7 @@
             const resultBox = document.getElementById('trackResultContainer');
 
             if (!phoneInput) {
-                alert("অনুগ্রহ করে আপনার দেওয়া মোবাইল নম্বরটি লিখুন।");
+                alert("অনুগ্রহ করে মোবাইল নম্বরটি লিখুন।");
                 return;
             }
 
@@ -851,22 +745,18 @@
               .get()
               .then((querySnapshot) => {
                   if (querySnapshot.empty) {
-                      resultBox.innerHTML = `<p class="text-center text-sm text-red-400">এই নম্বর দিয়ে কোনো বুকিং খুঁজে পাওয়া যায়নি!</p>`;
+                      resultBox.innerHTML = `<p class="text-center text-sm text-red-400">বুকিং খুঁজে পাওয়া যায়নি!</p>`;
                       return;
                   }
 
                   let html = `<h4 class="text-amber-400 font-bold border-b border-gray-800 pb-1 mb-2">আপনার বুকিংয়ের তথ্য:</h4>`;
                   querySnapshot.forEach((doc) => {
                       const data = doc.data();
-                      let statusBadge = '';
-
-                      if (data.status === 'Confirmed') {
-                          statusBadge = `<span class="text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full text-xs">✅ কনফার্ম হয়েছে (Confirmed)</span>`;
-                      } else if (data.status === 'Rejected') {
-                          statusBadge = `<span class="text-red-400 font-bold bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded-full text-xs">❌ বাতিল করা হয়েছে (Rejected)</span>`;
-                      } else {
-                          statusBadge = `<span class="text-yellow-400 font-bold bg-yellow-500/10 border border-yellow-500/30 px-2 py-0.5 rounded-full text-xs">⏳ পেন্ডিং (Pending)</span>`;
-                      }
+                      let statusBadge = data.status === 'Confirmed' 
+                          ? `<span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full text-xs">✅ Confirmed</span>`
+                          : data.status === 'Rejected'
+                          ? `<span class="text-red-400 font-bold bg-red-500/10 px-2 py-0.5 rounded-full text-xs">❌ Rejected</span>`
+                          : `<span class="text-yellow-400 font-bold bg-yellow-500/10 px-2 py-0.5 rounded-full text-xs">⏳ Pending</span>`;
 
                       html += `
                           <div class="space-y-1 text-sm border-b border-gray-800/80 pb-2 mb-2">
@@ -879,32 +769,19 @@
                   resultBox.innerHTML = html;
               })
               .catch((error) => {
-                  resultBox.innerHTML = `<p class="text-center text-sm text-red-400">সমস্যা হয়েছে: ${error.message}</p>`;
+                  resultBox.innerHTML = `<p class="text-center text-sm text-red-400">ত্রুটি: ${error.message}</p>`;
               });
         }
 
-        // Auth Modals
         function toggleAuthModal() {
             document.getElementById('authModal').classList.toggle('hidden');
         }
 
         function switchTab(tab) {
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-            const tabLogin = document.getElementById('tabLogin');
-            const tabSignup = document.getElementById('tabSignup');
-
-            if (tab === 'login') {
-                loginForm.classList.remove('hidden');
-                signupForm.classList.add('hidden');
-                tabLogin.className = "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500";
-                tabSignup.className = "flex-1 py-2 font-bold text-gray-400";
-            } else {
-                loginForm.classList.add('hidden');
-                signupForm.classList.remove('hidden');
-                tabSignup.className = "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500";
-                tabLogin.className = "flex-1 py-2 font-bold text-gray-400";
-            }
+            document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('signupForm').classList.toggle('hidden', tab !== 'signup');
+            document.getElementById('tabLogin').className = tab === 'login' ? "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500" : "flex-1 py-2 font-bold text-gray-400";
+            document.getElementById('tabSignup').className = tab === 'signup' ? "flex-1 py-2 font-bold text-amber-500 border-b-2 border-amber-500" : "flex-1 py-2 font-bold text-gray-400";
         }
 
         function handleLogin(event) {
@@ -917,9 +794,18 @@
                     alert("লগইন সফল হয়েছে!");
                     toggleAuthModal();
                 })
-                .catch((error) => {
-                    alert("লগইন ব্যর্থ হয়েছে: " + error.message);
-                });
+                .catch((error) => alert("লগইন ব্যর্থ: " + error.message));
+        }
+
+        function resetPassword() {
+            const email = document.getElementById('loginEmail').value;
+            if (!email) {
+                alert("ইমেইল ফিল্ডে আপনার ইমেইলটি লিখুন!");
+                return;
+            }
+            auth.sendPasswordResetEmail(email)
+                .then(() => alert("পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!"))
+                .catch((err) => alert(err.message));
         }
 
         function handleSignup(event) {
@@ -933,8 +819,7 @@
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    const uid = userCredential.user.uid;
-                    return db.collection("users").doc(uid).set({
+                    return db.collection("users").doc(userCredential.user.uid).set({
                         name: name,
                         phone: phone,
                         email: email,
@@ -946,19 +831,13 @@
                     alert("অ্যাকাউন্ট তৈরি সফল হয়েছে!");
                     toggleAuthModal();
                 })
-                .catch((error) => {
-                    alert("অ্যাকাউন্ট খুলতে সমস্যা হয়েছে: " + error.message);
-                });
+                .catch((error) => alert("ত্রুটি: " + error.message));
         }
 
         function handleLogout() {
-            auth.signOut().then(() => {
-                alert("লগআউট হয়েছে!");
-                location.reload();
-            });
+            auth.signOut().then(() => location.reload());
         }
 
-        // ADMIN DASHBOARD & ADVANCED FEATURES
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('hidden');
         }
@@ -968,56 +847,29 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('adminDateFilter').value = today;
             
-            switchAdminTab('overviewStats');
             loadAdminUsers();
             filterBookingsByDate();
-            renderExpenses();
-            updateLockControlsUI();
-        }
-
-        function addExpense() {
-            const title = document.getElementById('expenseTitle').value.trim();
-            const amount = parseFloat(document.getElementById('expenseAmount').value);
-
-            if (!title || !amount) {
-                alert("খরচের খাত ও পরিমাণ সঠিকভাবে দিন!");
-                return;
-            }
-
-            dailyExpenses.push({ title, amount, date: new Date().toISOString().split('T')[0] });
-            localStorage.setItem('dailyExpenses', JSON.stringify(dailyExpenses));
-            
-            document.getElementById('expenseTitle').value = '';
-            document.getElementById('expenseAmount').value = '';
+            loadSettingsFromFirestore();
             renderExpenses();
         }
 
-        function renderExpenses() {
-            const container = document.getElementById('expenseList');
-            const totalExpenseEl = document.getElementById('statTodayExpense');
-            
-            container.innerHTML = '';
-            let total = 0;
-
-            dailyExpenses.forEach((exp) => {
-                total += exp.amount;
-                container.innerHTML += `
-                    <div class="flex justify-between items-center border-b border-gray-800/50 py-1">
-                        <span>• ${exp.title}</span>
-                        <span class="text-rose-400 font-mono">৳${exp.amount}</span>
-                    </div>
-                `;
+        // Sync Lock Settings to Firestore
+        function loadSettingsFromFirestore() {
+            db.collection("settings").doc("locks").get().then((doc) => {
+                if(doc.exists) {
+                    blockedDates = doc.data().dates || [];
+                    blockedSlots = doc.data().slots || [];
+                    updateLockControlsUI();
+                }
             });
-
-            totalExpenseEl.innerText = `৳ ${total}`;
         }
 
         function blockOffDay() {
             const val = document.getElementById('blockDateInput').value;
             if (val && !blockedDates.includes(val)) {
                 blockedDates.push(val);
-                localStorage.setItem('blockedDates', JSON.stringify(blockedDates));
-                updateLockControlsUI();
+                db.collection("settings").doc("locks").set({ dates: blockedDates, slots: blockedSlots }, { merge: true })
+                  .then(() => updateLockControlsUI());
             }
         }
 
@@ -1025,8 +877,8 @@
             const val = document.getElementById('blockTimeInput').value;
             if (val && !blockedSlots.includes(val)) {
                 blockedSlots.push(val);
-                localStorage.setItem('blockedSlots', JSON.stringify(blockedSlots));
-                updateLockControlsUI();
+                db.collection("settings").doc("locks").set({ dates: blockedDates, slots: blockedSlots }, { merge: true })
+                  .then(() => updateLockControlsUI());
             }
         }
 
@@ -1035,9 +887,51 @@
             document.getElementById('blockedSlotsDisplay').innerText = blockedSlots.join(', ') || 'নেই';
         }
 
+        // Expenses Management (Firestore Integrated)
+        function addExpense() {
+            const title = document.getElementById('expenseTitle').value.trim();
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const today = new Date().toISOString().split('T')[0];
+
+            if (!title || !amount) {
+                alert("সব তথ্য সঠিকভাবে দিন!");
+                return;
+            }
+
+            db.collection("expenses").add({
+                title, amount, date: today, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                document.getElementById('expenseTitle').value = '';
+                document.getElementById('expenseAmount').value = '';
+                renderExpenses();
+            });
+        }
+
+        function renderExpenses() {
+            const container = document.getElementById('expenseList');
+            const totalExpenseEl = document.getElementById('statTodayExpense');
+            const today = new Date().toISOString().split('T')[0];
+            
+            db.collection("expenses").where("date", "==", today).get().then((snapshot) => {
+                container.innerHTML = '';
+                let total = 0;
+                snapshot.forEach((doc) => {
+                    const exp = doc.data();
+                    total += exp.amount;
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center border-b border-gray-800/50 py-1">
+                            <span>• ${exp.title}</span>
+                            <span class="text-rose-400 font-mono">৳${exp.amount}</span>
+                        </div>
+                    `;
+                });
+                totalExpenseEl.innerText = `৳ ${total}`;
+            });
+        }
+
         function exportBookingsToCSV() {
-            if (!loadedBookingsData || loadedBookingsData.length === 0) {
-                alert("ডাউনলোড করার মতো কোনো বুকিং তথ্য নেই!");
+            if (!loadedBookingsData.length) {
+                alert("কোনো বুকিং তথ্য নেই!");
                 return;
             }
 
@@ -1045,13 +939,11 @@
             csvContent += "সিরিয়াল,গ্রাহক,ফোন,সার্ভিস,কারিগর,তারিখ,সময়,মূল্য,স্ট্যাটাস\n";
 
             loadedBookingsData.forEach((b, index) => {
-                let row = `"${index + 1}","${b.customerName}","${b.customerPhone}","${b.service}","${b.barber || 'সৌমিক'}","${b.bookingDate}","${b.bookingTime}","${b.price || 0}","${b.status}"`;
-                csvContent += row + "\n";
+                csvContent += `"${index + 1}","${b.customerName}","${b.customerPhone}","${b.service}","${b.barber || 'সৌমিক'}","${b.bookingDate}","${b.bookingTime}","${b.price || 0}","${b.status}"\n`;
             });
 
-            const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
+            link.setAttribute("href", encodeURI(csvContent));
             link.setAttribute("download", `Salon_Bookings_${document.getElementById('adminDateFilter').value}.csv`);
             document.body.appendChild(link);
             link.click();
@@ -1060,20 +952,16 @@
 
         function loadAdminUsers() {
             const usersTable = document.getElementById('adminUsersTable');
-            usersTable.innerHTML = `<tr><td colspan="4" class="p-3 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
-
             db.collection("users").get().then((querySnapshot) => {
                 usersTable.innerHTML = '';
-
                 querySnapshot.forEach((doc) => {
                     const u = doc.data();
-                    const isAdmin = u.role === 'admin';
                     usersTable.innerHTML += `
-                        <tr class="border-b border-gray-800/60 hover:bg-gray-800/30 transition">
+                        <tr class="border-b border-gray-800/60">
                             <td class="p-2.5 font-medium text-gray-200">${u.name || 'N/A'}</td>
                             <td class="p-2.5 text-amber-400 font-mono">${u.phone || 'N/A'}</td>
                             <td class="p-2.5 text-gray-400">${u.email || 'N/A'}</td>
-                            <td class="p-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${isAdmin?'bg-amber-500/20 text-amber-400 border border-amber-500/40':'bg-gray-800 text-gray-400'}">${u.role || 'client'}</span></td>
+                            <td class="p-2.5 text-center"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${u.role==='admin'?'bg-amber-500/20 text-amber-400':'bg-gray-800 text-gray-400'}">${u.role || 'client'}</span></td>
                         </tr>
                     `;
                 });
@@ -1087,8 +975,6 @@
 
             if (!selectedDate) return;
 
-            bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-400">ডাটা লোড হচ্ছে...</td></tr>`;
-
             db.collection("bookings")
               .where("bookingDate", "==", selectedDate)
               .get()
@@ -1096,15 +982,14 @@
                   bookingsTable.innerHTML = '';
                   loadedBookingsData = [];
 
-                  const totalCount = querySnapshot.size;
+                  let totalCount = querySnapshot.size;
                   let confCount = 0;
-                  let pendCount = 0;
                   let totalEarnings = 0;
 
-                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/15 text-amber-300 font-bold px-2 py-0.5 rounded-lg border border-amber-500/30 text-xs">${totalCount} টি</span>`;
+                  countBadge.innerHTML = `📅 <span class="font-bold text-amber-400">${selectedDate}</span> তারিখে মোট বুকিং: <span class="bg-amber-500/15 text-amber-300 font-bold px-2 py-0.5 rounded-lg border text-xs">${totalCount} টি</span>`;
 
                   if (querySnapshot.empty) {
-                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80 font-medium">এই তারিখে কোনো সিরিয়াল বা বুকিং নেই।</td></tr>`;
+                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-amber-400/80">এই তারিখে কোনো বুকিং নেই।</td></tr>`;
                       document.getElementById('statTodayBookings').innerText = 0;
                       document.getElementById('statConfirmed').innerText = 0;
                       document.getElementById('statTodayEarnings').innerText = "৳ 0";
@@ -1112,51 +997,30 @@
                   }
 
                   let serialNo = 1;
-
                   querySnapshot.forEach((doc) => {
                       const b = doc.data();
-                      const docId = doc.id;
                       const currentStatus = b.status || 'Pending';
-                      const itemPrice = parseFloat(b.price || 0);
-
                       loadedBookingsData.push(b);
 
                       if (currentStatus === 'Confirmed') {
                           confCount++;
-                          totalEarnings += itemPrice;
-                      }
-                      if (currentStatus === 'Pending') pendCount++;
-
-                      if (statusFilter !== 'All' && currentStatus !== statusFilter) {
-                          return;
+                          totalEarnings += parseFloat(b.price || 0);
                       }
 
-                      let statusBadge = '';
-                      if (currentStatus === 'Confirmed') {
-                          statusBadge = `<span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-check text-[10px]"></i> Confirmed</span>`;
-                      } else if (currentStatus === 'Rejected') {
-                          statusBadge = `<span class="bg-red-500/15 text-red-400 border border-red-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-xmark text-[10px]"></i> Rejected</span>`;
-                      } else {
-                          statusBadge = `<span class="bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 px-2.5 py-1 rounded-full text-[11px] font-bold flex items-center justify-center gap-1 shadow-sm"><i class="fa-solid fa-spinner animate-spin text-[10px]"></i> Pending</span>`;
-                      }
+                      if (statusFilter !== 'All' && currentStatus !== statusFilter) return;
 
-                      let actionButtons = `
-                          <div class="flex items-center justify-center space-x-1.5">
-                              <button onclick="updateBookingStatus('${docId}', 'Confirmed')" title="Confirm Booking" class="bg-emerald-600 hover:bg-emerald-500 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></button>
-                              <button onclick="updateBookingStatus('${docId}', 'Rejected')" title="Reject Booking" class="bg-amber-600 hover:bg-amber-500 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-ban text-xs"></i></button>
-                              <button onclick="deleteBooking('${docId}')" title="Delete Order" class="bg-red-600/80 hover:bg-red-600 text-white w-7 h-7 rounded-lg transition shadow-md flex items-center justify-center"><i class="fa-solid fa-trash-can text-xs"></i></button>
-                          </div>
-                      `;
+                      let statusBadge = currentStatus === 'Confirmed' 
+                          ? `<span class="bg-emerald-500/15 text-emerald-400 px-2.5 py-1 rounded-full text-[11px] font-bold">Confirmed</span>`
+                          : currentStatus === 'Rejected'
+                          ? `<span class="bg-red-500/15 text-red-400 px-2.5 py-1 rounded-full text-[11px] font-bold">Rejected</span>`
+                          : `<span class="bg-yellow-500/15 text-yellow-400 px-2.5 py-1 rounded-full text-[11px] font-bold">Pending</span>`;
 
                       bookingsTable.innerHTML += `
-                          <tr class="border-b border-gray-800/60 hover:bg-gray-800/30 transition">
-                              <td class="p-3 text-center font-bold text-amber-400 text-sm">#${serialNo++}</td>
+                          <tr class="border-b border-gray-800/60">
+                              <td class="p-3 text-center font-bold text-amber-400">#${serialNo++}</td>
                               <td class="p-3 font-medium text-gray-200">
                                   ${b.customerName}
-                                  <div class="text-xs text-amber-400 flex items-center gap-1.5 mt-0.5 font-mono">
-                                      <span>${b.customerPhone}</span>
-                                      <a href="tel:${b.customerPhone}" title="Call Customer" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-gray-950 w-5 h-5 rounded-full transition flex items-center justify-center text-[10px]"><i class="fa-solid fa-phone"></i></a>
-                                  </div>
+                                  <div class="text-xs text-amber-400 font-mono">${b.customerPhone}</div>
                               </td>
                               <td class="p-3 text-gray-300">
                                   <div>${b.service}</div>
@@ -1167,148 +1031,139 @@
                                   <div class="text-xs text-green-400">৳${b.price || 0}</div>
                               </td>
                               <td class="p-3 text-center">${statusBadge}</td>
-                              <td class="p-3 text-center">${actionButtons}</td>
+                              <td class="p-3 text-center">
+                                  <div class="flex items-center justify-center space-x-1.5">
+                                      <button onclick="updateBookingStatus('${doc.id}', 'Confirmed')" class="bg-emerald-600 text-white w-7 h-7 rounded-lg"><i class="fa-solid fa-check text-xs"></i></button>
+                                      <button onclick="updateBookingStatus('${doc.id}', 'Rejected')" class="bg-amber-600 text-white w-7 h-7 rounded-lg"><i class="fa-solid fa-ban text-xs"></i></button>
+                                      <button onclick="deleteBooking('${doc.id}')" class="bg-red-600 text-white w-7 h-7 rounded-lg"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                                  </div>
+                              </td>
                           </tr>
                       `;
                   });
 
-                  if (bookingsTable.innerHTML === '') {
-                      bookingsTable.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-yellow-400/80 font-medium">এই ফিল্টারে কোনো তথ্য পাওয়া যায়নি।</td></tr>`;
-                  }
-
                   document.getElementById('statTodayBookings').innerText = totalCount;
                   document.getElementById('statConfirmed').innerText = confCount;
                   document.getElementById('statTodayEarnings').innerText = `৳ ${totalEarnings}`;
-              })
-              .catch((error) => {
-                  bookingsTable.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-400">তথ্য আনতে সমস্যা হয়েছে: ${error.message}</td></tr>`;
               });
         }
 
         function filterByCardStatus(status) {
-            switchAdminTab('bookingTableSection');
             filterBookingsByDate(status);
+            document.getElementById('bookingTableSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         function searchBookingsTable() {
             const input = document.getElementById('adminSearchInput').value.toLowerCase();
-            const rows = document.querySelectorAll('#adminBookingsTable tr');
-
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(input) ? '' : 'none';
+            document.querySelectorAll('#adminBookingsTable tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
             });
         }
 
         function updateBookingStatus(docId, newStatus) {
-            db.collection("bookings").doc(docId).update({
-                status: newStatus
-            }).then(() => {
-                filterBookingsByDate(); 
-            }).catch((error) => {
-                alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে: " + error.message);
-            });
+            db.collection("bookings").doc(docId).update({ status: newStatus }).then(() => filterBookingsByDate());
         }
 
         function deleteBooking(docId) {
-            if (confirm("আপনি কি নিশ্চিত এই বুকিংটি মুছে ফেলতে চান?")) {
-                db.collection("bookings").doc(docId).delete().then(() => {
-                    alert("বুকিংটি সফলভাবে মুছে ফেলা হয়েছে!");
-                    filterBookingsByDate();
-                }).catch((error) => {
-                    alert("মুছে ফেলতে সমস্যা হয়েছে: " + error.message);
-                });
+            if (confirm("বুকিংটি মুছে ফেলতে চান?")) {
+                db.collection("bookings").doc(docId).delete().then(() => filterBookingsByDate());
             }
         }
 
-        // Telegram Booking Notification
-        function sendTelegramBooking(event) {
+        // Send Booking (With Overlap Check & Phone Validation)
+        async function sendTelegramBooking(event) {
             event.preventDefault();
 
             const date = document.getElementById('bookDate').value;
             const time = document.getElementById('bookTime').value;
+            const phone = document.getElementById('bookPhone').value.trim();
+            const barber = document.getElementById('bookBarber').value;
+            const name = document.getElementById('bookName').value.trim();
+            const service = document.getElementById('bookService').value;
+
+            // Phone Number Validation (Bangladeshi Standard)
+            const bdPhoneRegex = /^01[3-9]\d{8}$/;
+            if (!bdPhoneRegex.test(phone)) {
+                alert("অনুগ্রহ করে সঠিক ১১ ডিজিটের বাংলাদেশি মোবাইল নম্বর দিন।");
+                return;
+            }
 
             if (blockedDates.includes(date)) {
-                alert("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে। অনুগ্রহ করে অন্য দিন নির্বাচন করুন।");
+                alert("দুঃখিত! এই তারিখে সেলুন বন্ধ থাকবে।");
                 return;
             }
             if (blockedSlots.includes(time)) {
-                alert("দুঃখিত! এই নির্দিষ্ট সময়ের স্লটটি বুকিংয়ের জন্য ব্লক করা রয়েছে।");
+                alert("দুঃখিত! এই স্লটটি ইতোমধ্যে লক করা রয়েছে।");
                 return;
             }
 
-            const name = document.getElementById('bookName').value.trim();
-            const phone = document.getElementById('bookPhone').value.trim();
-            const service = document.getElementById('bookService').value;
-            const barber = document.getElementById('bookBarber').value;
-            const price = calculatePrice();
-
-            const currentUser = auth.currentUser;
-            const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
-
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "পাঠানো হচ্ছে...";
+            btn.innerText = "যাচাই করা হচ্ছে...";
             btn.disabled = true;
 
-            db.collection("bookings").add({
-                customerName: name,
-                customerPhone: phone,
-                service: service,
-                barber: barber,
-                price: price,
-                bookingDate: date,
-                bookingTime: time,
-                userType: userStatus,
-                status: "Pending",
-                userId: currentUser ? currentUser.uid : "guest",
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            try {
+                // Check Overlapping Booking for Same Date, Time and Barber
+                const existingBooking = await db.collection("bookings")
+                    .where("bookingDate", "==", date)
+                    .where("bookingTime", "==", time)
+                    .where("barber", "==", barber)
+                    .where("status", "in", ["Pending", "Confirmed"])
+                    .get();
 
-            const telegramBotToken = "8847976532:AAHcKafdKbxfZ39ZbI25fxaKgzOvRGw9-jI";
-            const telegramChatId = "6091423501";
-            
-            const telegramMsg = `💈 *নতুন সেলুন বুকিং এসেছে!* 💈\n\n` +
-                                `👤 *নাম:* ${name}\n` +
-                                `📞 *ফোন:* ${phone}\n` +
-                                `✂️ *সার্ভিস:* ${service}\n` +
-                                `💈 *কারিগর:* ${barber}\n` +
-                                `💰 *মূল্য:* ৳${price}\n` +
-                                `📅 *তারিখ:* ${date}\n` +
-                                `⏰ *সময়:* ${time}\n` +
-                                `🏷️ *টাইপ:* ${userStatus}\n` +
-                                `⏳ *স্ট্যাটাস:* Pending`;
+                if (!existingBooking.empty) {
+                    alert(`দুঃখিত! ${barber}-এর জন্য এই সময়টি (${time}) ইতোমধ্যে বুক হয়ে গেছে। অন্য সময় বা কারিগর বেছে নিন।`);
+                    btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
+                    btn.disabled = false;
+                    return;
+                }
 
-            fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    chat_id: telegramChatId,
-                    text: telegramMsg,
-                    parse_mode: "Markdown"
-                })
-            })
-            .then(res => {
-                btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
-                btn.disabled = false;
+                const price = calculatePrice();
+                const currentUser = auth.currentUser;
+                const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
+
+                await db.collection("bookings").add({
+                    customerName: name,
+                    customerPhone: phone,
+                    service: service,
+                    barber: barber,
+                    price: price,
+                    bookingDate: date,
+                    bookingTime: time,
+                    userType: userStatus,
+                    status: "Pending",
+                    userId: currentUser ? currentUser.uid : "guest",
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Telegram Alert Send
+                const telegramBotToken = "8847976532:AAHcKafdKbxfZ39ZbI25fxaKgzOvRGw9-jI";
+                const telegramChatId = "6091423501";
+                const telegramMsg = `💈 *নতুন সেলুন বুকিং!* 💈\n\n👤 *নাম:* ${name}\n📞 *ফোন:* ${phone}\n✂️ *সার্ভিস:* ${service}\n💈 *কারিগর:* ${barber}\n💰 *মূল্য:* ৳${price}\n📅 *তারিখ:* ${date}\n⏰ *সময়:* ${time}\n⏳ *স্ট্যাটাস:* Pending`;
+
+                fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: telegramChatId, text: telegramMsg, parse_mode: "Markdown" })
+                }).catch(() => {});
+
                 alert("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!");
                 event.target.reset();
                 calculatePrice();
-            })
-            .catch(err => {
+
+            } catch(err) {
+                alert("বুকিং জমা দিতে সমস্যা হয়েছে: " + err.message);
+            } finally {
                 btn.innerHTML = `<i class="fa-solid fa-calendar-check mr-2"></i> আপনার বুকিং নিশ্চিত করুন`;
                 btn.disabled = false;
-                alert("বুকিং জমা হয়েছে, ধন্যবাদ!");
-            });
+            }
         }
 
-        // Review System
+        // Firestore Integrated Reviews
         let selectedRating = 0;
-        const initialReviews = [
-            { name: "আরিফ আহমেদ", rating: 5, comment: "খুবই চমৎকার সার্ভিস! হেয়ার কাটিং ও দাড়ি স্টাইলিং অনেক নিখুঁত হয়েছে।" }
-        ];
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadReviews();
+            loadReviewsFromFirestore();
+            loadSettingsFromFirestore();
             const today = new Date().toISOString().split('T')[0];
             if(document.getElementById('bookDate')) {
                 document.getElementById('bookDate').min = today;
@@ -1316,14 +1171,13 @@
             }
         });
 
-        function loadReviews() {
-            let reviews = JSON.parse(localStorage.getItem('salon_reviews'));
-            if (!reviews || reviews.length === 0) {
-                reviews = initialReviews;
-                localStorage.setItem('salon_reviews', JSON.stringify(reviews));
-            }
-            renderReviews(reviews);
-            updateSummary(reviews);
+        function loadReviewsFromFirestore() {
+            db.collection("reviews").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
+                let reviews = [];
+                snapshot.forEach(doc => reviews.push(doc.data()));
+                renderReviews(reviews);
+                updateSummary(reviews);
+            });
         }
 
         function renderReviews(reviews) {
@@ -1332,25 +1186,20 @@
 
             reviews.forEach(review => {
                 const starsText = '⭐'.repeat(review.rating);
-                const commentHtml = review.comment !== "" 
-                    ? `<p class="text-sm text-gray-400">${review.comment}</p>` 
-                    : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`;
-
-                const reviewHtml = `
+                reviewsList.innerHTML += `
                     <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-1">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-gray-200">${review.name}</span>
                             <span class="text-amber-400 text-sm">${starsText}</span>
                         </div>
-                        ${commentHtml}
+                        ${review.comment ? `<p class="text-sm text-gray-400">${review.comment}</p>` : `<p class="text-xs italic text-gray-500">শুধুমাত্র রেটিং প্রদান করা হয়েছে</p>`}
                     </div>
                 `;
-                reviewsList.insertAdjacentHTML('beforeend', reviewHtml);
             });
         }
 
         function updateSummary(reviews) {
-            if (reviews.length === 0) return;
+            if (!reviews.length) return;
             const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
             const avgScore = (totalScore / reviews.length).toFixed(1);
 
@@ -1363,13 +1212,7 @@
             selectedRating = rating;
             const stars = document.getElementById('starContainer').children;
             for (let i = 0; i < stars.length; i++) {
-                if (i < rating) {
-                    stars[i].classList.add('text-amber-400');
-                    stars[i].classList.remove('text-gray-700');
-                } else {
-                    stars[i].classList.remove('text-amber-400');
-                    stars[i].classList.add('text-gray-700');
-                }
+                stars[i].className = i < rating ? "fa-solid fa-star transition duration-200 text-amber-400 hover:scale-110" : "fa-solid fa-star transition duration-200 text-gray-700 hover:scale-110";
             }
         }
 
@@ -1377,37 +1220,30 @@
             selectedRating = 0;
             const stars = document.getElementById('starContainer').children;
             for (let i = 0; i < stars.length; i++) {
-                stars[i].classList.remove('text-amber-400');
-                stars[i].classList.add('text-gray-700');
+                stars[i].className = "fa-solid fa-star transition duration-200 text-gray-700 hover:scale-110";
             }
         }
 
         function submitReview(event) {
             event.preventDefault();
             const nameInput = document.getElementById('custName').value.trim();
-
-            if (!nameInput) {
-                alert('অনুগ্রহ করে আপনার নাম লিখুন।');
-                return;
-            }
-            if (selectedRating === 0) {
-                alert('অনুগ্রহ করে রেটিং দিতে স্টার ক্লিক করুন।');
-                return;
-            }
-
             const commentInput = document.getElementById('custComment').value.trim();
-            const newReview = { name: nameInput, rating: selectedRating, comment: commentInput };
 
-            let reviews = JSON.parse(localStorage.getItem('salon_reviews')) || [];
-            reviews.unshift(newReview);
-            localStorage.setItem('salon_reviews', JSON.stringify(reviews));
+            if (!nameInput || selectedRating === 0) {
+                alert('নাম এবং স্টার রেটিং নিশ্চিত করুন!');
+                return;
+            }
 
-            renderReviews(reviews);
-            updateSummary(reviews);
-
-            document.getElementById('ratingForm').reset();
-            resetRating();
-            alert('রেটিং সফলভাবে জমা হয়েছে!');
+            db.collection("reviews").add({
+                name: nameInput,
+                rating: selectedRating,
+                comment: commentInput,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                document.getElementById('ratingForm').reset();
+                resetRating();
+                alert('রেটিং জমা হয়েছে!');
+            });
         }
     </script>
 </body>
