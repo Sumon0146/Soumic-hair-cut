@@ -224,24 +224,24 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের সার্ভিস <span class="text-red-500">*</span></label>
-                        <select id="bookService" onchange="calculatePrice()" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
-                            <option value="">সার্ভিস নির্বাচন করুন</option>
-                            <option value="হেয়ার কাট" data-price="100">হেয়ার কাট (৳১০০)</option>
-                            <option value="দাড়ি স্টাইলিং/ট্রিম" data-price="60">দাড়ি স্টাইলিং / ট্রিম (৳৬০)</option>
-                            <option value="কম্বো ১ (হেয়ারকাট + দাড়ি)" data-price="150">কম্বো ১ (হেয়ারকাট + দাড়ি) (৳১৫০)</option>
-                            <option value="কম্বো ২ (ফুল গ্রুমিং)" data-price="300">কম্বো ২ (ফুল গ্রুমিং) (৳৩০০)</option>
-                            <option value="ফেসিয়াল / স্কিন কেয়ার" data-price="200">ফেসিয়াল / স্কিন কেয়ার (৳২০০)</option>
-                            <option value="অন্যান্য" data-price="80">অন্যান্য (৳৮০)</option>
+                        <select id="bookService" onchange="calculatePrice()" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition cursor-pointer">
+                            <option value="" class="bg-gray-900 text-gray-400">সার্ভিস নির্বাচন করুন</option>
+                            <option value="হেয়ার কাট" data-price="100" class="bg-gray-900 text-gray-100">হেয়ার কাট (৳১০০)</option>
+                            <option value="দাড়ি স্টাইলিং/ট্রিম" data-price="60" class="bg-gray-900 text-gray-100">দাড়ি স্টাইলিং / ট্রিম (৳৬০)</option>
+                            <option value="কম্বো ১ (হেয়ারকাট + দাড়ি)" data-price="150" class="bg-gray-900 text-gray-100">কম্বো ১ (হেয়ারকাট + দাড়ি) (৳১৫০)</option>
+                            <option value="কম্বো ২ (ফুল গ্রুমিং)" data-price="300" class="bg-gray-900 text-gray-100">কম্বো ২ (ফুল গ্রুমিং) (৳৩০০)</option>
+                            <option value="ফেসিয়াল / স্কিন কেয়ার" data-price="200" class="bg-gray-900 text-gray-100">ফেসিয়াল / স্কিন কেয়ার (৳২০০)</option>
+                            <option value="অন্যান্য" data-price="80" class="bg-gray-900 text-gray-100">অন্যান্য (৳৮০)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-1">পছন্দের কারিগর (Barber/Staff) <span class="text-red-500">*</span></label>
-                    <select id="bookBarber" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition">
-                        <option value="সৌমিক">সৌমিক</option>
-                        <option value="রহিম">রহিম</option>
-                        <option value="কার্তিক">কার্তিক</option>
+                    <select id="bookBarber" required class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-sky-500 transition cursor-pointer">
+                        <option value="সৌমিক" class="bg-gray-900 text-gray-100">সৌমিক</option>
+                        <option value="রহিম" class="bg-gray-900 text-gray-100">রহিম</option>
+                        <option value="কার্তিক" class="bg-gray-900 text-gray-100">কার্তিক</option>
                     </select>
                 </div>
 
@@ -472,23 +472,29 @@
                 </div>
             </div>
 
-            <!-- Expense Tracker -->
+            <!-- Expense Tracker (Updated Dropdown Styles) -->
             <div id="expenseTracker" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
                     <i class="fa-solid fa-wallet mr-2"></i> প্রতিদিনের খরচ হিসাব ডায়েরি
                 </h3>
                 <div class="flex flex-col md:flex-row gap-2">
-                    <select id="expenseTitle" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500">
-                        <option value="" disabled selected>খাত (যেমন: ব্লেড/শ্যাম্পু/বিল)</option>
-                        <optgroup label="যন্ত্রপাতি">
-                            <option value="হেয়ার ক্লিপার">হেয়ার ক্লিপার</option>
-                            <option value="ব্লেড">ব্লেড</option>
-                            <option value="কাঁচি">কাঁচি</option>
+                    <select id="expenseTitle" class="bg-gray-900 border border-gray-800 text-xs rounded-xl p-2.5 flex-1 text-gray-100 focus:outline-none focus:border-amber-500 cursor-pointer">
+                        <option value="" disabled selected class="bg-gray-900 text-gray-400">খাত নির্বাচন করুন (যেমন: ব্লেড/শ্যাম্পু/বিল)</option>
+                        <optgroup label="যন্ত্রপাতি" class="bg-gray-900 text-amber-400 font-bold">
+                            <option value="হেয়ার ক্লিপার" class="bg-gray-900 text-gray-100">হেয়ার ক্লিপার</option>
+                            <option value="ব্লেড" class="bg-gray-900 text-gray-100">ব্লেড</option>
+                            <option value="কাঁচি" class="bg-gray-900 text-gray-100">কাঁচি</option>
                         </optgroup>
-                        <optgroup label="প্রসাধন ও সরঞ্জাম">
-                            <option value="শ্যাম্পু">শ্যাম্পু</option>
-                            <option value="শেভিং ক্রিম">শেভিং ক্রিম</option>
-                            <option value="টিস্যু পেপার">টিস্যু পেপার</option>
+                        <optgroup label="প্রসাধন ও সরঞ্জাম" class="bg-gray-900 text-amber-400 font-bold">
+                            <option value="শ্যাম্পু" class="bg-gray-900 text-gray-100">শ্যাম্পু</option>
+                            <option value="শেভিং ক্রিম" class="bg-gray-900 text-gray-100">শেভিং ক্রিম</option>
+                            <option value="টিস্যু পেপার" class="bg-gray-900 text-gray-100">টিস্যু পেপার</option>
+                        </optgroup>
+                        <optgroup label="অন্যান্য খরচ" class="bg-gray-900 text-amber-400 font-bold">
+                            <option value="বিদ্যুৎ বিল" class="bg-gray-900 text-gray-100">বিদ্যুৎ বিল</option>
+                            <option value="দোকান ভাড়া" class="bg-gray-900 text-gray-100">দোকান ভাড়া</option>
+                            <option value="চা / নাস্তা" class="bg-gray-900 text-gray-100">চা / নাস্তা</option>
+                            <option value="অন্যান্য" class="bg-gray-900 text-gray-100">অন্যান্য</option>
                         </optgroup>
                     </select>
 
@@ -943,26 +949,39 @@
             document.getElementById('blockedSlotsDisplay').innerText = blockedSlots.join(', ') || 'নেই';
         }
 
+        // Updated Expense Handler Function
         function addExpense() {
-            const title = document.getElementById('expenseTitle').value;
+            const titleSelect = document.getElementById('expenseTitle');
+            const title = titleSelect.value;
             const amount = parseFloat(document.getElementById('expenseAmount').value);
             const today = new Date().toISOString().split('T')[0];
             const originalHtml = document.getElementById('expenseBtn').innerHTML;
 
-            if (!title || !amount) {
-                showToast("সব তথ্য সঠিকভাবে দিন!", 'warning');
+            if (!title) {
+                showToast("অনুগ্রহ করে খরচের খাত নির্বাচন করুন!", 'warning');
+                return;
+            }
+
+            if (isNaN(amount) || amount <= 0) {
+                showToast("সঠিক টাকার পরিমাণ লিখুন!", 'warning');
                 return;
             }
 
             setBtnLoading('expenseBtn', true, originalHtml);
             db.collection("expenses").add({
-                title, amount, date: today, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                title: title,
+                amount: amount,
+                date: today,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
                 setBtnLoading('expenseBtn', false, originalHtml);
-                document.getElementById('expenseTitle').value = '';
+                titleSelect.selectedIndex = 0;
                 document.getElementById('expenseAmount').value = '';
                 renderExpenses();
-                showToast("খরচ যোগ করা হয়েছে।", 'success');
+                showToast("খরচ সফলভাবে যোগ করা হয়েছে।", 'success');
+            }).catch((err) => {
+                setBtnLoading('expenseBtn', false, originalHtml);
+                showToast("ত্রুটি: " + err.message, 'error');
             });
         }
 
