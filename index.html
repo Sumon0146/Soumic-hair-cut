@@ -68,17 +68,17 @@
                 <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
                 
                 <div class="space-y-2">
-                    <button onclick="openAdminSection(\'overviewStats\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('overviewStats')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-chart-pie mr-3 text-amber-400"></i> ১. সমারি ও লাভ-ক্ষতি</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <button onclick="openAdminSection(\'analyticsSection\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('analyticsSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-chart-line mr-3 text-blue-400"></i> ১.১. অ্যাডভান্সড অ্যানালিটিক্স</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <button onclick="openAdminSection(\'expenseTracker\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('expenseTracker')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-wallet mr-3 text-rose-400"></i> ২. খরচের হিসাব ডায়েরি</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
@@ -93,17 +93,17 @@
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <button onclick="openAdminSection(\'userList\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('userList')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-users mr-3 text-sky-400"></i> ৫. নিবন্ধিত ইউজার তালিকা</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <button onclick="openAdminSection(\'inventoryManagementSection\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('inventoryManagementSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-boxes-stacked mr-3 text-purple-400"></i> ৬. ইনভেন্টরি ম্যানেজমেন্ট</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
 
-                    <button onclick="openAdminSection(\'serviceBarberManagementSection\')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                    <button onclick="openAdminSection('serviceBarberManagementSection')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-scissors-alt mr-3 text-green-400"></i> ৭. সার্ভিস ও কারিগর ম্যানেজমেন্ট</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
                     </button>
@@ -892,28 +892,29 @@
 
         function openAdminSection(sectionId) {
             toggleDrawer();
-            const modal = document.getElementById(\'adminModal\');
-            if(modal.classList.contains(\'hidden\')) {
+            const modal = document.getElementById('adminModal');
+            if(modal.classList.contains('hidden')) {
                 openAdminPanel();
             }
             // Directly show the target section without timeout, as openAdminPanel will handle initial loading
             let targetId = sectionId;
-            if(sectionId === \'bookingTable\') targetId = \'bookingTableSection\';
-            if(sectionId === \'userList\') targetId = \'registeredUsersSection\';
-            if(sectionId === \'analyticsSection\') targetId = \'analyticsSection\';
-            if(sectionId === \'inventoryManagementSection\') targetId = \'inventoryManagementSection\';
-            if(sectionId === \'serviceBarberManagementSection\') targetId = \'serviceBarberManagementSection\';
+            if(sectionId === 'bookingTable') targetId = 'bookingTableSection';
+            if(sectionId === 'userList') targetId = 'registeredUsersSection';
+            if(sectionId === 'analyticsSection') targetId = 'analyticsSection';
+            if(sectionId === 'inventoryManagementSection') targetId = 'inventoryManagementSection';
+            if(sectionId === 'serviceBarberManagementSection') targetId = 'serviceBarberManagementSection';
 
             // Hide all admin sections first
-            document.querySelectorAll(\'#adminModal > div > div > div[id$="Section"], #adminModal > div > div > div[id$="Tracker"], #adminModal > div > div > div[id$="Controls"], #adminModal > div > div > div[id$="Table"]\').forEach(section => {
-                section.classList.add(\'hidden\');
+            const adminSections = document.querySelectorAll('#adminModal > div > div > div[id$="Section"], #adminModal > div > div > div[id$="Tracker"], #adminModal > div > div > div[id$="Controls"], #adminModal > div > div > div[id$="Table"]');
+            adminSections.forEach(section => {
+                section.classList.add('hidden');
             });
 
             // Show the target section
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                targetSection.classList.remove(\'hidden\');
-                targetSection.scrollIntoView({ behavior: \'smooth\' });
+                targetSection.classList.remove('hidden');
+                targetSection.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -2112,6 +2113,7 @@
                 showToast('নাম এবং স্টার রেটিং নিশ্চিত করুন!', 'warning');
                 return;
             }
+
             setBtnLoading('ratingSubmitBtn', true, originalHtml);
             db.collection("reviews").add({
                 name: nameInput,
@@ -2129,5 +2131,5 @@
             });
         }
     </script>
-</body>
+    </body>
 </html>
