@@ -825,6 +825,31 @@
         const db = firebase.firestore();
 
         const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
+        const TELEGRAM_BOT_TOKEN = "8847976532:AAECY50B175kuj0AJfhSKy7Ediu1TrEB5aE";
+        const TELEGRAM_CHAT_ID = "6091423501";
+
+        function sendTelegramMessage(bookingData) {
+            if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes("YOUR_BOT")) return;
+
+            const message = `🔔 নতুন সিরিয়াল বুকিং!\n\n` +
+                            `👤 নাম: ${bookingData.customerName}\n` +
+                            `📞 ফোন: ${bookingData.customerPhone}\n` +
+                            `✂️ সার্ভিস: ${bookingData.service}\n` +
+                            `👨‍🦱 কারিগর: ${bookingData.barber || 'সৌমিক'}\n` +
+                            `📅 তারিখ: ${bookingData.bookingDate}\n` +
+                            `⏰ সময়: ${bookingData.bookingTime}\n` +
+                            `💰 মূল্য: ৳${bookingData.price}\n` +
+                            `📌 স্ট্যাটাস: ${bookingData.status}`;
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.ok) console.error("Telegram API Error:", data);
+                })
+                .catch(error => console.error("Telegram Fetch Error:", error));
+        }
 
         let currentDiscountPercent = 0;
         let blockedDates = [];
@@ -1992,7 +2017,7 @@
                 const currentUser = auth.currentUser;
                 const userStatus = currentUser ? "নিবন্ধিত গ্রাহক" : "গেস্ট গ্রাহক";
 
-                await db.collection("bookings").add({
+                const bookingData = {
                     customerName: name,
                     customerPhone: phone,
                     service: service,
@@ -2004,7 +2029,12 @@
                     status: "Pending",
                     userId: currentUser ? currentUser.uid : "guest",
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                };
+
+                await db.collection("bookings").add(bookingData);
+                
+                // টেলিগ্রাম নোটিফিকেশন পাঠানো
+                sendTelegramMessage(bookingData);
 
                 showToast("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!", 'success');
                 event.target.reset();
@@ -2130,6 +2160,6 @@
                 showToast('ত্রুটি: ' + err.message, 'error');
             });
         }
-    </script>
+        </script>
     </body>
 </html>
