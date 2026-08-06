@@ -829,7 +829,10 @@
         const TELEGRAM_CHAT_ID = "6091423501";
 
         function sendTelegramMessage(bookingData) {
-            if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes("YOUR_BOT")) return;
+            if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes("YOUR_BOT")) {
+                console.warn("Telegram Token not set properly.");
+                return;
+            }
 
             const message = `🔔 নতুন সিরিয়াল বুকিং!\n\n` +
                             `👤 নাম: ${bookingData.customerName}\n` +
@@ -846,9 +849,18 @@
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    if (!data.ok) console.error("Telegram API Error:", data);
+                    if (data.ok) {
+                        console.log("টেলিগ্রাম নোটিফিকেশন পাঠানো হয়েছে।");
+                    } else {
+                        console.error("Telegram API Error:", data);
+                        showToast("টেলিগ্রাম নোটিফিকেশন পাঠানো যায়নি!", 'warning');
+                    }
                 })
-                .catch(error => console.error("Telegram Fetch Error:", error));
+                .catch(error => {
+                    console.error("Telegram Fetch Error:", error);
+                    // ব্রাউজার যদি রিকোয়েস্ট ব্লক করে তবে এখানে আসবে
+                    showToast("টেলিগ্রামের সাথে সংযোগ বিচ্ছিন্ন বা ব্লক করা হয়েছে!", 'error');
+                });
         }
 
         let currentDiscountPercent = 0;
@@ -1981,6 +1993,11 @@
             const name = document.getElementById('bookName').value.trim();
             const service = document.getElementById('bookService').value;
             const originalHtml = document.getElementById('submitBtn').innerHTML;
+
+            if (!name || !service || !barber || !date || !time) {
+                showToast("অনুগ্রহ করে সবগুলি ঘর সঠিকভাবে পূরণ করুন।", 'warning');
+                return;
+            }
 
             const bdPhoneRegex = /^01[3-9]\d{8}$/;
             if (!bdPhoneRegex.test(phone)) {
