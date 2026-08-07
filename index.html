@@ -143,9 +143,15 @@
                 </a>
             </div>
             
-            <div id="navUserArea" class="flex items-center space-x-2">
-                <!-- Google Translate Element -->
-                <div id="google_translate_element" class="hidden sm:block"></div>
+            <div id="navUserArea" class="flex items-center space-x-3">
+                <!-- Direct Language Switcher -->
+                <div class="flex items-center bg-gray-900 rounded-full p-1 border border-gray-800">
+                    <button onclick="changeLanguage('bn')" class="px-3 py-1 text-xs font-bold rounded-full transition bg-amber-500 text-gray-950" id="lang-bn">বাংলা</button>
+                    <button onclick="changeLanguage('en')" class="px-3 py-1 text-xs font-bold rounded-full transition text-gray-400 hover:text-amber-500" id="lang-en">EN</button>
+                </div>
+                
+                <!-- Hidden Google Translate Element -->
+                <div id="google_translate_element" class="hidden"></div>
                 
                 <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
                     <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
@@ -375,199 +381,7 @@
 
     </div>
 
-    <!-- Analytics Section -->
-            <div id="analyticsSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-blue-400 flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2 text-blue-400"></i> অ্যাডভান্সড অ্যানালিটিক্স
-                </h3>
-                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                    <h4 class="text-sm font-bold text-gray-200 mb-2">সাপ্তাহিক আয়ের গ্রাফ</h4>
-                    <canvas id="weeklyEarningsChart"></canvas>
-                </div>
-            </div>
 
-            <!-- Inventory Management -->
-            <div id="inventoryManagementSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-purple-400 flex items-center">
-                    <i class="fa-solid fa-boxes-stacked mr-2 text-purple-400"></i> ইনভেন্টরি ম্যানেজমেন্ট
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="productName" class="block text-sm font-medium text-gray-300 mb-1">পণ্যের নাম</label>
-                        <input type="text" id="productName" placeholder="শ্যাম্পু, ব্লেড, লোশন" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition">
-                    </div>
-                    <div>
-                        <label for="productQuantity" class="block text-sm font-medium text-gray-300 mb-1">পরিমাণ</label>
-                        <input type="number" id="productQuantity" placeholder="সংখ্যা" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition">
-                    </div>
-                </div>
-                <button onclick="addProduct()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addProductBtn">
-                    <i class="fa-solid fa-plus mr-2"></i> পণ্য যোগ করুন
-                </button>
-                <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                    <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-900/90 text-purple-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                            <tr>
-                                <th class="p-3">পণ্যের নাম</th>
-                                <th class="p-3">পরিমাণ</th>
-                                <th class="p-3 text-center">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Service & Barber Management -->
-            <div id="serviceBarberManagementSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-green-400 flex items-center">
-                    <i class="fa-solid fa-scissors-alt mr-2 text-green-400"></i> সার্ভিস ও কারিগর ম্যানেজমেন্ট
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="serviceName" class="block text-sm font-medium text-gray-300 mb-1">সার্ভিসের নাম</label>
-                        <input type="text" id="serviceName" placeholder="হেয়ার কাট, দাড়ি" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition">
-                    </div>
-                    <div>
-                        <label for="servicePrice" class="block text-sm font-medium text-gray-300 mb-1">মূল্য (৳)</label>
-                        <input type="number" id="servicePrice" placeholder="৳150" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition">
-                    </div>
-                </div>
-                <button onclick="addService()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addServiceBtn">
-                    <i class="fa-solid fa-plus mr-2"></i> সার্ভিস যোগ করুন
-                </button>
-                <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                    <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-900/90 text-green-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                            <tr>
-                                <th class="p-3">সার্ভিসের নাম</th>
-                                <th class="p-3">মূল্য</th>
-                                <th class="p-3 text-center">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="servicesTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="mt-8">
-                    <h4 class="text-base font-bold text-green-400 mb-3">কারিগর ম্যানেজমেন্ট</h4>
-                    <input type="text" id="barberName" placeholder="কারিগর এর নাম" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition mb-3">
-                    <button onclick="addBarber()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addBarberBtn">
-                        <i class="fa-solid fa-user-plus mr-2"></i> কারিগর যোগ করুন
-                    </button>
-                    <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                        <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                            <thead class="bg-gray-900/90 text-blue-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                                <tr>
-                                    <th class="p-3">কারিগর এর নাম</th>
-                                    <th class="p-3 text-center">অ্যাকশন</th>
-                                </tr>
-                            </thead>
-                            <tbody id="barbersTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Section -->
-            <div id="analyticsSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-blue-400 flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2 text-blue-400"></i> অ্যাডভান্সড অ্যানালিটিক্স
-                </h3>
-                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
-                    <h4 class="text-sm font-bold text-gray-200 mb-2">সাপ্তাহিক আয়ের গ্রাফ</h4>
-                    <canvas id="weeklyEarningsChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Inventory Management -->
-            <div id="inventoryManagementSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-purple-400 flex items-center">
-                    <i class="fa-solid fa-boxes-stacked mr-2 text-purple-400"></i> ইনভেন্টরি ম্যানেজমেন্ট
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="productName" class="block text-sm font-medium text-gray-300 mb-1">পণ্যের নাম</label>
-                        <input type="text" id="productName" placeholder="শ্যাম্পু, ব্লেড, লোশন" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition">
-                    </div>
-                    <div>
-                        <label for="productQuantity" class="block text-sm font-medium text-gray-300 mb-1">পরিমাণ</label>
-                        <input type="number" id="productQuantity" placeholder="সংখ্যা" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500 transition">
-                    </div>
-                </div>
-                <button onclick="addProduct()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addProductBtn">
-                    <i class="fa-solid fa-plus mr-2"></i> পণ্য যোগ করুন
-                </button>
-                <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                    <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-900/90 text-purple-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                            <tr>
-                                <th class="p-3">পণ্যের নাম</th>
-                                <th class="p-3">পরিমাণ</th>
-                                <th class="p-3 text-center">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Service & Barber Management -->
-            <div id="serviceBarberManagementSection" class="space-y-4 bg-gray-950/70 p-4 md:p-5 rounded-2xl border border-gray-800/80 shadow-xl scroll-mt-6 hidden">
-                <h3 class="text-base md:text-lg font-bold text-green-400 flex items-center">
-                    <i class="fa-solid fa-scissors-alt mr-2 text-green-400"></i> সার্ভিস ও কারিগর ম্যানেজমেন্ট
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="serviceName" class="block text-sm font-medium text-gray-300 mb-1">সার্ভিসের নাম</label>
-                        <input type="text" id="serviceName" placeholder="হেয়ার কাট, দাড়ি" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition">
-                    </div>
-                    <div>
-                        <label for="servicePrice" class="block text-sm font-medium text-gray-300 mb-1">মূল্য (৳)</label>
-                        <input type="number" id="servicePrice" placeholder="৳150" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition">
-                    </div>
-                </div>
-                <button onclick="addService()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addServiceBtn">
-                    <i class="fa-solid fa-plus mr-2"></i> সার্ভিস যোগ করুন
-                </button>
-                <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                    <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                        <thead class="bg-gray-900/90 text-green-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                            <tr>
-                                <th class="p-3">সার্ভিসের নাম</th>
-                                <th class="p-3">মূল্য</th>
-                                <th class="p-3 text-center">অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="servicesTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="mt-8">
-                    <h4 class="text-base font-bold text-green-400 mb-3">কারিগর ম্যানেজমেন্ট</h4>
-                    <input type="text" id="barberName" placeholder="কারিগর এর নাম" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-green-500 transition mb-3">
-                    <button onclick="addBarber()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-xl transition duration-300 w-full shadow-md" id="addBarberBtn">
-                        <i class="fa-solid fa-user-plus mr-2"></i> কারিগর যোগ করুন
-                    </button>
-                    <div class="overflow-x-auto rounded-xl border border-gray-800/80 shadow-md mt-4">
-                        <table class="w-full text-xs md:text-sm text-left text-gray-300">
-                            <thead class="bg-gray-900/90 text-blue-400 uppercase text-[11px] font-bold border-b border-gray-800">
-                                <tr>
-                                    <th class="p-3">কারিগর এর নাম</th>
-                                    <th class="p-3 text-center">অ্যাকশন</th>
-                                </tr>
-                            </thead>
-                            <tbody id="barbersTable" class="divide-y divide-gray-800/60 bg-gray-950/40">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
             <!-- Admin Modal -->
     <div id="authModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
@@ -823,10 +637,23 @@
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'bn',
-                includedLanguages: 'en,bn,hi,ar,es,fr',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                includedLanguages: 'en,bn',
                 autoDisplay: false
             }, 'google_translate_element');
+        }
+
+        function changeLanguage(langCode) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+                
+                // Update Button Styles
+                document.getElementById('lang-bn').className = langCode === 'bn' ? 'px-3 py-1 text-xs font-bold rounded-full transition bg-amber-500 text-gray-950' : 'px-3 py-1 text-xs font-bold rounded-full transition text-gray-400 hover:text-amber-500';
+                document.getElementById('lang-en').className = langCode === 'en' ? 'px-3 py-1 text-xs font-bold rounded-full transition bg-amber-500 text-gray-950' : 'px-3 py-1 text-xs font-bold rounded-full transition text-gray-400 hover:text-amber-500';
+            } else {
+                showToast("ভাষা পরিবর্তন করার সিস্টেম লোড হচ্ছে, দয়া করে একটু অপেক্ষা করুন।", 'info');
+            }
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -1995,18 +1822,33 @@
         }
 
         function updateBookingStatus(docId, newStatus) {
-            db.collection("bookings").doc(docId).update({ status: newStatus }).then(() => {
-                filterBookingsByDate();
-                showToast(`স্ট্যাটাস '${newStatus}' করা হয়েছে।`, 'success');
-            });
+            if(!docId) {
+                showToast("ত্রুটি: বুকিং আইডি পাওয়া যায়নি।", 'error');
+                return;
+            }
+            db.collection("bookings").doc(docId).update({ status: newStatus })
+                .then(() => {
+                    filterBookingsByDate();
+                    showToast(`বুকিং সফলভাবে '${newStatus}' করা হয়েছে।`, 'success');
+                })
+                .catch(error => {
+                    console.error("Update Status Error:", error);
+                    showToast("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে: " + error.message, 'error');
+                });
         }
 
         function deleteBooking(docId) {
-            if (confirm("বুকিংটি মুছে ফেলতে চান?")) {
-                db.collection("bookings").doc(docId).delete().then(() => {
-                    filterBookingsByDate();
-                    showToast("বুকিং মুছে ফেলা হয়েছে।", 'info');
-                });
+            if(!docId) return;
+            if (confirm("আপনি কি নিশ্চিতভাবে এই বুকিংটি মুছে ফেলতে চান?")) {
+                db.collection("bookings").doc(docId).delete()
+                    .then(() => {
+                        filterBookingsByDate();
+                        showToast("বুকিং সফলভাবে মুছে ফেলা হয়েছে।", 'info');
+                    })
+                    .catch(error => {
+                        console.error("Delete Booking Error:", error);
+                        showToast("বুকিং মুছতে সমস্যা হয়েছে: " + error.message, 'error');
+                    });
             }
         }
 
@@ -2204,7 +2046,6 @@
                 setBtnLoading('ratingSubmitBtn', false, originalHtml);
                 showToast('ত্রুটি: ' + err.message, 'error');
             });
-        }
-        </script>
+        }</script>
     </body>
 </html>
