@@ -828,39 +828,43 @@
         const TELEGRAM_BOT_TOKEN = "8847976532:AAECY50B175kuj0AJfhSKy7Ediu1TrEB5aE";
         const TELEGRAM_CHAT_ID = "6091423501";
 
-        function sendTelegramMessage(bookingData) {
+        async function sendTelegramMessage(bookingData) {
             if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes("YOUR_BOT")) {
                 console.warn("Telegram Token not set properly.");
                 return;
             }
 
-            const message = `🔔 নতুন সিরিয়াল বুকিং!\n\n` +
-                            `👤 নাম: ${bookingData.customerName}\n` +
-                            `📞 ফোন: ${bookingData.customerPhone}\n` +
-                            `✂️ সার্ভিস: ${bookingData.service}\n` +
-                            `👨‍🦱 কারিগর: ${bookingData.barber || 'সৌমিক'}\n` +
-                            `📅 তারিখ: ${bookingData.bookingDate}\n` +
-                            `⏰ সময়: ${bookingData.bookingTime}\n` +
-                            `💰 মূল্য: ৳${bookingData.price}\n` +
-                            `📌 স্ট্যাটাস: ${bookingData.status}`;
+            const message = `🔔 <b>নতুন সিরিয়াল বুকিং!</b>\n\n` +
+                            `👤 <b>নাম:</b> ${bookingData.customerName}\n` +
+                            `📞 <b>ফোন:</b> ${bookingData.customerPhone}\n` +
+                            `✂️ <b>সার্ভিস:</b> ${bookingData.service}\n` +
+                            `👨‍🦱 <b>কারিগর:</b> ${bookingData.barber || 'সৌমিক'}\n` +
+                            `📅 <b>তারিখ:</b> ${bookingData.bookingDate}\n` +
+                            `⏰ <b>সময়:</b> ${bookingData.bookingTime}\n` +
+                            `💰 <b>মূল্য:</b> ৳${bookingData.price}\n` +
+                            `📌 <b>স্ট্যাটাস:</b> ${bookingData.status}`;
 
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        console.log("টেলিগ্রাম নোটিফিকেশন পাঠানো হয়েছে।");
-                    } else {
-                        console.error("Telegram API Error:", data);
-                        showToast("টেলিগ্রাম নোটিফিকেশন পাঠানো যায়নি!", 'warning');
-                    }
-                })
-                .catch(error => {
-                    console.error("Telegram Fetch Error:", error);
-                    // ব্রাউজার যদি রিকোয়েস্ট ব্লক করে তবে এখানে আসবে
-                    showToast("টেলিগ্রামের সাথে সংযোগ বিচ্ছিন্ন বা ব্লক করা হয়েছে!", 'error');
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
                 });
+                const data = await response.json();
+                if (data.ok) {
+                    console.log("টেলিগ্রাম নোটিফিকেশন পাঠানো হয়েছে।");
+                } else {
+                    console.error("Telegram API Error:", data);
+                }
+            } catch (error) {
+                console.error("Telegram Fetch Error:", error);
+            }
         }
 
         let currentDiscountPercent = 0;
@@ -2051,7 +2055,7 @@
                 await db.collection("bookings").add(bookingData);
                 
                 // টেলিগ্রাম নোটিফিকেশন পাঠানো
-                sendTelegramMessage(bookingData);
+                await sendTelegramMessage(bookingData);
 
                 showToast("আপনার বুকিং অনুরোধটি সফলভাবে জমা হয়েছে!", 'success');
                 event.target.reset();
