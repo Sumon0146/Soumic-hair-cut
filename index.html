@@ -41,6 +41,14 @@
             to { transform: translateX(0); opacity: 1; }
         }
         .toast-animate { animation: slideIn 0.3s ease-out forwards; }
+
+        /* Google Translate Styling */
+        .goog-te-gadget { font-family: 'Hind Siliguri', sans-serif !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo { background: #111827 !important; color: #f59e0b !important; border: 1px solid #f59e0b4d !important; border-radius: 8px !important; padding: 4px !important; outline: none !important; font-size: 12px !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget span { display: none !important; }
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100 relative selection:bg-amber-500 selection:text-gray-950">
@@ -135,7 +143,10 @@
                 </a>
             </div>
             
-            <div id="navUserArea">
+            <div id="navUserArea" class="flex items-center space-x-2">
+                <!-- Google Translate Element -->
+                <div id="google_translate_element" class="hidden sm:block"></div>
+                
                 <button onclick="toggleAuthModal()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 text-sm font-bold py-1.5 px-4 rounded-full transition duration-300 flex items-center shadow-md shadow-amber-500/10">
                     <i class="fa-solid fa-right-to-bracket mr-1.5"></i> লগইন / রেজিস্টার
                 </button>
@@ -806,6 +817,19 @@
     <footer class="bg-gray-950 text-gray-500 text-center py-6 mt-10 border-t border-gray-900 text-xs">
         <p>© 2026 সৌমিক হেয়ার কাটিং | সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'bn',
+                includedLanguages: 'en,bn,hi,ar,es,fr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- JavaScript Implementation -->
     <script>
