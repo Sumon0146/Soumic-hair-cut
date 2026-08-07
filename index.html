@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 
     <style>
         body { font-family: 'Hind Siliguri', sans-serif; }
@@ -41,6 +42,48 @@
             to { transform: translateX(0); opacity: 1; }
         }
         .toast-animate { animation: slideIn 0.3s ease-out forwards; }
+
+        /* Gallery Styles */
+        .gallery-image {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .spinner {
+            border: 3px solid rgba(245, 158, 11, 0.1);
+            border-top: 3px solid #f59e0b;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         /* Google Translate Styling */
         .goog-te-gadget { font-family: 'Hind Siliguri', sans-serif !important; color: transparent !important; }
@@ -76,6 +119,11 @@
                 <p class="text-xs font-bold uppercase tracking-wider text-amber-400/80">এডমিন কন্ট্রোল সেকশন</p>
                 
                 <div class="space-y-2">
+                    <button onclick="openAdminSection('galleryManagement')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
+                        <span class="flex items-center"><i class="fa-solid fa-image mr-3 text-amber-400"></i> ০. গ্যালারি ম্যানেজমেন্ট</span>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
                     <button onclick="openAdminSection('overviewStats')" class="w-full flex items-center justify-between p-3 rounded-xl bg-gray-950/80 border border-amber-500/20 text-gray-200 hover:border-amber-500 hover:text-amber-400 transition text-sm">
                         <span class="flex items-center"><i class="fa-solid fa-chart-pie mr-3 text-amber-400"></i> ১. সমারি ও লাভ-ক্ষতি</span>
                         <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
@@ -121,7 +169,8 @@
             <hr class="border-gray-800">
 
             <div class="space-y-2">
-                <a href="#booking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">📅 সিরিয়াল বুকিং</a>
+                <a href="#gallery" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">🖼️ ছবি গ্যালারি</a>
+                <a href="#booking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">📅 সিরিয়াল বুকিং</a>
                 <a href="#trackBooking" onclick="toggleDrawer()" class="block p-2.5 text-sm text-gray-300 hover:text-amber-400 transition">🔍 বুকিং স্ট্যাটাস</a>
             </div>
         </div>
@@ -166,11 +215,11 @@
             <h1 class="text-4xl md:text-5xl font-bold mb-2 text-amber-500 tracking-wide">সৌমিক হেয়ার কাটিং</h1>
             <p class="text-lg md:text-xl text-gray-300 mb-6">আপনার নিখুঁত লুকের সঠিক ঠিকানা</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#booking" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-sky-500/20">
-                    <i class="fa-solid fa-calendar-check mr-2"></i> সিরিয়াল বুক করুন
+                <a href="#gallery" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-purple-500/20">
+                    <i class="fa-solid fa-image mr-2"></i> আমাদের কাজ দেখুন
                 </a>
-                <a href="#trackBooking" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-magnifying-glass mr-2"></i> বুকিং স্ট্যাটাস চেক
+                <a href="#booking" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2.5 px-6 rounded-full transition duration-300 flex items-center shadow-lg shadow-sky-500/20">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> সিরিয়াল বুক করুন
                 </a>
             </div>
         </div>
@@ -208,6 +257,38 @@
                 <p class="text-xs text-gray-400">সিরিয়ালে সময়ের সঞ্চয়</p>
             </div>
         </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="bg-gray-900/90 p-6 md:p-8 rounded-2xl border border-purple-500/30 shadow-xl scroll-mt-6 space-y-6 gold-glow">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-purple-400 flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-image mr-2"></i> আমাদের কাজের গ্যালারি
+                </h2>
+                <p class="text-sm text-gray-400">আমাদের দক্ষ কারিগরদের দ্বারা করা সুন্দর হেয়ারস্টাইল এবং সার্ভিসের নমুনা দেখুন</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="col-span-full text-center py-8 text-gray-400">
+                    <i class="fa-solid fa-image text-4xl mb-2 opacity-50"></i>
+                    <p>এখনও কোনো ছবি আপলোড করা হয়নি</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Modal for Full View -->
+        <div id="imageModal" class="image-modal">
+            <div class="relative max-w-2xl w-full">
+                <img id="modalImage" src="" alt="Full View" class="w-full rounded-lg">
+                <button onclick="closeImageModal()" class="absolute top-4 right-4 bg-black/70 hover:bg-black text-white rounded-full p-2 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div id="imageInfo" class="absolute bottom-4 left-4 right-4 bg-black/70 text-white p-3 rounded-lg">
+                    <p id="imageTitle" class="font-bold"></p>
+                    <p id="imageDate" class="text-xs text-gray-300"></p>
+                </div>
+            </div>
+        </div>
 
         <!-- Track Booking -->
         <section id="trackBooking" class="bg-gray-900/90 p-6 rounded-2xl border border-amber-500/30 shadow-xl space-y-4 scroll-mt-20 gold-glow">
@@ -506,6 +587,45 @@
                 </div>
             </div>
 
+            <!-- Gallery Management Section -->
+            <div id="galleryManagementSection" class="bg-gray-950/70 p-4 rounded-2xl border border-purple-500/30 space-y-4 scroll-mt-6">
+                <h3 class="text-sm font-bold text-purple-400 flex items-center">
+                    <i class="fa-solid fa-image mr-2"></i> গ্যালারি ম্যানেজমেন্ট
+                </h3>
+                
+                <!-- Upload Section -->
+                <div class="bg-gray-900 p-3 rounded-xl border border-purple-500/20 space-y-3">
+                    <h4 class="text-xs font-semibold text-purple-300">নতুন ছবি আপলোড করুন</h4>
+                    
+                    <div>
+                        <label class="text-xs text-gray-400 mb-1 block">ছবির শিরোনাম</label>
+                        <input type="text" id="imageTitle" placeholder="যেমন: আধুনিক হেয়ারস্টাইল" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2 text-xs text-gray-100 focus:outline-none focus:border-purple-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-gray-400 mb-1 block">ছবি নির্বাচন করুন</label>
+                        <input type="file" id="imageFile" accept="image/*" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2 text-xs text-gray-100 focus:outline-none focus:border-purple-500 transition cursor-pointer file:bg-purple-500 file:text-gray-950 file:font-bold file:border-0 file:rounded file:cursor-pointer">
+                    </div>
+
+                    <div id="imagePreview" class="hidden">
+                        <p class="text-xs text-gray-400 mb-1">প্রিভিউ:</p>
+                        <img id="previewImg" src="" alt="Preview" class="w-full max-h-40 object-cover rounded-lg border border-gray-800">
+                    </div>
+
+                    <button onclick="uploadImage()" id="uploadBtn" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 rounded-lg text-xs transition flex items-center justify-center">
+                        <i class="fa-solid fa-cloud-arrow-up mr-2"></i> আপলোড করুন
+                    </button>
+                </div>
+
+                <!-- Uploaded Images List -->
+                <div class="bg-gray-900 p-3 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="text-xs font-semibold text-purple-300">আপলোড করা ছবিগুলি</h4>
+                    <div id="adminGalleryList" class="space-y-2 max-h-48 overflow-y-auto text-xs text-gray-400">
+                        <p>কোনো ছবি নেই</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Expense Tracker (Updated Dropdown Styles) -->
             <div id="expenseTracker" class="bg-gray-950/70 p-4 rounded-2xl border border-gray-800/80 space-y-3 scroll-mt-6">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center">
@@ -674,10 +794,168 @@
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
+        const storage = firebase.storage();
 
         const ADMIN_EMAIL = "Bdsumonu@gmail.com"; 
         const TELEGRAM_BOT_TOKEN = "8847976532:AAECY50B175kuj0AJfhSKy7Ediu1TrEB5aE";
         const TELEGRAM_CHAT_ID = "6091423501";
+
+        // Gallery Management Functions
+        document.getElementById('imageFile')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('previewImg').src = event.target.result;
+                    document.getElementById('imagePreview').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function uploadImage() {
+            const title = document.getElementById('imageTitle').value.trim();
+            const file = document.getElementById('imageFile').files[0];
+
+            if (!title) {
+                showToast('ছবির শিরোনাম লিখুন', 'error');
+                return;
+            }
+            if (!file) {
+                showToast('ছবি নির্বাচন করুন', 'error');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = '<div class="spinner"></div> আপলোড হচ্ছে...';
+
+            try {
+                const timestamp = Date.now();
+                const fileName = `gallery/${timestamp}_${file.name}`;
+                const storageRef = storage.ref(fileName);
+                
+                const snapshot = await storageRef.put(file);
+                const downloadURL = await snapshot.ref.getDownloadURL();
+
+                await db.collection('gallery').add({
+                    title: title,
+                    imageUrl: downloadURL,
+                    fileName: fileName,
+                    uploadedAt: new Date(),
+                    uploadedBy: auth.currentUser?.email || 'admin'
+                });
+
+                showToast('ছবি সফলভাবে আপলোড হয়েছে!', 'success');
+                document.getElementById('imageTitle').value = '';
+                document.getElementById('imageFile').value = '';
+                document.getElementById('imagePreview').classList.add('hidden');
+                loadGalleryImages();
+                loadAdminGalleryList();
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast('আপলোড ব্যর্থ: ' + error.message, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> আপলোড করুন';
+            }
+        }
+
+        async function loadGalleryImages() {
+            try {
+                const snapshot = await db.collection('gallery').orderBy('uploadedAt', 'desc').get();
+                const galleryGrid = document.getElementById('galleryGrid');
+                
+                if (snapshot.empty) {
+                    galleryGrid.innerHTML = `
+                        <div class="col-span-full text-center py-8 text-gray-400">
+                            <i class="fa-solid fa-image text-4xl mb-2 opacity-50"></i>
+                            <p>এখনও কোনো ছবি আপলোড করা হয়নি</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                galleryGrid.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'relative group cursor-pointer';
+                    galleryItem.innerHTML = `
+                        <img src="${data.imageUrl}" alt="${data.title}" class="gallery-image w-full h-48 object-cover rounded-lg border border-gray-800" onclick="openImageModal('${data.imageUrl}', '${data.title}')">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <div class="text-center">
+                                <p class="text-white font-bold text-sm">${data.title}</p>
+                            </div>
+                        </div>
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                });
+            } catch (error) {
+                console.error('Load gallery error:', error);
+            }
+        }
+
+        async function loadAdminGalleryList() {
+            try {
+                const snapshot = await db.collection('gallery').orderBy('uploadedAt', 'desc').get();
+                const adminList = document.getElementById('adminGalleryList');
+                
+                if (snapshot.empty) {
+                    adminList.innerHTML = '<p class="text-gray-400 text-xs">কোনো ছবি নেই</p>';
+                    return;
+                }
+
+                adminList.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const item = document.createElement('div');
+                    item.className = 'flex items-center justify-between bg-gray-950 p-2 rounded-lg border border-gray-800';
+                    item.innerHTML = `
+                        <div class="flex items-center gap-2 flex-1 min-w-0">
+                            <img src="${data.imageUrl}" alt="${data.title}" class="w-10 h-10 object-cover rounded border border-gray-700 flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="font-semibold text-gray-200 text-xs truncate">${data.title}</p>
+                                <p class="text-xs text-gray-400">${new Date(data.uploadedAt.toDate()).toLocaleDateString('bn-BD')}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteImage('${doc.id}', '${data.fileName}')" class="bg-red-500/20 hover:bg-red-500/40 text-red-400 p-1 rounded transition flex-shrink-0">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    `;
+                    adminList.appendChild(item);
+                });
+            } catch (error) {
+                console.error('Load admin gallery error:', error);
+            }
+        }
+
+        async function deleteImage(docId, fileName) {
+            if (!confirm('এই ছবি মুছে ফেলতে চান?')) return;
+
+            try {
+                await storage.ref(fileName).delete();
+                await db.collection('gallery').doc(docId).delete();
+                showToast('ছবি মুছে ফেলা হয়েছে', 'success');
+                loadGalleryImages();
+                loadAdminGalleryList();
+            } catch (error) {
+                console.error('Delete error:', error);
+                showToast('মুছে ফেলা ব্যর্থ: ' + error.message, 'error');
+            }
+        }
+
+        function openImageModal(imageUrl, title) {
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('imageTitle').textContent = title;
+            document.getElementById('imageDate').textContent = new Date().toLocaleDateString('bn-BD');
+            modal.classList.add('active');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
 
         async function sendTelegramMessage(bookingData) {
             if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN.includes("YOUR_BOT")) {
@@ -795,6 +1073,7 @@
             if(sectionId === 'analyticsSection') targetId = 'analyticsSection';
             if(sectionId === 'inventoryManagementSection') targetId = 'inventoryManagementSection';
             if(sectionId === 'serviceBarberManagementSection') targetId = 'serviceBarberManagementSection';
+            if(sectionId === 'galleryManagement') targetId = 'galleryManagementSection';
 
             // Hide all admin sections first
             const adminSections = document.querySelectorAll('#adminModal > div > div > div[id$="Section"], #adminModal > div > div > div[id$="Tracker"], #adminModal > div > div > div[id$="Controls"], #adminModal > div > div > div[id$="Table"]');
@@ -807,6 +1086,11 @@
             if (targetSection) {
                 targetSection.classList.remove('hidden');
                 targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Load gallery data if gallery section is opened
+                if (targetId === 'galleryManagementSection') {
+                    loadAdminGalleryList();
+                }
             }
         }
 
@@ -1027,6 +1311,8 @@
             renderWeeklyEarningsChart();
             loadInventory();
             loadServicesAndBarbers();
+            loadGalleryImages();
+            loadAdminGalleryList();
         }
 
         function loadSettingsFromFirestore() {
